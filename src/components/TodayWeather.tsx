@@ -1,25 +1,23 @@
 import React, { useState, useEffect } from "react";
 import Card from "react-bootstrap/Card";
 import Moment from "react-moment";
-
+import weatherService from "../API/weatherService";
+import { useFetching } from "../hooks/useFetching";
 
 const TodayWeather = () => {
   const [loading, setLoading] = useState(true);
   const [dailyWeatherData, setDailyWeatherData] = useState(Object);
 
+  const [fetchPosts, isLoading, postError] = useFetching(async () => {
+    const response = await weatherService.fetchTodayWeather();
+    console.log("Data", response);
+
+    setDailyWeatherData(response);
+    setLoading(false);
+  });
+
   useEffect(() => {
-    const fetchApi = async () => {
-      const data = await fetch(
-        "https://api.open-meteo.com/v1/forecast?latitude=51.1682&longitude=6.9309&hourly=temperature_2m,relativehumidity_2m,dewpoint_2m,apparent_temperature,precipitation_probability,precipitation,rain,showers,snowfall,snow_depth,weathercode,pressure_msl,is_day&daily=weathercode,temperature_2m_max,temperature_2m_min,sunrise,sunset&timezone=Europe%2FBerlin&forecast_days=1"
-      );
-
-      const jsonData = await data.json();
-      setDailyWeatherData(jsonData);
-      setLoading(false);
-      console.log("Daily: ", jsonData);
-    };
-
-    fetchApi();
+    fetchPosts();
   }, []);
 
   return (
@@ -29,6 +27,8 @@ const TodayWeather = () => {
         {!loading && (
           <Card.Body>
             <div>
+              {postError && <h1>Es ist ein Fehler aufgetreten: {postError}</h1>}
+
               {dailyWeatherData && (
                 <span>
                   <p>Sunrise: {dailyWeatherData.daily.sunrise}</p>
