@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from "react";
 import Card from "react-bootstrap/Card";
-import Moment from "react-moment";
 import weatherService from "../API/weatherService";
 import { useFetching } from "../hooks/useFetching";
+import HourlyWeather from "./HourlyWeather";
 
 const TodayWeather = () => {
   const [loading, setLoading] = useState(true);
@@ -36,40 +36,10 @@ const TodayWeather = () => {
                   <p>Code: {dailyWeatherData.daily.weathercode}</p>
 
                   <h3>Daily weather</h3>
-                  <p>
-                    <Moment format="HH:mm">
-                      {dailyWeatherData.hourly.time[7]}
-                    </Moment>{" "}
-                    :{dailyWeatherData.hourly.weathercode[7]}
-                  </p>
-
-                  <p>
-                    <Moment format="HH:mm">
-                      {dailyWeatherData.hourly.time[11]}
-                    </Moment>{" "}
-                    :{dailyWeatherData.hourly.weathercode[11]}
-                  </p>
-
-                  <p>
-                    <Moment format="HH:mm">
-                      {dailyWeatherData.hourly.time[15]}
-                    </Moment>{" "}
-                    :{dailyWeatherData.hourly.weathercode[15]}
-                  </p>
-
-                  <p>
-                    <Moment format="HH:mm">
-                      {dailyWeatherData.hourly.time[19]}
-                    </Moment>{" "}
-                    :{dailyWeatherData.hourly.weathercode[19]}
-                  </p>
-
-                  <p>
-                    <Moment format="HH:mm">
-                      {dailyWeatherData.hourly.time[23]}
-                    </Moment>{" "}
-                    :{dailyWeatherData.hourly.weathercode[23]}
-                  </p>
+                  <HourlyWeather
+                    time={dailyWeatherData.hourly.time}
+                    code={dailyWeatherData.hourly.weathercode}
+                  />
                 </span>
               )}
             </div>
