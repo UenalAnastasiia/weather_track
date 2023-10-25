@@ -7,8 +7,7 @@ import Button from "@mui/material/Button";
 import IconButton from "@mui/material/IconButton";
 import MenuIcon from "@mui/icons-material/Menu";
 
-
-export default function Navbar() {
+const Navbar = () => {
   const styles = {
     box: {
       flexGrow: 1,
@@ -24,18 +23,23 @@ export default function Navbar() {
     },
   };
 
-  const [currentDate, setCurrentDate] = useState(getDate());
 
-
-  function getDate(): string | number {
+  const getCurrentDate = (): string | number => {
     const today = new Date();
-    const currDate = today.toLocaleDateString('en-us', { weekday: 'long', month: 'short', day: 'numeric' });    
+    const currDate = today.toLocaleDateString("en-us", {
+      weekday: "long",
+      month: "short",
+      day: "numeric",
+    });
+    
     return `${currDate}`;
-  }
+  };
 
+
+  const [currentDate, setCurrentDate] = useState(getCurrentDate());
 
   return (
-    <Box sx={ styles.box }>
+    <Box sx={styles.box}>
       <AppBar position="static" sx={styles.appBar}>
         <Toolbar>
           <IconButton
@@ -48,7 +52,7 @@ export default function Navbar() {
             <MenuIcon />
           </IconButton>
           <Typography variant="h6" component="div" sx={styles.typography}>
-            { currentDate }
+            {currentDate}
           </Typography>
           <Button color="inherit">Login</Button>
         </Toolbar>
@@ -56,3 +60,6 @@ export default function Navbar() {
     </Box>
   );
 }
+
+
+export default Navbar;
