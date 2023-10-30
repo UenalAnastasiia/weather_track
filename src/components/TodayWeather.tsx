@@ -10,7 +10,7 @@ const TodayWeather = () => {
 
   const [fetchPosts, isLoading, postError] = useFetching(async () => {
     const response = await weatherService.fetchTodayWeather();
-    console.log("Data", response);
+    // console.log("Data", response);
 
     setDailyWeatherData(response);
     setLoading(false);
