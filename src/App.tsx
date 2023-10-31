@@ -1,7 +1,7 @@
 import React from 'react';
 import './styles/App.css';
 import Navbar from './components/Navbar';
-import TodayWeather from './components/TodayWeather';
+import TodayWeather from './components/today_components/TodayWeather';
 
 function App() {
   return (
