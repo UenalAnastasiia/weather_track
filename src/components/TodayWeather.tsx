@@ -3,6 +3,7 @@ import Card from "react-bootstrap/Card";
 import weatherService from "../API/weatherService";
 import { useFetching } from "../hooks/useFetching";
 import HourlyWeather from "./HourlyWeather";
+import WeatherDescription from "./WeatherDescription";
 
 const TodayWeather = () => {
   const [loading, setLoading] = useState(true);
@@ -33,7 +34,7 @@ const TodayWeather = () => {
                 <span>
                   <p>Sunrise: {dailyWeatherData.daily.sunrise}</p>
                   <p>Sunset: {dailyWeatherData.daily.sunset}</p>
-                  <p>Code: {dailyWeatherData.daily.weathercode}</p>
+                  <WeatherDescription sharedData={dailyWeatherData.daily} />
 
                   <h3>Daily weather</h3>
                   <HourlyWeather

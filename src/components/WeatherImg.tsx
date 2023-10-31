@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 
-const CheckWeatherImg = (data: any) => {
+const WeatherImg = (data: any) => {
   const [showImg, setShowImg] = useState(null);
   const [showIcon, setShowIcon] = useState(null);
 
@@ -69,4 +69,4 @@ const CheckWeatherImg = (data: any) => {
   );
 };
 
-export default CheckWeatherImg;
+export default WeatherImg;
