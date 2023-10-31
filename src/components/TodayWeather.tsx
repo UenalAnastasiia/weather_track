@@ -8,18 +8,35 @@ import WeatherDescription from "./WeatherDescription";
 const TodayWeather = () => {
   const [loading, setLoading] = useState(true);
   const [dailyWeatherData, setDailyWeatherData] = useState(Object);
+  const [sunriseTime, setSunriseTime] = useState(Object);
+  const [sunsetTime, setSunsetTime] = useState(Object);
 
   const [fetchPosts, isLoading, postError] = useFetching(async () => {
     const response = await weatherService.fetchTodayWeather();
-    // console.log("Data", response);
-
     setDailyWeatherData(response);
+    getSunriseAndSunsetTime(response.daily);
     setLoading(false);
   });
+
 
   useEffect(() => {
     fetchPosts();
   }, []);
+
+  
+  const getSunriseAndSunsetTime = (data: any) => {
+    const sunriseTimeFormat = new Date(data.sunrise).toLocaleTimeString([], {
+      hour: "2-digit",
+      minute: "2-digit",
+    });
+    setSunriseTime(sunriseTimeFormat);
+
+    const sunsetTimeFormat = new Date(data.sunset).toLocaleTimeString([], {
+      hour: "2-digit",
+      minute: "2-digit",
+    });
+    setSunsetTime(sunsetTimeFormat);
+  };
 
   return (
     <div>
@@ -32,8 +49,12 @@ const TodayWeather = () => {
 
               {dailyWeatherData && (
                 <span>
-                  <p>Sunrise: {dailyWeatherData.daily.sunrise}</p>
-                  <p>Sunset: {dailyWeatherData.daily.sunset}</p>
+                  <p>
+                    <b>Sunrise:</b> {sunriseTime}
+                  </p>
+                  <p>
+                    <b>Sunset:</b> {sunsetTime}
+                  </p>
                   <WeatherDescription sharedData={dailyWeatherData.daily} />
 
                   <h3>Daily weather</h3>
