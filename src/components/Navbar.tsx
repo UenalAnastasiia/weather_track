@@ -6,6 +6,7 @@ import Typography from "@mui/material/Typography";
 import Button from "@mui/material/Button";
 import IconButton from "@mui/material/IconButton";
 import MenuIcon from "@mui/icons-material/Menu";
+import { Link } from "react-router-dom";
 
 const Navbar = () => {
   const styles = {
@@ -23,7 +24,6 @@ const Navbar = () => {
     },
   };
 
-
   const getCurrentDate = (): string | number => {
     const today = new Date();
     const currDate = today.toLocaleDateString("en-us", {
@@ -31,10 +31,9 @@ const Navbar = () => {
       month: "short",
       day: "numeric",
     });
-    
+
     return `${currDate}`;
   };
-
 
   const [currentDate, setCurrentDate] = useState(getCurrentDate());
 
@@ -54,12 +53,13 @@ const Navbar = () => {
           <Typography variant="h6" component="div" sx={styles.typography}>
             {currentDate}
           </Typography>
+          <Link to="/today">Today</Link>
+          <Link to="/current">Current</Link>
           <Button color="inherit">Login</Button>
         </Toolbar>
       </AppBar>
     </Box>
   );
-}
-
+};
 
 export default Navbar;

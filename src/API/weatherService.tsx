@@ -7,4 +7,14 @@ export default class WeatherService {
     const jsonData = await data.json();
     return jsonData;
   }
+
+
+  static async fetchCurrentWeather() {
+    const data = await fetch(
+      "https://api.open-meteo.com/v1/forecast?latitude=51.1682&longitude=6.9309&current=temperature_2m,relative_humidity_2m,apparent_temperature,weather_code,wind_speed_10m,wind_direction_10m"
+    );
+
+    const jsonData = await data.json();
+    return jsonData;
+  }
 }
