@@ -14,7 +14,7 @@ const Navbar = () => {
       flexGrow: 1,
     },
     appBar: {
-      background: "#0b96aa",
+      background: "#5568E8",
     },
     iconBtn: {
       mr: 2,
