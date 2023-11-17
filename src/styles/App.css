@@ -14,20 +14,15 @@
 
 .weatherBG {
   position: absolute;
-  top: 35px;
-  left: 35px;
-  width: 280px;
-  height: 280px;
-  border-radius: 100%;
+  top: 45px;
+  left: 45px;
+  width: 270px;
+  height: 270px;
   object-fit: cover;
 }
 
 .weatherIcon {
-  position: absolute;
-  right: 30px;
-  bottom: 30px;
-  border-radius: 50%;
-  padding: 4px;
+  width: 70px;
 }
 
 .hourlyWeather {
@@ -39,6 +34,10 @@
   margin-left: 16px;
   margin-right: 16px;
   position: relative;
+  border: 2px solid #e6dede;
+  border-radius: 56px;
+  padding: 8px;
+  background: #c3c3c3b0;
 }
 
 .todayContainer {
@@ -58,14 +57,16 @@
 
 
 .wrapper {
-  width: 100vw;
-  height: calc(100vh - 74px);
+  padding-left: 10vw;
+  padding-top: 10vh;
+  width: 90vw;
+  height: calc(90vh - 64px);
   display: flex;
-  justify-content: center;
-  align-items: center;
+  /* justify-content: center;
+  align-items: center; */
   flex-direction: column;
-  /* background-color: #e0e5ec; */
-  background-color: #dde1e7;
+  /* background-color: #dde1e7; */
+  background: radial-gradient(circle, #9d1bd4, #8118c9, #6316be, #4114b2, #0712a6);;
   position: relative;
 }
 
@@ -100,7 +101,7 @@
   align-items: center;
   height:350px;
   width: 350px;
-  background: #dde1e7;
+  background: #d6e3f6;
   border-radius: 50%;
   box-shadow: -3px -3px 7px #ffffffa6, 3px 3px 5px rgba(94, 104, 121, 0.712);
   position: relative;
@@ -113,4 +114,17 @@
   background-color: transparent;
   border-radius: 50%;
   box-shadow: inset -3px -3px 7px #ffffffb0, inset 3px 3px 5px rgba(94, 104, 121, 0.671);
+}
+
+.currentDataBox {
+  display: flex;
+  margin-left: 10vw;
+}
+
+.tempDescrBox {
+  width: 30vw;
+}
+
+.tempDescrBox h1 {
+  font-size: 54px;
 }

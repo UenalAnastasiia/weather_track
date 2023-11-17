@@ -8,7 +8,7 @@ const WeatherDescription = (data: any) => {
   }, []);
 
   const getDescriptionFromWeather = () => {
-    let checkedCode = data.sharedData.weathercode[0];
+    let checkedCode = data.sharedData.weather_code[0];
 
     if (checkedCode === 0) {
         setGetDescription("Clear sky");

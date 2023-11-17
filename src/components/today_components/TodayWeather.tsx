@@ -53,7 +53,7 @@ const TodayWeather = () => {
               {dailyWeatherData && (
                 <div className="todayContainer">
                   <WeatherImg
-                    sharedCode={dailyWeatherData.daily.weathercode[0]}
+                    sharedCode={dailyWeatherData.daily.weather_code[0]}
                     hourlyCheck={false}
                   />
                   <div className="todayDataDiv">
@@ -80,7 +80,7 @@ const TodayWeather = () => {
                     <h3>Daily weather</h3>
                     <HourlyWeather
                       time={dailyWeatherData.hourly.time}
-                      code={dailyWeatherData.hourly.weathercode}
+                      code={dailyWeatherData.hourly.weather_code}
                       temp={dailyWeatherData.hourly.temperature_2m}
                       units={dailyWeatherData.hourly_units.temperature_2m}
                     />

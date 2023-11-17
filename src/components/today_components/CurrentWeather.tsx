@@ -14,11 +14,28 @@ const CurrentWeather = () => {
     setWeatherData(response);
     setLoading(false);
     console.log(response);
+    roundTimeQuarterHour("2023-11-17T11:26");
   });
 
   useEffect(() => {
     fetchPosts();
   }, []);
+
+  const getRoundTemp = (temp: any) => {
+    return Math.round(temp) + weatherData.daily_units.temperature_2m_min;
+  };
+
+  const roundTimeQuarterHour = (time: any) => {
+    let round = 1000 * 60 * 15;
+    let date = new Date(time);
+    let timeToReturn = new Date(Math.floor(date.getTime() / round) * round);
+
+    let returnHours = timeToReturn.getHours();
+    let currentHours = ("0" + returnHours).slice(-2);
+    let timeResult = currentHours + ":" + timeToReturn.getMinutes();
+    console.log(timeResult);
+    // return timeToReturn;
+  };
 
   return (
     <div>
@@ -31,17 +48,26 @@ const CurrentWeather = () => {
 
               {weatherData && (
                 <div>
-                  <h1>Current weather</h1>
-                  <div className="circle">
-                    <WeatherImg
-                      sharedCode={weatherData.daily.weathercode[0]}
-                      hourlyCheck={false}
-                    />
+                  <div className="currentDataBox">
+                    <div className="circle">
+                      <WeatherImg
+                        sharedCode={weatherData.daily.weather_code[0]}
+                        hourlyCheck={false}
+                      />
+                    </div>
+
+                    <div className="tempDescrBox">
+                      <h1>Hilden</h1>
+                      <h2>
+                        H:{getRoundTemp(weatherData.daily.temperature_2m_max)}{" "}
+                        L:{getRoundTemp(weatherData.daily.temperature_2m_min)}
+                      </h2>
+                    </div>
                   </div>
 
                   <HourlyWeather
                     time={weatherData.hourly.time}
-                    code={weatherData.hourly.weathercode}
+                    code={weatherData.hourly.weather_code}
                     temp={weatherData.hourly.temperature_2m}
                     units={weatherData.hourly_units.temperature_2m}
                   />

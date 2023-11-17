@@ -14,7 +14,7 @@ const Navbar = () => {
       flexGrow: 1,
     },
     appBar: {
-      background: "#5568E8",
+      background: "linear-gradient(to right, #9796f0, #fbc7d4)"
     },
     iconBtn: {
       mr: 2,
