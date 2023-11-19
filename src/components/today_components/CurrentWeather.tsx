@@ -21,9 +21,11 @@ const CurrentWeather = () => {
     fetchPosts();
   }, []);
 
+  
   const getRoundTemp = (temp: any) => {
     return Math.round(temp) + weatherData.daily_units.temperature_2m_min;
   };
+
 
   const roundTimeQuarterHour = (time: any) => {
     let round = 1000 * 60 * 15;
