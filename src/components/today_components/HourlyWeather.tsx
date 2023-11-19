@@ -5,7 +5,7 @@ const HourlyWeather = (data: any) => {
   const codeNumbers:number[] = [7, 11, 15, 19, 23];
 
   const getRoundTemp = (temp: any) => {
-    return Math.round(temp) + " " + data.units;
+    return Math.round(temp);
   };
 
   return (
@@ -14,7 +14,7 @@ const HourlyWeather = (data: any) => {
         <span key={index}>
           <Moment format="HH:mm">{data.time[index]}</Moment>
           <WeatherImg sharedCode={data.code[index]} hourlyCheck={true} />
-          {getRoundTemp(data.temp[index])}
+          {getRoundTemp(data.temp[index])}&deg;
         </span>
       ))}
     </div>

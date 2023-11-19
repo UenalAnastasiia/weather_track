@@ -82,7 +82,6 @@ const TodayWeather = () => {
                       time={dailyWeatherData.hourly.time}
                       code={dailyWeatherData.hourly.weather_code}
                       temp={dailyWeatherData.hourly.temperature_2m}
-                      units={dailyWeatherData.hourly_units.temperature_2m}
                     />
                   </div>
                 </div>

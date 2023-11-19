@@ -14,7 +14,6 @@ const CurrentWeather = () => {
     setWeatherData(response);
     setLoading(false);
     console.log(response);
-    
   });
 
   useEffect(() => {
@@ -22,7 +21,7 @@ const CurrentWeather = () => {
   }, []);
 
   const getRoundTemp = (temp: any) => {
-    return Math.round(temp) + weatherData.daily_units.temperature_2m_min;
+    return Math.round(temp);
   };
 
 
@@ -50,6 +49,7 @@ const CurrentWeather = () => {
     return currdateFormat;
   };
 
+
   return (
     <div>
       <Card className="wrapper">
@@ -62,19 +62,20 @@ const CurrentWeather = () => {
               {weatherData && (
                 <div>
                   <div className="currentDataBox">
-                    <div className="circle">
-                      <WeatherImg
-                        sharedCode={weatherData.daily.weather_code[0]}
-                        hourlyCheck={false}
-                      />
+                    <div className="circleBox">
+                        <div className="circle">
+                            <WeatherImg
+                                sharedCode={weatherData.daily.weather_code[0]}
+                                hourlyCheck={false} />
+                        </div>
                     </div>
 
                     <div className="tempDescrBox">
                       <h1>Hilden</h1>
-                      <h1>{getCurrentTemperature(weatherData)}</h1>
+                      <h1 className="currentTempH1">{getCurrentTemperature(weatherData)}&deg;</h1>
                       <h2>
-                        H:{getRoundTemp(weatherData.daily.temperature_2m_max)}
-                        L:{getRoundTemp(weatherData.daily.temperature_2m_min)}
+                        H:{getRoundTemp(weatherData.daily.temperature_2m_max)}&deg;
+                        L:{getRoundTemp(weatherData.daily.temperature_2m_min)}&deg;
                       </h2>
                     </div>
                   </div>

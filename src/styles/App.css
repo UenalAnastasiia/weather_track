@@ -1,8 +1,11 @@
 .App {
   text-align: center;
-  background: rgb(234 234 234);
+  background: radial-gradient(circle, #9d1bd4, #8118c9, #6316be, #4114b2, #0712a6);
   width: 100vw;
-  height: calc(100vh - 17px);
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .weatherImg {
@@ -13,31 +16,48 @@
 }
 
 .weatherBG {
-  position: absolute;
+  /* position: absolute;
   top: 45px;
-  left: 45px;
-  width: 270px;
-  height: 270px;
+  left: 45px; */
+  width: 150px;
+  height: 150px;
   object-fit: cover;
 }
 
 .weatherIcon {
-  width: 70px;
+  width: 42px;
 }
 
 .hourlyWeather {
   display: flex;
   justify-content: center;
+  padding: 24px;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 37vw;
+  height: 20vh;
+  background: #7e63c5db;
+  backdrop-filter: blur(10px);
+  border-radius: 32px;
+  box-shadow: 4px 4px 4px #fff, -4px -4px 20px #fff, inset -4px -4px 20px #fff, inset 4px 4px 20px #fff;
+  opacity: 0.9;
+  /* box-shadow: 0px 0px 18px 6px #fdfdfdad;
+  border: 2px solid #ffffff75; */
 }
 
 .hourlyWeather span {
   margin-left: 16px;
   margin-right: 16px;
   position: relative;
-  border: 2px solid #e6dede;
+  border: 1px solid #e6dede;
   border-radius: 56px;
   padding: 8px;
-  background: #c3c3c3b0;
+  background: #381e5fb0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  color: white;
 }
 
 .todayContainer {
@@ -57,17 +77,21 @@
 
 
 .wrapper {
-  padding-left: 10vw;
-  padding-top: 10vh;
-  width: 90vw;
-  height: calc(90vh - 64px);
+  /* padding-left: 10vw;
+  padding-top: 10vh; */
+  width: 40vw;
+  height: 90vh;
+  /* height: calc(90vh - 64px); */
   display: flex;
-  /* justify-content: center;
-  align-items: center; */
+  /* justify-content: center; */
+  align-items: center;
   flex-direction: column;
   /* background-color: #dde1e7; */
-  background: radial-gradient(circle, #9d1bd4, #8118c9, #6316be, #4114b2, #0712a6);;
+  /* background: radial-gradient(circle, #9d1bd4, #8118c9, #6316be, #4114b2, #0712a6); */
   position: relative;
+  background-color: #160e2a6b;
+  border-radius: 32px;
+  box-shadow: 0px 0px 18px 6px #fdfdfdad;
 }
 
 /* .circle {
@@ -99,8 +123,8 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  height:350px;
-  width: 350px;
+  height: 220px;
+  width: 220px;
   background: #d6e3f6;
   border-radius: 50%;
   box-shadow: -3px -3px 7px #ffffffa6, 3px 3px 5px rgba(94, 104, 121, 0.712);
@@ -118,13 +142,33 @@
 
 .currentDataBox {
   display: flex;
-  margin-left: 10vw;
+  align-items: center;
+  justify-content: space-around;
+  width: 40vw;
+  margin-top: 10vh;
+  color: white;
+}
+
+.circleBox {
+  margin-left: 5vw;
 }
 
 .tempDescrBox {
-  width: 30vw;
+  width: 20vw;
+  height: 50vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin-right: 5vw;
 }
 
 .tempDescrBox h1 {
   font-size: 54px;
+  margin: 0;
+}
+
+.currentTempH1 {
+  font-size: 86px !important;
+  margin: 0;
 }
