@@ -6,8 +6,6 @@ import WeatherImg from "./WeatherImg";
 import HourlyWeather from "./HourlyWeather";
 
 const CurrentWeather = () => {
-  let numbers = [1, 2, 3, 4, 5];
-
   const [loading, setLoading] = useState(true);
   const [weatherData, setWeatherData] = useState(Object);
 
@@ -16,7 +14,7 @@ const CurrentWeather = () => {
     setWeatherData(response);
     setLoading(false);
     console.log(response);
-    roundTimeQuarterHour("2023-11-17T11:26");
+    
   });
 
   useEffect(() => {
@@ -27,16 +25,29 @@ const CurrentWeather = () => {
     return Math.round(temp) + weatherData.daily_units.temperature_2m_min;
   };
 
-  const roundTimeQuarterHour = (time: any) => {
-    let round = 1000 * 60 * 15;
-    let date = new Date(time);
-    let timeToReturn = new Date(Math.floor(date.getTime() / round) * round);
 
-    let returnHours = timeToReturn.getHours();
-    let currentHours = ("0" + returnHours).slice(-2);
-    let timeResult = currentHours + ":" + timeToReturn.getMinutes();
-    console.log(timeResult);
-    // return timeToReturn;
+  const getCurrentTemperature = (data: any) => {
+    let currdate = roundTimeQuarterHour();
+    let tempResult = [];
+
+    for (let index = 0; index < 95; index++) {
+        if (data.minutely_15.time[index] === currdate) {            
+            tempResult.push(getRoundTemp(data.minutely_15.temperature_2m[index]))
+        }
+    }
+
+    return tempResult;
+  };
+
+  const roundTimeQuarterHour = () => {
+    let round = 1000 * 60 * 15;
+    let today = new Date();
+    let timeToReturn = new Date(Math.floor(today.getTime() / round) * round);
+
+    let timeResult = ("0" + timeToReturn.getHours()).slice(-2) + ":" + ("0" + timeToReturn.getMinutes()).slice(-2);
+    let currdateFormat = today.getFullYear() + '-' + (today.getMonth() + 1) + '-' + today.getDate() + 'T' + timeResult;
+
+    return currdateFormat;
   };
 
   return (
@@ -60,8 +71,9 @@ const CurrentWeather = () => {
 
                     <div className="tempDescrBox">
                       <h1>Hilden</h1>
+                      <h1>{getCurrentTemperature(weatherData)}</h1>
                       <h2>
-                        H:{getRoundTemp(weatherData.daily.temperature_2m_max)}{" "}
+                        H:{getRoundTemp(weatherData.daily.temperature_2m_max)}
                         L:{getRoundTemp(weatherData.daily.temperature_2m_min)}
                       </h2>
                     </div>

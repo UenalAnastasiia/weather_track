@@ -17,7 +17,7 @@ const TodayWeather = () => {
     getSunriseAndSunsetTime(response.daily);
     getMinAndMaxTemp(response);
     setLoading(false);
-    console.log(response);
+    // console.log(response);
   });
 
   useEffect(() => {
