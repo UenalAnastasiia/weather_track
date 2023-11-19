@@ -6,6 +6,8 @@ import WeatherImg from "./WeatherImg";
 import HourlyWeather from "./HourlyWeather";
 
 const CurrentWeather = () => {
+  let numbers = [1, 2, 3, 4, 5];
+
   const [loading, setLoading] = useState(true);
   const [weatherData, setWeatherData] = useState(Object);
 
@@ -21,11 +23,9 @@ const CurrentWeather = () => {
     fetchPosts();
   }, []);
 
-  
   const getRoundTemp = (temp: any) => {
     return Math.round(temp) + weatherData.daily_units.temperature_2m_min;
   };
-
 
   const roundTimeQuarterHour = (time: any) => {
     let round = 1000 * 60 * 15;
