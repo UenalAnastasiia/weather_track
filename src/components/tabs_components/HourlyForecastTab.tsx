@@ -1,5 +1,5 @@
 import Moment from "react-moment";
-import WeatherImg from "./WeatherImg";
+import WeatherImg from "../weather_infos/WeatherImg";
 
 const HourlyForecastTab = (data: any) => {
 

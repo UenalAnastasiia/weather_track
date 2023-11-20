@@ -2,9 +2,9 @@ import React, { useState, useEffect } from "react";
 import Card from "react-bootstrap/Card";
 import weatherService from "../../API/weatherService";
 import { useFetching } from "../../hooks/useFetching";
-import HourlyWeather from "./DailyForecastTab";
-import WeatherDescription from "./WeatherDescription";
-import WeatherImg from "./WeatherImg";
+import HourlyWeather from "../tabs_components/DailyForecastTab";
+import WeatherDescription from "../weather_infos/WeatherDescription";
+import WeatherImg from "../weather_infos/WeatherImg";
 
 const TodayWeather = () => {
   const [loading, setLoading] = useState(true);

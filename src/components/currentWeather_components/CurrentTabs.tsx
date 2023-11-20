@@ -4,8 +4,9 @@ import Tab from "@mui/material/Tab";
 import TabContext from "@mui/lab/TabContext";
 import TabList from "@mui/lab/TabList";
 import TabPanel from "@mui/lab/TabPanel";
-import DailyForecastTab from "./DailyForecastTab";
-import HourlyForecastTab from "./HourlyForecastTab";
+import DailyForecastTab from "../tabs_components/DailyForecastTab";
+import HourlyForecastTab from "../tabs_components/HourlyForecastTab";
+import WeeklyForecastTab from "../tabs_components/WeeklyForecastTab";
 
 const CurrentTabs = (data: any) => {
   const [value, setValue] = React.useState("daily");
@@ -19,11 +20,17 @@ const CurrentTabs = (data: any) => {
       <TabContext value={value}>
         <Box sx={{ borderBottom: 1, borderColor: "divider" }}>
           <TabList onChange={handleChange}>
-            <Tab label="Daily Forecast" value="daily" />
             <Tab label="Hourly Forecast" value="hourly" />
+            <Tab label="Daily Forecast" value="daily" />
             <Tab label="Weekly Forecast" value="weekly" />
           </TabList>
         </Box>
+        <TabPanel value="hourly">
+            <HourlyForecastTab
+                quarterData={data.sharedData.minutely_15}
+            />
+        </TabPanel>
+
         <TabPanel value="daily">
           <DailyForecastTab
             time={data.sharedData.hourly.time}
@@ -31,12 +38,10 @@ const CurrentTabs = (data: any) => {
             temp={data.sharedData.hourly.temperature_2m}
           />
         </TabPanel>
-        <TabPanel value="hourly">
-            <HourlyForecastTab
-                quarterData={data.sharedData.minutely_15}
-            />
-          </TabPanel>
-        <TabPanel value="weekly">Weekly Forecast</TabPanel>
+
+        <TabPanel value="weekly">
+          <WeeklyForecastTab />
+        </TabPanel>
       </TabContext>
     </Box>
   );

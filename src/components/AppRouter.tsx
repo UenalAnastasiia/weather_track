@@ -1,8 +1,8 @@
 import React, { Fragment } from 'react';
 import { Route, Routes } from "react-router-dom";
 import TodayWeather from './today_components/TodayWeather';
-import HourlyWeather from './today_components/DailyForecastTab';
-import CurrentWeather from './today_components/CurrentWeather';
+import HourlyWeather from './tabs_components/DailyForecastTab';
+import CurrentWeather from './currentWeather_components/CurrentWeather';
 
 
 const AppRouter = () => {

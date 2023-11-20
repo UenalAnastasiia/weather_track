@@ -2,8 +2,8 @@ import { useState, useEffect } from "react";
 import weatherService from "../../API/weatherService";
 import { useFetching } from "../../hooks/useFetching";
 import Card from "react-bootstrap/Card";
-import WeatherImg from "./WeatherImg";
-import WeatherDescription from "./WeatherDescription";
+import WeatherImg from "../weather_infos/WeatherImg";
+import WeatherDescription from "../weather_infos/WeatherDescription";
 import CurrentTabs from "./CurrentTabs";
 
 const CurrentWeather = () => {
@@ -40,7 +40,7 @@ const CurrentWeather = () => {
     return tempResult;
   };
 
-  
+
   const roundTimeQuarterHour = () => {
     let round = 1000 * 60 * 15;
     let today = new Date();

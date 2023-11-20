@@ -1,5 +1,5 @@
 import Moment from "react-moment";
-import WeatherImg from "./WeatherImg";
+import WeatherImg from "../weather_infos/WeatherImg";
 
 const DailyForecastTab = (data: any) => {
   const codeNumbers:number[] = [7, 11, 15, 19, 23];
