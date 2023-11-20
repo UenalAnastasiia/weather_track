@@ -3,7 +3,6 @@ import weatherService from "../../API/weatherService";
 import { useFetching } from "../../hooks/useFetching";
 import Card from "react-bootstrap/Card";
 import WeatherImg from "./WeatherImg";
-import DailyForecastTab from "./DailyForecastTab";
 import WeatherDescription from "./WeatherDescription";
 import CurrentTabs from "./CurrentTabs";
 
@@ -17,6 +16,7 @@ const CurrentWeather = () => {
     setLoading(false);
     // console.log(response);
   });
+
 
   useEffect(() => {
     fetchPosts();
@@ -40,6 +40,7 @@ const CurrentWeather = () => {
     return tempResult;
   };
 
+  
   const roundTimeQuarterHour = () => {
     let round = 1000 * 60 * 15;
     let today = new Date();
@@ -86,13 +87,6 @@ const CurrentWeather = () => {
                   <div className="tabsBox">
                     <CurrentTabs sharedData={weatherData} />
                   </div>
-
-                  {/* <DailyForecastTab
-                    time={weatherData.hourly.time}
-                    code={weatherData.hourly.weather_code}
-                    temp={weatherData.hourly.temperature_2m}
-                    units={weatherData.hourly_units.temperature_2m}
-                  /> */}
                 </div>
               )}
             </div>

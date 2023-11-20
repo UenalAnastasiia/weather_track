@@ -97,6 +97,11 @@
   margin-right: 4px;
 }
 
+.hourlyForecastDiv span:first-child {
+  background: #ceadff;
+}
+
+
 .todayContainer {
   display: flex;
   justify-content: center;

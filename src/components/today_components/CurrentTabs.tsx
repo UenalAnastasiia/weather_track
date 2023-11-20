@@ -33,9 +33,7 @@ const CurrentTabs = (data: any) => {
         </TabPanel>
         <TabPanel value="hourly">
             <HourlyForecastTab
-                time={data.sharedData.hourly.time}
-                code={data.sharedData.hourly.weather_code}
-                temp={data.sharedData.hourly.temperature_2m}
+                quarterData={data.sharedData.minutely_15}
             />
           </TabPanel>
         <TabPanel value="weekly">Weekly Forecast</TabPanel>
