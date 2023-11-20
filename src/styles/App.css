@@ -166,9 +166,21 @@
 .tempDescrBox h1 {
   font-size: 54px;
   margin: 0;
+  margin-bottom: -20px;
+}
+
+.tempDescrBox h2 {
+  margin: 0;
 }
 
 .currentTempH1 {
   font-size: 86px !important;
   margin: 0;
+}
+
+.descriptionP {
+  margin: 0;
+  color: #ffffff85;
+  margin-top: 12px;
+  margin-bottom: 6px;
 }

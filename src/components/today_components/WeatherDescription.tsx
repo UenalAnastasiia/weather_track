@@ -64,7 +64,7 @@ const WeatherDescription = (data: any) => {
   };
 
   return <div>
-    <p><b>Today Weather:</b> {getDescription}</p>
+    <p className="descriptionP">{getDescription}</p>
   </div>
 };
 

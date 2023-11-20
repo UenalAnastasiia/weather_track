@@ -9,7 +9,7 @@ const AppRouter = () => {
   return (
     <Fragment>
       <Routes>
-        <Route path="/"></Route>
+        <Route path="/" element={<CurrentWeather />}></Route>
         <Route path="/current" element={<CurrentWeather />}></Route>
         <Route path="/today" element={<TodayWeather />}></Route>
       </Routes>

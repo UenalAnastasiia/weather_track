@@ -4,6 +4,7 @@ import { useFetching } from "../../hooks/useFetching";
 import Card from "react-bootstrap/Card";
 import WeatherImg from "./WeatherImg";
 import HourlyWeather from "./HourlyWeather";
+import WeatherDescription from "./WeatherDescription";
 
 const CurrentWeather = () => {
   const [loading, setLoading] = useState(true);
@@ -73,6 +74,7 @@ const CurrentWeather = () => {
                     <div className="tempDescrBox">
                       <h1>Hilden</h1>
                       <h1 className="currentTempH1">{getCurrentTemperature(weatherData)}&deg;</h1>
+                      <WeatherDescription sharedData={weatherData.daily} />
                       <h2>
                         H:{getRoundTemp(weatherData.daily.temperature_2m_max)}&deg;
                         L:{getRoundTemp(weatherData.daily.temperature_2m_min)}&deg;
