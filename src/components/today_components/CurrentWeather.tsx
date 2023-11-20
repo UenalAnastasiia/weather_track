@@ -3,7 +3,7 @@ import weatherService from "../../API/weatherService";
 import { useFetching } from "../../hooks/useFetching";
 import Card from "react-bootstrap/Card";
 import WeatherImg from "./WeatherImg";
-import HourlyWeather from "./HourlyWeather";
+import DailyForecastTab from "./DailyForecastTab";
 import WeatherDescription from "./WeatherDescription";
 import CurrentTabs from "./CurrentTabs";
 
@@ -15,7 +15,7 @@ const CurrentWeather = () => {
     const response = await weatherService.fetchTodayWeather();
     setWeatherData(response);
     setLoading(false);
-    console.log(response);
+    // console.log(response);
   });
 
   useEffect(() => {
@@ -87,7 +87,7 @@ const CurrentWeather = () => {
                     <CurrentTabs sharedData={weatherData} />
                   </div>
 
-                  {/* <HourlyWeather
+                  {/* <DailyForecastTab
                     time={weatherData.hourly.time}
                     code={weatherData.hourly.weather_code}
                     temp={weatherData.hourly.temperature_2m}

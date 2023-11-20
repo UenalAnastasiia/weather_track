@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import Card from "react-bootstrap/Card";
 import weatherService from "../../API/weatherService";
 import { useFetching } from "../../hooks/useFetching";
-import HourlyWeather from "./HourlyWeather";
+import HourlyWeather from "./DailyForecastTab";
 import WeatherDescription from "./WeatherDescription";
 import WeatherImg from "./WeatherImg";
 

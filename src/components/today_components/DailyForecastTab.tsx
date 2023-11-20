@@ -1,7 +1,7 @@
 import Moment from "react-moment";
 import WeatherImg from "./WeatherImg";
 
-const HourlyWeather = (data: any) => {
+const DailyForecastTab = (data: any) => {
   const codeNumbers:number[] = [7, 11, 15, 19, 23];
 
   const getRoundTemp = (temp: any) => {
@@ -9,7 +9,7 @@ const HourlyWeather = (data: any) => {
   };
 
   return (
-    <div className="hourlyWeather">
+    <div className="dailyForecastTab">
       {codeNumbers.map((index) => (
         <span key={index}>
           <Moment format="HH:mm">{data.time[index]}</Moment>
@@ -21,4 +21,4 @@ const HourlyWeather = (data: any) => {
   );
 };
 
-export default HourlyWeather;
+export default DailyForecastTab;
