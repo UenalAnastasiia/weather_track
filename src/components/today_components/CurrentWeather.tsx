@@ -5,6 +5,7 @@ import Card from "react-bootstrap/Card";
 import WeatherImg from "./WeatherImg";
 import HourlyWeather from "./HourlyWeather";
 import WeatherDescription from "./WeatherDescription";
+import CurrentTabs from "./CurrentTabs";
 
 const CurrentWeather = () => {
   const [loading, setLoading] = useState(true);
@@ -82,12 +83,16 @@ const CurrentWeather = () => {
                     </div>
                   </div>
 
-                  <HourlyWeather
+                  <div className="tabsBox">
+                    <CurrentTabs sharedData={weatherData} />
+                  </div>
+
+                  {/* <HourlyWeather
                     time={weatherData.hourly.time}
                     code={weatherData.hourly.weather_code}
                     temp={weatherData.hourly.temperature_2m}
                     units={weatherData.hourly_units.temperature_2m}
-                  />
+                  /> */}
                 </div>
               )}
             </div>

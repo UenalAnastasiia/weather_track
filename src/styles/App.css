@@ -184,3 +184,16 @@
   margin-top: 12px;
   margin-bottom: 6px;
 }
+
+.whiteColor {
+  color: white;
+}
+
+.css-heg063-MuiTabs-flexContainer {
+  justify-content: center;
+}
+
+.tabsBox {
+  height: 35vh;
+  margin-top: -36px;
+}
