@@ -51,7 +51,12 @@ const HourlyForecastTab = (data: any) => {
       <div className="hourlyForecastDiv">
         {getCurrentHour().map((index) => (
           <span key={index}>
-            <Moment format="HH:mm">{data.quarterData.time[index]}</Moment>
+            
+            {index === findIndexFromCurrentHour()
+            ? <span className="nowSpan">Now</span>
+            : <Moment format="HH:mm">{data.quarterData.time[index]}</Moment>
+            }
+
             <WeatherImg sharedCode={data.quarterData.weather_code[index]} hourlyCheck={true} />
             {getRoundTemp(data.quarterData.temperature_2m[index])}&deg;
           </span>

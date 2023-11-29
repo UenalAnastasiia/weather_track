@@ -101,6 +101,12 @@
   background: #ceadff;
 }
 
+.nowSpan {
+  margin: 0 !important;
+  padding: 0 !important;
+  border: none !important;
+}
+
 
 .todayContainer {
   display: flex;
