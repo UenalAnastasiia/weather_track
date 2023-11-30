@@ -21,7 +21,7 @@ export default class WeatherService {
 
   static async fetchWeeklyWeather() {
     const data = await fetch(
-      "https://api.open-meteo.com/v1/forecast?latitude=51.1682&longitude=6.9309&daily=weather_code,temperature_2m_max,temperature_2m_min&forecast_days=14"
+      "https://api.open-meteo.com/v1/forecast?latitude=51.1682&longitude=6.9309&daily=weather_code,temperature_2m_max,temperature_2m_min&forecast_days=16"
     );
 
     const jsonData = await data.json();

@@ -52,7 +52,7 @@
   width: 42px;
 }
 
-.dailyForecastTab, .hourlyForecastTab, .weeklyForecastTab {
+.dailyForecastTab, .hourlyForecastTab, .weeklyForecastTab, .moreForecastTab {
   display: flex;
   justify-content: center;
   padding: 24px;
@@ -68,6 +68,48 @@
   opacity: 0.9;
   /* box-shadow: 0px 0px 18px 6px #fdfdfdad;
   border: 2px solid #ffffff75; */
+}
+
+.moreForecastTab {
+  height: 85vh !important;
+  flex-wrap: wrap;
+  opacity: 1;
+}
+
+.moreForecastTab button {
+  position: absolute;
+  bottom: 12px;
+  padding: 4px;
+  border-radius: 14px;
+  width: fit-content;
+  height: fit-content;
+}
+
+.btndiv {
+  display: flex;
+}
+
+.btndivhidden {
+  display: none;
+}
+
+.position-rel {
+  position: relative;
+}
+
+.moreForecastTab span {
+  width: 100px;
+  height: fit-content;
+  padding: 6px;
+  border: 1px solid white;
+  border-radius: 24px;
+  margin-left: 6px;
+  margin-right: 6px;
+}
+
+.moreForecastTab p {
+  width: 100px;
+  margin: 0;
 }
 
 .dailyForecastTab span, .hourlyForecastTab span, .weeklyForecastTab span {

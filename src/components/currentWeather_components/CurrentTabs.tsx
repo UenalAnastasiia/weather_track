@@ -7,6 +7,7 @@ import TabPanel from "@mui/lab/TabPanel";
 import DailyForecastTab from "../tabs_components/DailyForecastTab";
 import HourlyForecastTab from "../tabs_components/HourlyForecastTab";
 import WeeklyForecastTab from "../tabs_components/WeeklyForecastTab";
+import MoreForecast from "../tabs_components/MoreForecast";
 
 const CurrentTabs = (data: any) => {
   const [value, setValue] = React.useState("daily");
@@ -23,6 +24,7 @@ const CurrentTabs = (data: any) => {
             <Tab label="Hourly Forecast" value="hourly" />
             <Tab label="Daily Forecast" value="daily" />
             <Tab label="Weekly Forecast" value="weekly" />
+            <Tab label="..." value="more_forecast" />
           </TabList>
         </Box>
         <TabPanel value="hourly">
@@ -41,6 +43,10 @@ const CurrentTabs = (data: any) => {
 
         <TabPanel value="weekly">
           <WeeklyForecastTab />
+        </TabPanel>
+
+        <TabPanel value="more_forecast">
+          <MoreForecast />
         </TabPanel>
       </TabContext>
     </Box>

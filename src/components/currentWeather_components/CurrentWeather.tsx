@@ -13,8 +13,8 @@ const CurrentWeather = () => {
   const [weatherData, setWeatherData] = useState(Object);
 
   const [fetchPosts, postError] = useFetching(async () => {
-    const response = await weatherService.fetchTodayWeather();
-    setWeatherData(response);
+    const todayWeather = await weatherService.fetchTodayWeather();
+    setWeatherData(todayWeather);
     setLoading(false);
     // console.log(response);
   });
