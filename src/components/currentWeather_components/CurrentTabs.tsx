@@ -10,21 +10,34 @@ import WeeklyForecastTab from "../tabs_components/WeeklyForecastTab";
 import MoreForecast from "../tabs_components/MoreForecast";
 
 const CurrentTabs = (data: any) => {
-  const [value, setValue] = React.useState("daily");
+  const [tabValue, setTabValue] = React.useState("daily");
+  const [openDialog, setOpenDialog] = React.useState(false);
 
-  const handleChange = (event: React.SyntheticEvent, newValue: string) => {
-    setValue(newValue);
+
+  const handleTabChange = (event: React.SyntheticEvent, newValue: string) => {
+    setTabValue(newValue);
   };
+
+
+  const handleClickOpenDialog = () => {
+    setOpenDialog(true);
+  };
+
+
+  const handleCloseDialog = () => {
+    setOpenDialog(false);
+  };
+  
 
   return (
     <Box sx={{ width: "100%", typography: "body1", color: "white" }}>
-      <TabContext value={value}>
+      <TabContext value={tabValue}>
         <Box sx={{ borderBottom: 1, borderColor: "divider" }}>
-          <TabList onChange={handleChange}>
+          <TabList onChange={handleTabChange}>
             <Tab label="Hourly Forecast" value="hourly" />
             <Tab label="Daily Forecast" value="daily" />
             <Tab label="Weekly Forecast" value="weekly" />
-            <Tab label="..." value="more_forecast" />
+            <Tab label="..." value="more_forecast" onClick={handleClickOpenDialog} />
           </TabList>
         </Box>
         <TabPanel value="hourly">
@@ -46,7 +59,8 @@ const CurrentTabs = (data: any) => {
         </TabPanel>
 
         <TabPanel value="more_forecast">
-          <MoreForecast />
+          <MoreForecast openDialog={openDialog}
+        onCloseDialog={handleCloseDialog} />
         </TabPanel>
       </TabContext>
     </Box>

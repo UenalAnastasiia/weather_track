@@ -323,3 +323,10 @@
   height: 35vh;
   margin-top: 0;
 }
+
+.css-1t1j96h-MuiPaper-root-MuiDialog-paper {
+  max-width: none !important;
+  max-height: none !important;
+  width: 41vw;
+  height: 90vh;
+}

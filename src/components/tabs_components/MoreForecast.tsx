@@ -2,20 +2,17 @@ import { useState, useEffect } from "react";
 import weatherService from "../../API/weatherService";
 import { useFetching } from "../../hooks/useFetching";
 import WeatherImg from "../weather_infos/WeatherImg";
-import CurrentWeather from "../currentWeather_components/CurrentWeather";
-import { Link } from "react-router-dom";
-import { setTimeout } from "timers/promises";
+import { DialogModal } from "../../interfaces/DialogModal";
+import { Dialog } from "@mui/material";
 
-const MoreForecast = () => {
+const MoreForecast = (props: DialogModal) => {
   const [loading, setLoading] = useState(true);
   const [weatherData, setWeatherData] = useState(Object);
-  const [isVisible, setIsVisible] = useState(true);
+  const { onCloseDialog, openDialog } = props;
 
   const [fetchPosts, postError] = useFetching(async () => {
     const response = await weatherService.fetchWeeklyWeather();
     setWeatherData(response);
-    // console.log(response);
-
     setLoading(false);
   });
 
@@ -30,12 +27,13 @@ const MoreForecast = () => {
   };
 
 
-  const handleClick = () => {
-    setIsVisible(false);
-};
+  const handleCloseDialog = () => {
+    onCloseDialog();
+  };
+  
 
   return (
-    <div className={isVisible ? 'btndiv' : 'btndivhidden'}>
+    <Dialog onClose={handleCloseDialog} open={openDialog}>
       {loading && <p>Loading...</p>}
       {!loading && (
         <div>
@@ -43,21 +41,30 @@ const MoreForecast = () => {
 
           <div className="moreForecastTab">
             {Array.from(Array(16).keys()).map((element, index) => (
-                <span key={index}>
-                    <p>{weatherData.daily.time[element]}</p>
-                    <WeatherImg sharedCode={weatherData.daily.weather_code[element]} hourlyCheck={true}/>
-                    <p>H: {getRoundTemp(weatherData.daily.temperature_2m_max[element])}&deg;</p>
-                    <p>L: {getRoundTemp(weatherData.daily.temperature_2m_min[element])}&deg;</p>
-                </span>
+              <span key={index}>
+                <p>{weatherData.daily.time[element]}</p>
+                <WeatherImg
+                  sharedCode={weatherData.daily.weather_code[element]}
+                  hourlyCheck={true}
+                />
+                <p>
+                  H:{getRoundTemp(weatherData.daily.temperature_2m_max[element])}
+                  &deg;
+                </p>
+                <p>
+                  L:{getRoundTemp(weatherData.daily.temperature_2m_min[element])}
+                  &deg;
+                </p>
+              </span>
             ))}
 
-                <button key='button' onClick={handleClick}>
-                    BACK
-                </button>
+            <button key="button" onClick={handleCloseDialog}>
+              BACK
+            </button>
           </div>
         </div>
       )}
-    </div>
+    </Dialog>
   );
 };
 
