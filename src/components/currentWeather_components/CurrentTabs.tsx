@@ -7,7 +7,7 @@ import TabPanel from "@mui/lab/TabPanel";
 import DailyForecastTab from "../tabs_components/DailyForecastTab";
 import HourlyForecastTab from "../tabs_components/HourlyForecastTab";
 import WeeklyForecastTab from "../tabs_components/WeeklyForecastTab";
-import MoreForecast from "../tabs_components/MoreForecast";
+import MoreForecastTab from "../tabs_components/MoreForecastTab";
 
 const CurrentTabs = (data: any) => {
   const [tabValue, setTabValue] = React.useState("daily");
@@ -26,6 +26,7 @@ const CurrentTabs = (data: any) => {
 
   const handleCloseDialog = () => {
     setOpenDialog(false);
+    setTabValue("daily");
   };
   
 
@@ -59,7 +60,7 @@ const CurrentTabs = (data: any) => {
         </TabPanel>
 
         <TabPanel value="more_forecast">
-          <MoreForecast openDialog={openDialog}
+          <MoreForecastTab openDialog={openDialog}
         onCloseDialog={handleCloseDialog} />
         </TabPanel>
       </TabContext>

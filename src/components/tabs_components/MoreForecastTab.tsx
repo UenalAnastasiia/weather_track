@@ -4,8 +4,9 @@ import { useFetching } from "../../hooks/useFetching";
 import WeatherImg from "../weather_infos/WeatherImg";
 import { DialogModal } from "../../interfaces/DialogModal";
 import { Dialog } from "@mui/material";
+import Button from '@mui/material/Button';
 
-const MoreForecast = (props: DialogModal) => {
+const MoreForecastTab = (props: DialogModal) => {
   const [loading, setLoading] = useState(true);
   const [weatherData, setWeatherData] = useState(Object);
   const { onCloseDialog, openDialog } = props;
@@ -27,6 +28,19 @@ const MoreForecast = (props: DialogModal) => {
   };
 
 
+  const getDateFormat = (data: Date): string | number => {
+    const today = new Date(data);
+    const currDate = today.toLocaleDateString("en-us", {
+      weekday: "short",
+      month: "short",
+      day: "numeric",
+    });
+
+    return `${currDate}`;
+  };
+
+
+
   const handleCloseDialog = () => {
     onCloseDialog();
   };
@@ -39,28 +53,26 @@ const MoreForecast = (props: DialogModal) => {
         <div>
           {postError && <h1>Es ist ein Fehler aufgetreten: {postError}</h1>}
 
+          <div className="moreForecastCloseBtn">
+          <Button variant="contained" key="button" color="error" onClick={handleCloseDialog}>X</Button>
+          </div>
+
+          <h1 className="moreForcastTabH1">Forecast for 16 days</h1>
+
           <div className="moreForecastTab">
             {Array.from(Array(16).keys()).map((element, index) => (
               <span key={index}>
-                <p>{weatherData.daily.time[element]}</p>
+                <p>{getDateFormat(weatherData.daily.time[element])}</p>
                 <WeatherImg
                   sharedCode={weatherData.daily.weather_code[element]}
                   hourlyCheck={true}
                 />
-                <p>
-                  H:{getRoundTemp(weatherData.daily.temperature_2m_max[element])}
-                  &deg;
-                </p>
-                <p>
-                  L:{getRoundTemp(weatherData.daily.temperature_2m_min[element])}
-                  &deg;
-                </p>
+              <div className="moreForecastTabDiv">
+                <p>H:{getRoundTemp(weatherData.daily.temperature_2m_max[element])}&deg;</p>
+                <p>L:{getRoundTemp(weatherData.daily.temperature_2m_min[element])}&deg;</p>
+              </div>
               </span>
             ))}
-
-            <button key="button" onClick={handleCloseDialog}>
-              BACK
-            </button>
           </div>
         </div>
       )}
@@ -68,4 +80,4 @@ const MoreForecast = (props: DialogModal) => {
   );
 };
 
-export default MoreForecast;
+export default MoreForecastTab;
