@@ -16,7 +16,7 @@ const CurrentWeather = () => {
     const todayWeather = await weatherService.fetchTodayWeather();
     setWeatherData(todayWeather);
     setLoading(false);
-    // console.log(response);
+    console.log(todayWeather);
   });
 
 
@@ -57,7 +57,7 @@ const CurrentWeather = () => {
     let timeToReturn = new Date(Math.floor(today.getTime() / round) * round);
 
     let timeResult = ("0" + timeToReturn.getHours()).slice(-2) + ":" + ("0" + timeToReturn.getMinutes()).slice(-2);
-    let currdateFormat = today.getFullYear() + '-' + (today.getMonth() + 1) + '-' + today.getDate() + 'T' + timeResult;
+    let currdateFormat = today.getFullYear() + '-' + (today.getMonth() + 1) + '-' + ('0' + today.getDate()).slice(-2) + 'T' + timeResult;
 
     return currdateFormat;
   };

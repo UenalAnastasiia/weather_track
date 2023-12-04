@@ -52,7 +52,7 @@
   width: 42px;
 }
 
-.dailyForecastTab, .hourlyForecastTab, .weeklyForecastTab, .moreForecastTab {
+.dailyForecastTab, .hourlyForecastTab, .weeklyForecastTab {
   display: flex;
   justify-content: center;
   padding: 24px;
@@ -324,9 +324,19 @@
   margin-top: 0;
 }
 
+.moreForecastTab {
+  display: flex;
+  justify-content: center;
+  padding: 24px;
+}
+
 .css-1t1j96h-MuiPaper-root-MuiDialog-paper {
   max-width: none !important;
   max-height: none !important;
-  width: 41vw;
-  height: 90vh;
+  width: 40vw;
+  height: fit-content;
+  background: #7e63c5db !important;
+  backdrop-filter: blur(10px);
+  border-radius: 32px !important;
+  box-shadow: 4px 4px 4px #fff, -4px -4px 20px #fff, inset -4px -4px 20px #fff, inset 4px 4px 20px #fff !important;
 }

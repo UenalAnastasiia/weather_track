@@ -2,7 +2,6 @@ import Moment from "react-moment";
 import WeatherImg from "../weather_infos/WeatherImg";
 
 const HourlyForecastTab = (data: any) => {
-
   const getRoundTemp = (temp: any) => {
     return Math.round(temp);
   };
@@ -14,7 +13,7 @@ const HourlyForecastTab = (data: any) => {
     let timeToReturn = new Date(Math.floor(today.getTime() / round) * round);
 
     let timeResult = ("0" + timeToReturn.getHours()).slice(-2) + ":" + ("0" + timeToReturn.getMinutes()).slice(-2);
-    let currdateFormat = today.getFullYear() + '-' + (today.getMonth() + 1) + '-' + today.getDate() + 'T' + timeResult;
+    let currdateFormat = today.getFullYear() + '-' + (today.getMonth() + 1) + '-' + ('0' + today.getDate()).slice(-2) + 'T' + timeResult;
 
     return currdateFormat
   };
@@ -25,9 +24,9 @@ const HourlyForecastTab = (data: any) => {
     let indexResult = [];
 
     for (let index = 0; index < data.quarterData.time.length; index++) {
-        if (data.quarterData.time[index] === currdate) {            
+        if (data.quarterData.time[index] === currdate) {                      
             indexResult.push(index)
-        }
+        } 
     }
     
     return indexResult[0];
@@ -50,8 +49,8 @@ const HourlyForecastTab = (data: any) => {
     <div className="hourlyForecastTab">
       <div className="hourlyForecastDiv">
         {getCurrentHour().map((index) => (
-          <span key={index}>
-            
+          <span key={index}>    
+
             {index === findIndexFromCurrentHour()
             ? <span className="nowSpan">Now</span>
             : <Moment format="HH:mm">{data.quarterData.time[index]}</Moment>
