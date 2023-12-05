@@ -49,9 +49,9 @@ const CurrentTabs = (data: any) => {
 
         <TabPanel value="daily">
           <DailyForecastTab
-            time={data.sharedData.hourly.time}
-            code={data.sharedData.hourly.weather_code}
-            temp={data.sharedData.hourly.temperature_2m}
+            // time={data.sharedData.hourly.time}
+            // code={data.sharedData.hourly.weather_code}
+            // temp={data.sharedData.hourly.temperature_2m}
           />
         </TabPanel>
 
@@ -61,7 +61,7 @@ const CurrentTabs = (data: any) => {
 
         <TabPanel value="more_forecast">
           <MoreForecastTab openDialog={openDialog}
-        onCloseDialog={handleCloseDialog} />
+            onCloseDialog={handleCloseDialog} />
         </TabPanel>
       </TabContext>
     </Box>

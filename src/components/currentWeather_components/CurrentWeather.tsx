@@ -16,7 +16,7 @@ const CurrentWeather = () => {
     const todayWeather = await weatherService.fetchTodayWeather();
     setWeatherData(todayWeather);
     setLoading(false);
-    console.log(todayWeather);
+    // console.log(todayWeather);
   });
 
 
@@ -29,17 +29,19 @@ const CurrentWeather = () => {
   };
 
 
-  const getCurrentTemperature = (data: any) => {
+  const getCurrentData = (weatherInfo: any, data: any, dataTyp: string) => {
     let currdate = roundTimeQuarterHour();
-    let tempResult = [];
+    let dataResult = [];
 
     for (let index = 0; index < 95; index++) {
-        if (data.minutely_15.time[index] === currdate) {            
-            tempResult.push(getRoundTemp(data.minutely_15.temperature_2m[index]))
-        }
+      if (weatherInfo.minutely_15.time[index] === currdate && dataTyp === "temperature") {            
+        dataResult.push(getRoundTemp(data[index]));
+      } else if (weatherInfo.minutely_15.time[index] === currdate && dataTyp === "weatherCode") {
+        dataResult.push(data[index]);
+      }
     }
 
-    return tempResult;
+    return dataResult[0];
   };
 
 
@@ -82,14 +84,14 @@ const CurrentWeather = () => {
                     <div className="circleBox">
                         <div className="circle">
                             <WeatherImg
-                                sharedCode={weatherData.daily.weather_code[0]}
-                                hourlyCheck={false} />
+                              sharedCode={getCurrentData(weatherData, weatherData.minutely_15.weather_code, 'weatherCode')}
+                              hourlyCheck={false} />
                         </div>
                     </div>
 
                     <div className="tempDescrBox">
                       <h1>Hilden</h1>
-                      <h1 className="currentTempH1">{getCurrentTemperature(weatherData)}&deg;</h1>
+                      <h1 className="currentTempH1">{getCurrentData(weatherData, weatherData.minutely_15.temperature_2m, 'temperature')}&deg;</h1>
                       <WeatherDescription sharedData={weatherData.daily} />
                       <h2>
                         H:{getRoundTemp(weatherData.daily.temperature_2m_max[0])}&deg;

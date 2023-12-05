@@ -19,9 +19,7 @@ const HourlyForecastTab = (data: any) => {
   };
 
 
-  const findIndexFromCurrentHour = (): number => {
-    console.log(data);
-    
+  const findIndexFromCurrentHour = (): number => {    
     let currdate = roundTimeToHour();
     let indexResult = [];
 

@@ -86,7 +86,7 @@
   flex-direction: column;
   align-items: center;
   justify-content: flex-end;
-  margin-right: 5vw;
+  margin-right: 2vw;
 }
 
 .tempDescrBox h1 {
@@ -202,7 +202,8 @@
   border: 1px solid #e6dede;
   border-radius: 56px;
   padding: 8px;
-  background: #381e5fb0;
+  background: #ffffff63;
+  /* background: #381e5fb0; */
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -228,17 +229,15 @@
 }
 
 .dailyForecastTab span {
-  margin-left: 2px !important;
-  margin-right: 2px !important;
+  margin-left: 4px !important;
+  margin-right: 4px !important;
 }
 
-.dailyForecastTabBoxLeft {
+.dailyForecastTabBox {
   display: flex;
-}
-
-.dailyForecastTabBoxRight span {
-  margin-top: 4px;
-  margin-bottom: 4px;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
 }
 
 /****** Close Daily Forecast ******/
@@ -257,6 +256,7 @@
 .hourlyForecastDiv span {
   margin-left: 4px;
   margin-right: 4px;
+  padding: 4px !important;
 }
 
 .hourlyForecastDiv span:first-child {
@@ -317,7 +317,7 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  background: #381e5fb0;
+  background: #ffffff63;
   color: white;
 }
 
@@ -325,8 +325,9 @@
   margin: 0;
 }
 
-.moreForecastTab p:first-child {
+.moreForecastTab span p:first-child {
   font-weight: 600;
+  margin-bottom: 4px;
 }
 
 .moreForecastTabDiv {
@@ -335,6 +336,7 @@
 
 .moreForecastTabDiv p:first-child {
   margin-right: 12px;
+  font-weight: lighter !important;
 }
 
 .moreForecastCloseBtn {

@@ -8,78 +8,53 @@ const WeatherImg = (data: any) => {
   }, []);
 
   const checkIcon = () => {
-    if (data.sharedCode === 0) {
+    let checkedCode = data.sharedCode;
+
+    if (checkedCode === 0) {
       setShowIcon("../assets/icon_sun.png");
     }
 
-    if (
-      data.sharedCode === 1 ||
-      data.sharedCode === 2 ||
-      data.sharedCode === 3
-    ) {
+    if (checkedCode === 1 || checkedCode === 2 || checkedCode === 3) {
       setShowIcon("../assets/icon_cloud.png");
     }
 
-    if (data.sharedCode === 45 || data.sharedCode === 48) {
+    if (checkedCode === 45 || checkedCode === 48) {
       setShowIcon("../assets/icon_fog.png");
     }
 
-    if (
-      data.sharedCode === 51 ||
-      data.sharedCode === 53 ||
-      data.sharedCode === 55 ||
-      data.sharedCode === 56 ||
-      data.sharedCode === 57 
-    ) {
+    if (checkedCode === 51 || checkedCode === 53 || checkedCode === 55 || checkedCode === 56 || checkedCode === 57) {
       setShowIcon("../assets/icon_little_rain.png");
     }
 
-    if (
-      data.sharedCode === 61 ||
-      data.sharedCode === 63 ||
-      data.sharedCode === 65
-    ) {
+    if (checkedCode === 61 || checkedCode === 63 || checkedCode === 65) {
       setShowIcon("../assets/icon_rain.png");
     }
 
-    if (data.sharedCode === 66 || data.sharedCode === 67) {
+    if (checkedCode === 66 || checkedCode === 67) {
       setShowIcon("../assets/icon_snow_rain.png");
     }
 
-    if (
-      data.sharedCode === 71 ||
-      data.sharedCode === 73 ||
-      data.sharedCode === 75 
-    ) {
+    if (checkedCode === 71 || checkedCode === 73 || checkedCode === 75) {
       setShowIcon("../assets/icon_little_snow.png");
     }
 
-    if (
-      data.sharedCode === 77 
-    ) {
+    if (checkedCode === 77) {
       setShowIcon("../assets/icon_snow_showers.png");
     }
 
-    if (
-      data.sharedCode === 80 ||
-      data.sharedCode === 81 ||
-      data.sharedCode === 82
-    ) {
+    if (checkedCode === 80 || checkedCode === 81 || checkedCode === 82) {
       setShowIcon("../assets/icon_rain_showers.png");
     }
 
-    if (
-      data.sharedCode === 85 ||
-      data.sharedCode === 86
-    ) {
+    if (checkedCode === 85 || checkedCode === 86) {
       setShowIcon("../assets/icon_snow.png");
     }
 
-    if (data.sharedCode === 95) {
+    if (checkedCode === 95) {
       setShowIcon("../assets/icon_chance_of_storm.png");
     }
 
-    if (data.sharedCode === 96 || data.sharedCode === 99) {
+    if (checkedCode === 96 || checkedCode === 99) {
       setShowIcon("../assets/icon_slight_storm.png");
     }
   };
