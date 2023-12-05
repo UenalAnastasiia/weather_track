@@ -221,6 +221,28 @@
 
 /****** Close Forecast Tabs ******/
 
+/****** Daily Forecast ******/
+
+.dailyForecastTab {
+  justify-content: space-around !important;
+}
+
+.dailyForecastTab span {
+  margin-left: 2px !important;
+  margin-right: 2px !important;
+}
+
+.dailyForecastTabBoxLeft {
+  display: flex;
+}
+
+.dailyForecastTabBoxRight span {
+  margin-top: 4px;
+  margin-bottom: 4px;
+}
+
+/****** Close Daily Forecast ******/
+
 
 /****** Hourly Forecast ******/
 
@@ -239,6 +261,10 @@
 
 .hourlyForecastDiv span:first-child {
   background: #ceadff;
+}
+
+.hourlyForecastDiv span time {
+  width: 46px;
 }
 
 .nowSpan {
@@ -278,6 +304,7 @@
   /* height: 85vh !important; */
   flex-wrap: wrap;
   opacity: 1;
+  margin-bottom: 24px;
 }
 
 .moreForecastTab span {
@@ -326,7 +353,7 @@
 .css-1t1j96h-MuiPaper-root-MuiDialog-paper {
   max-width: none !important;
   max-height: none !important;
-  width: 40vw;
+  width: 45vw;
   height: fit-content;
   background: #7e63c5db !important;
   backdrop-filter: blur(10px);

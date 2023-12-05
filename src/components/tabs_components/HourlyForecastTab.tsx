@@ -20,6 +20,8 @@ const HourlyForecastTab = (data: any) => {
 
 
   const findIndexFromCurrentHour = (): number => {
+    console.log(data);
+    
     let currdate = roundTimeToHour();
     let indexResult = [];
 
@@ -53,7 +55,7 @@ const HourlyForecastTab = (data: any) => {
 
             {index === findIndexFromCurrentHour()
             ? <span className="nowSpan">Now</span>
-            : <Moment format="HH:mm">{data.quarterData.time[index]}</Moment>
+            : <Moment format="h a">{data.quarterData.time[index]}</Moment>
             }
 
             <WeatherImg sharedCode={data.quarterData.weather_code[index]} hourlyCheck={true} />

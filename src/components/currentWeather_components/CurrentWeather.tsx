@@ -92,19 +92,19 @@ const CurrentWeather = () => {
                       <h1 className="currentTempH1">{getCurrentTemperature(weatherData)}&deg;</h1>
                       <WeatherDescription sharedData={weatherData.daily} />
                       <h2>
-                        H:{getRoundTemp(weatherData.daily.temperature_2m_max)}&deg;
-                        L:{getRoundTemp(weatherData.daily.temperature_2m_min)}&deg;
+                        H:{getRoundTemp(weatherData.daily.temperature_2m_max[0])}&deg;
+                        L:{getRoundTemp(weatherData.daily.temperature_2m_min[0])}&deg;
                       </h2>
 
                       <div className="sunDiv">
                         <span>
                           <img className="sunImg" src="../assets/sunrise.png" />
-                          <h3>{getTimeFromDate(weatherData.daily.sunrise)}</h3>
+                          <h3>{getTimeFromDate(weatherData.daily.sunrise[0])}</h3>
                         </span>
 
                         <span>
                           <img className="sunImg" src="../assets/sunset.png" />
-                          <h3>{getTimeFromDate(weatherData.daily.sunset)}</h3>
+                          <h3>{getTimeFromDate(weatherData.daily.sunset[0])}</h3>
                         </span>
                       </div>
                     </div>

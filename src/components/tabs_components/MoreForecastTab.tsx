@@ -57,10 +57,10 @@ const MoreForecastTab = (props: DialogModal) => {
           <Button variant="contained" key="button" color="error" onClick={handleCloseDialog}>X</Button>
           </div>
 
-          <h1 className="moreForcastTabH1">Forecast for 16 days</h1>
+          <h1 className="moreForcastTabH1">Forecast for 10 days</h1>
 
           <div className="moreForecastTab">
-            {Array.from(Array(16).keys()).map((element, index) => (
+            {Array.from(Array(10).keys()).map((element, index) => (
               <span key={index}>
                 <p>{getDateFormat(weatherData.daily.time[element])}</p>
                 <WeatherImg
