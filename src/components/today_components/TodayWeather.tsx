@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import Card from "react-bootstrap/Card";
 import weatherService from "../../API/weatherService";
 import { useFetching } from "../../hooks/useFetching";
@@ -20,9 +20,11 @@ const TodayWeather = () => {
     // console.log(response);
   });
 
+
   useEffect(() => {
     fetchPosts();
   }, []);
+
 
   const getSunriseAndSunsetTime = (data: any) => {
     return new Date(data).toLocaleTimeString([], {
@@ -30,6 +32,7 @@ const TodayWeather = () => {
       minute: "2-digit",
     });
   };
+
 
   const getMinAndMaxTemp = (data: any) => {
     let minTemp =
@@ -40,6 +43,7 @@ const TodayWeather = () => {
       data.daily_units.temperature_2m_max;
     setMinMaxTemp({ minTemp, maxTemp });
   };
+  
 
   return (
     <div>

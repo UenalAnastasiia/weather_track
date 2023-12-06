@@ -10,7 +10,7 @@ export default class WeatherService {
 
   static async fetchCurrentWeather() {
     const data = await fetch(
-      "https://api.open-meteo.com/v1/forecast?latitude=51.1682&longitude=6.9309&current=temperature_2m,relative_humidity_2m,apparent_temperature,precipitation,rain,weather_code,wind_speed_10m,wind_direction_10m&daily=sunrise,sunset,daylight_duration,sunshine_duration,uv_index_max,precipitation_sum&forecast_days=1&forecast_minutely_15=4"
+      "https://api.open-meteo.com/v1/forecast?latitude=51.1682&longitude=6.9309&current=temperature_2m,relative_humidity_2m,apparent_temperature,precipitation,rain,weather_code,wind_speed_10m,wind_direction_10m&daily=sunrise,sunset,daylight_duration,sunshine_duration,uv_index_max,precipitation_sum&timezone=Europe%2FBerlin&forecast_days=1&forecast_minutely_15=4"
     );
 
     const jsonData = await data.json();

@@ -39,8 +39,7 @@ const MoreForecastTab = (props: DialogModal) => {
     return `${currDate}`;
   };
 
-
-
+  
   const handleCloseDialog = () => {
     onCloseDialog();
   };

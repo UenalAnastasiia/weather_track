@@ -224,9 +224,9 @@
 
 /****** Daily Forecast ******/
 
-.dailyForecastTab {
+/* .dailyForecastTab {
   justify-content: space-around !important;
-}
+} */
 
 .dailyForecastTab span {
   margin-left: 4px !important;
@@ -234,10 +234,50 @@
 }
 
 .dailyForecastTabBox {
-  display: flex;
+  width: 37vw;
+  height: 20vh;
+  /* display: flex;
   flex-wrap: wrap;
   align-items: center;
+  justify-content: center; */
+}
+
+.windBox {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.windBox div >span {
+  display: flex;
+  justify-content: center !important;
+  align-items: center !important;
+  flex-direction: row !important;
+  margin: 8px !important;
+}
+
+.windBox div >span img {
+  margin-right: 6px;
+}
+
+.windHeader {
+  height: fit-content;
+  display: flex;
   justify-content: center;
+  align-items: center;
+  position: absolute;
+  top: 4px;
+  left: 142px;
+}
+
+.windHeader >img {
+  width: 48px;
+  margin-right: 6px;
+}
+
+.windDescription {
+  display: flex;
+  height: fit-content;
 }
 
 /****** Close Daily Forecast ******/
@@ -371,3 +411,44 @@
 }
 
 /****** Close MoreForecastTab ******/
+
+/****** Compass ******/
+
+.compass {
+  position: relative;
+  width: 180px;
+  height: 180px;
+  border-radius: 50%;
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+  margin: auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: -18px;
+}
+
+.compass > .arrow {
+  width: 0;
+  height: 0;
+  border-width: 0 3px 120px 2px;
+  border-color: transparent transparent #F02222 transparent;
+  border-style: solid;
+  position: absolute;
+  bottom: 30px;
+  right: 88px;
+}
+
+.compass > .compass-circle {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  transition: transform 0.1s ease-out;
+  background: url('/public/assets/compass.png')
+    center no-repeat;
+  background-size: contain;
+}
+
+/****** Close Compass ******/

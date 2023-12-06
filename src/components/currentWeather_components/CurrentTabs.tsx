@@ -9,6 +9,7 @@ import HourlyForecastTab from "../tabs_components/HourlyForecastTab";
 import WeeklyForecastTab from "../tabs_components/WeeklyForecastTab";
 import MoreForecastTab from "../tabs_components/MoreForecastTab";
 
+
 const CurrentTabs = (data: any) => {
   const [tabValue, setTabValue] = React.useState("daily");
   const [openDialog, setOpenDialog] = React.useState(false);
@@ -48,11 +49,7 @@ const CurrentTabs = (data: any) => {
         </TabPanel>
 
         <TabPanel value="daily">
-          <DailyForecastTab
-            // time={data.sharedData.hourly.time}
-            // code={data.sharedData.hourly.weather_code}
-            // temp={data.sharedData.hourly.temperature_2m}
-          />
+          <DailyForecastTab />
         </TabPanel>
 
         <TabPanel value="weekly">
