@@ -11,7 +11,7 @@ const TodayWeather = () => {
   const [dailyWeatherData, setDailyWeatherData] = useState(Object);
   const [minMaxTemp, setMinMaxTemp] = useState(Object);
 
-  const [fetchPosts, postError] = useFetching(async () => {
+  const [fetchAPIData, postError] = useFetching(async () => {
     const response = await weatherService.fetchTodayWeather(51.16818, 6.93093);
     setDailyWeatherData(response);
     getSunriseAndSunsetTime(response.daily);
@@ -22,7 +22,7 @@ const TodayWeather = () => {
 
 
   useEffect(() => {
-    fetchPosts();
+    fetchAPIData();
   }, []);
 
 

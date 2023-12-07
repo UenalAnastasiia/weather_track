@@ -3,21 +3,23 @@ import weatherService from "../../API/weatherService";
 import { useFetching } from "../../hooks/useFetching";
 import WeatherImg from "../weather_infos/WeatherImg";
 
-const WeeklyForecastTab = () => {
+const WeeklyForecastTab = (data) => {
   const weeklyLength = Array.from({ length: 7 }, (_, i) => i + 1);
   const [loading, setLoading] = useState(true);
   const [dailyData, setDailyData] = useState(Object);
 
 
-  const [fetchPosts, postError] = useFetching(async () => {
-    const response = await weatherService.fetchWeeklyWeather();
+  const [fetchAPIData, postError] = useFetching(async () => {
+    console.log(data);
+    
+    const response = await weatherService.fetchWeeklyWeather(data.coordinates.latitude, data.coordinates.longitude);
     setDailyData(response.daily);
     setLoading(false);
   });
 
 
   useEffect(() => {
-    fetchPosts();
+    fetchAPIData();
   }, []);
 
 

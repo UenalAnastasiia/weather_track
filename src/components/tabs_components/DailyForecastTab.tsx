@@ -8,8 +8,8 @@ const DailyForecastTab = (data: any) => {
   const [loading, setLoading] = useState(true);
   const [currentData, setCurrentData] = useState(Object);
 
-  const [fetchPosts, postError] = useFetching(async () => {
-    const todayWeather = await weatherService.fetchCurrentWeather();
+  const [fetchAPIData, postError] = useFetching(async () => {
+    const todayWeather = await weatherService.fetchCurrentWeather(data.coordinates.latitude, data.coordinates.longitude);
     setCurrentData(todayWeather);
     setLoading(false);
     // console.log(todayWeather);
@@ -17,7 +17,7 @@ const DailyForecastTab = (data: any) => {
 
 
   useEffect(() => {
-    fetchPosts();
+    fetchAPIData();
   }, []);
 
 

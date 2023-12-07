@@ -11,15 +11,15 @@ const MoreForecastTab = (props: DialogModal) => {
   const [weatherData, setWeatherData] = useState(Object);
   const { onCloseDialog, openDialog } = props;
 
-  const [fetchPosts, postError] = useFetching(async () => {
-    const response = await weatherService.fetchWeeklyWeather();
+  const [fetchAPIData, postError] = useFetching(async () => {
+    const response = await weatherService.fetchWeeklyWeather(props.data.latitude, props.data.longitude);
     setWeatherData(response);
     setLoading(false);
   });
 
 
   useEffect(() => {
-    fetchPosts();
+    fetchAPIData();
   }, []);
 
 
