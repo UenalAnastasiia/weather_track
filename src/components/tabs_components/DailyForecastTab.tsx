@@ -3,6 +3,7 @@ import weatherService from "../../API/weatherService";
 import { useFetching } from "../../hooks/useFetching";
 import Compass from "../currentWeather_components/Compass";
 
+
 const DailyForecastTab = (data: any) => {
   const [loading, setLoading] = useState(true);
   const [currentData, setCurrentData] = useState(Object);
@@ -14,9 +15,11 @@ const DailyForecastTab = (data: any) => {
     // console.log(todayWeather);
   });
 
+
   useEffect(() => {
     fetchPosts();
   }, []);
+
 
   const getTimeFromDate = (timeData: Date) => {
     let today = new Date(timeData);

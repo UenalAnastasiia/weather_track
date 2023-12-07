@@ -12,7 +12,7 @@ const TodayWeather = () => {
   const [minMaxTemp, setMinMaxTemp] = useState(Object);
 
   const [fetchPosts, postError] = useFetching(async () => {
-    const response = await weatherService.fetchTodayWeather();
+    const response = await weatherService.fetchTodayWeather(51.16818, 6.93093);
     setDailyWeatherData(response);
     getSunriseAndSunsetTime(response.daily);
     getMinAndMaxTemp(response);

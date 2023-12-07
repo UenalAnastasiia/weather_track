@@ -7,22 +7,33 @@ import WeatherDescription from "../weather_infos/WeatherDescription";
 import CurrentTabs from "./CurrentTabs";
 import BottomNavigationAction from "@mui/material/BottomNavigationAction";
 import ThermostatIcon from '@mui/icons-material/Thermostat';
+import CoordinatesService from "../../API/coordinatesService";
 
 const CurrentWeather = () => {
   const [loading, setLoading] = useState(true);
   const [weatherData, setWeatherData] = useState(Object);
+  const [inputValue, setInputValue] = useState('');
+  const [cityData, setCityData] = useState(Object);
 
   const [fetchPosts, postError] = useFetching(async () => {
-    const todayWeather = await weatherService.fetchTodayWeather();
+    // console.log(todayWeather);
+
+    const cData = await CoordinatesService.fetchCoordinateAPI(inputValue);
+    setCityData(cData.results[0]);
+
+    const todayWeather = await weatherService.fetchTodayWeather(cData.results[0].latitude, cData.results[0].longitude);
     setWeatherData(todayWeather);
     setLoading(false);
-    // console.log(todayWeather);
   });
 
+  // useEffect(() => {
+  //   fetchPosts();
+  // }, []);
 
-  useEffect(() => {
-    fetchPosts();
-  }, []);
+
+  const handleSearchCity = () => {
+    fetchPosts(inputValue);
+  }
 
   const getRoundTemp = (temp: any) => {
     return Math.round(temp);
@@ -67,6 +78,10 @@ const CurrentWeather = () => {
 
   return (
     <div>
+      <div>
+        <input type="text" onChange={(e) => setInputValue(e.target.value)} ></input>
+        <button onClick={handleSearchCity}>search</button>
+      </div>
       <Card className="wrapper">
         {loading && <p>Loading...</p>}
         {!loading && (
@@ -90,7 +105,9 @@ const CurrentWeather = () => {
                     </div>
 
                     <div className="tempDescrBox">
-                      <h1>Hilden</h1>
+                    {cityData && (
+                      <h1>{cityData.name}</h1>
+                    )}
                       <h1 className="currentTempH1">{getCurrentData(weatherData, weatherData.minutely_15.temperature_2m, 'temperature')}&deg;</h1>
                       <WeatherDescription sharedData={weatherData.daily} />
                       <h2>
