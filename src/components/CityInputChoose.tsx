@@ -2,6 +2,7 @@ import { useState } from "react";
 import { useFetching } from "../hooks/useFetching";
 import CoordinatesService from "../API/coordinatesService";
 import CurrentWeather from "./currentWeather_components/CurrentWeather";
+import WeatherService from "../API/weatherService";
 
 
 const CityInputChoose = () => {
@@ -13,6 +14,8 @@ const CityInputChoose = () => {
     const cData = await CoordinatesService.fetchCoordinateAPI(inputValue);
     setCityData(cData.results[0]);
     setShow(true);
+
+    WeatherService.getCoordinatesForUrl(cData.results[0].latitude, cData.results[0].longitude)
   });
 
 
@@ -28,12 +31,9 @@ const CityInputChoose = () => {
       ></input>
       <button onClick={handleSearchCity}>search</button>
 
-      {show ? (
-        <CurrentWeather
-          latitude={cityData.latitude}
-          longitude={cityData.longitude}
-          name={cityData.name}
-        />
+      {show 
+      ? (
+        <CurrentWeather name={cityData.name} />
       ) : null}
     </div>
   );

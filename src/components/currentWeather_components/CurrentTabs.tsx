@@ -49,17 +49,16 @@ const CurrentTabs = (data: any) => {
         </TabPanel>
 
         <TabPanel value="daily">
-          <DailyForecastTab coordinates={data.cityData}/>
+          <DailyForecastTab />
         </TabPanel>
 
         <TabPanel value="weekly">
-          <WeeklyForecastTab coordinates={data.cityData}/>
+          <WeeklyForecastTab />
         </TabPanel>
 
         <TabPanel value="more_forecast">
           <MoreForecastTab openDialog={openDialog}
-            onCloseDialog={handleCloseDialog}
-            data={data.cityData} />
+            onCloseDialog={handleCloseDialog}/>
         </TabPanel>
       </TabContext>
     </Box>

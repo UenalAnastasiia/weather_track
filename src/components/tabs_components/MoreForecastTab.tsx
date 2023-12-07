@@ -12,7 +12,7 @@ const MoreForecastTab = (props: DialogModal) => {
   const { onCloseDialog, openDialog } = props;
 
   const [fetchAPIData, postError] = useFetching(async () => {
-    const response = await weatherService.fetchWeeklyWeather(props.data.latitude, props.data.longitude);
+    const response = await weatherService.fetchWeeklyWeather();
     setWeatherData(response);
     setLoading(false);
   });

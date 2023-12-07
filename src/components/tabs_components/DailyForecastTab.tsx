@@ -4,12 +4,12 @@ import { useFetching } from "../../hooks/useFetching";
 import Compass from "../currentWeather_components/Compass";
 
 
-const DailyForecastTab = (data: any) => {
+const DailyForecastTab = () => {
   const [loading, setLoading] = useState(true);
   const [currentData, setCurrentData] = useState(Object);
 
   const [fetchAPIData, postError] = useFetching(async () => {
-    const todayWeather = await weatherService.fetchCurrentWeather(data.coordinates.latitude, data.coordinates.longitude);
+    const todayWeather = await weatherService.fetchCurrentWeather();
     setCurrentData(todayWeather);
     setLoading(false);
     // console.log(todayWeather);

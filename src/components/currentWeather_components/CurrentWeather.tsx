@@ -14,7 +14,7 @@ const CurrentWeather = (props) => {
   const [weatherData, setWeatherData] = useState(Object);
 
   const [fetchAPIData, postError] = useFetching(async () => {
-    const todayWeather = await weatherService.fetchTodayWeather(props.latitude, props.longitude);
+    const todayWeather = await weatherService.fetchTodayWeather();
     setWeatherData(todayWeather);
     setLoading(false);
   });
@@ -116,7 +116,7 @@ const CurrentWeather = (props) => {
                   </div>
 
                   <div className="tabsBox">
-                    <CurrentTabs sharedData={weatherData} cityData={props}/>
+                    <CurrentTabs sharedData={weatherData} />
                   </div>
                 </div>
               )}

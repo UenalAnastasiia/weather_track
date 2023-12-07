@@ -12,7 +12,7 @@ const WeeklyForecastTab = (data) => {
   const [fetchAPIData, postError] = useFetching(async () => {
     console.log(data);
     
-    const response = await weatherService.fetchWeeklyWeather(data.coordinates.latitude, data.coordinates.longitude);
+    const response = await weatherService.fetchWeeklyWeather();
     setDailyData(response.daily);
     setLoading(false);
   });

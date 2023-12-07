@@ -12,7 +12,7 @@ const TodayWeather = () => {
   const [minMaxTemp, setMinMaxTemp] = useState(Object);
 
   const [fetchAPIData, postError] = useFetching(async () => {
-    const response = await weatherService.fetchTodayWeather(51.16818, 6.93093);
+    const response = await weatherService.fetchTodayWeather();
     setDailyWeatherData(response);
     getSunriseAndSunsetTime(response.daily);
     getMinAndMaxTemp(response);
@@ -81,12 +81,6 @@ const TodayWeather = () => {
 
                     <WeatherDescription sharedData={dailyWeatherData.daily} />
 
-                    <h3>Daily weather</h3>
-                    <HourlyWeather
-                      time={dailyWeatherData.hourly.time}
-                      code={dailyWeatherData.hourly.weather_code}
-                      temp={dailyWeatherData.hourly.temperature_2m}
-                    />
                   </div>
                 </div>
               )}
