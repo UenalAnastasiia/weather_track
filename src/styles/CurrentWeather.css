@@ -1,0 +1,139 @@
+/****** Current Weather ******/
+
+.wrapper {
+    width: 40vw;
+    height: 90vh;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    position: relative;
+    background-color: #160e2a6b;
+    border-radius: 32px;
+    box-shadow: 0px 0px 18px 6px #fdfdfdad;
+  }
+  
+  .circle {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 220px;
+    width: 220px;
+    background: #d6e3f6;
+    border-radius: 50%;
+    box-shadow: -3px -3px 7px #ffffffa6, 3px 3px 5px rgba(94, 104, 121, 0.712);
+    position: relative;
+  }
+  
+  .circle:after {
+    content: '';
+    position: absolute;
+    height: 90%;
+    width: 90%;
+    background-color: transparent;
+    border-radius: 50%;
+    box-shadow: inset -3px -3px 7px #ffffffb0, inset 3px 3px 5px rgba(94, 104, 121, 0.671);
+  }
+  
+  .currentDataBox {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    width: 40vw;
+    margin-top: 5vh;
+    color: white;
+  }
+  
+  .circleBox {
+    margin-left: 5vw;
+  }
+  
+  .tempDescrBox {
+    width: 20vw;
+    height: 50vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin-right: 2vw;
+  }
+  
+  .tempDescrBox h1 {
+    font-size: 54px;
+    margin: 0;
+    margin-bottom: -20px;
+  }
+  
+  .tempDescrBox h2 {
+    margin: 0;
+  }
+  
+  .currentTempH1 {
+    font-size: 86px !important;
+    margin: 0;
+  }
+  
+  .descriptionP {
+    margin: 0;
+    color: #ffffff85;
+    margin-top: 12px;
+    margin-bottom: 6px;
+  }
+  
+  .whiteColor {
+    color: white;
+  }
+  
+  .todayContainer {
+    display: flex;
+    justify-content: center;
+  }
+  
+  .todayDataDiv {
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background: #ffffff4f;
+    margin-top: 5vh;
+    border-radius: 24px;
+  }
+  
+  .sunDiv {
+    display: flex;
+    justify-content: space-between;
+    width: 200px;
+    margin-top: 12px;
+  }
+  
+  .sunDiv h3 {
+    margin: 0;
+    margin-top: -6px;
+  }
+  
+  .sunImg {
+    width: 45px;
+  }
+  
+  /****** Close Current Weather ******/
+  
+  
+  /****** Weather Img ******/
+  
+  .weatherImg {
+    width: 200px;
+    height: 200px;
+    border-radius: 100%;
+    object-fit: cover;
+  }
+  
+  .weatherBG {
+    width: 150px;
+    height: 150px;
+    object-fit: cover;
+  }
+  
+  .weatherIcon {
+    width: 42px;
+  }
+  
+  /****** Close Weather Img ******/

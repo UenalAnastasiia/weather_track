@@ -1,5 +1,7 @@
 import "./styles/App.css";
 import "./styles/BgAnimation.css";
+import "./styles/Tabs.css";
+import "./styles/CurrentWeather.css";
 import Navbar from "./components/Navbar";
 import TodayWeather from "./components/today_components/TodayWeather";
 import AppRouter from "./components/AppRouter";

@@ -72,10 +72,6 @@ const CurrentWeather = (props) => {
         {loading && <p>Loading...</p>}
         {!loading && (
           <Card.Body>
-            <div className="temp-btn">
-              <BottomNavigationAction label="Info" icon={<ThermostatIcon style={{ color: 'white', fontSize: 38 }} />} />
-            </div>
-
             <div>
               {postError && <h1>Es ist ein Fehler aufgetreten: {postError}</h1>}
 
