@@ -97,8 +97,8 @@ const CurrentWeather = (props) => {
                       <h1 className="currentTempH1">{getCurrentData(weatherData, weatherData.minutely_15.temperature_2m, 'temperature')}&deg;</h1>
                       <WeatherDescription sharedData={weatherData.daily} />
                       <h2>
-                        H:{getRoundTemp(weatherData.daily.temperature_2m_max[0])}&deg;
-                        L:{getRoundTemp(weatherData.daily.temperature_2m_min[0])}&deg;
+                        Max: {getRoundTemp(weatherData.daily.temperature_2m_max[0])}&deg;
+                        Min: {getRoundTemp(weatherData.daily.temperature_2m_min[0])}&deg;
                       </h2>
 
                       <div className="sunDiv">

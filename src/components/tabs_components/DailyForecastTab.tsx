@@ -2,7 +2,13 @@ import { useState, useEffect } from "react";
 import weatherService from "../../API/weatherService";
 import { useFetching } from "../../hooks/useFetching";
 import Compass from "../currentWeather_components/Compass";
-
+import ThermostatIcon from "@mui/icons-material/Thermostat";
+import WaterIcon from "@mui/icons-material/Water";
+import WaterDropIcon from "@mui/icons-material/WaterDrop";
+import WaterDropDailyIcon from "@mui/icons-material/Opacity";
+import UVIndexIcon from "@mui/icons-material/WbSunny";
+import CompassIcon from "@mui/icons-material/Explore";
+import SpeedIcon from "@mui/icons-material/WindPower";
 
 const DailyForecastTab = () => {
   const [loading, setLoading] = useState(true);
@@ -12,14 +18,12 @@ const DailyForecastTab = () => {
     const todayWeather = await weatherService.fetchCurrentWeather();
     setCurrentData(todayWeather);
     setLoading(false);
-    // console.log(todayWeather);
+    console.log(todayWeather);
   });
-
 
   useEffect(() => {
     fetchAPIData();
   }, []);
-
 
   const getTimeFromDate = (timeData: Date) => {
     let today = new Date(timeData);
@@ -35,18 +39,16 @@ const DailyForecastTab = () => {
     return Math.round(temp);
   };
 
-
   const windToTextualDescription = (degree) => {
-    if (degree > 337.5) return "Northerly";
-    if (degree > 292.5) return "North Westerly";
-    if (degree > 247.5) return "Westerly";
-    if (degree > 202.5) return "South Westerly";
-    if (degree > 157.5) return "Southerly";
-    if (degree > 122.5) return "South Easterly";
-    if (degree > 67.5) return "Easterly";
-    if (degree > 22.5) return "North Easterly";
+    if (degree > 337.5) return "N";
+    if (degree > 292.5) return "NW";
+    if (degree > 247.5) return "W";
+    if (degree > 202.5) return "SW";
+    if (degree > 157.5) return "S";
+    if (degree > 122.5) return "SE";
+    if (degree > 67.5) return "E";
+    if (degree > 22.5) return "NE";
   };
-
 
   return (
     <div>
@@ -57,37 +59,29 @@ const DailyForecastTab = () => {
 
           <div className="dailyForecastTab">
             {currentData && (
-              <div className="dailyForecastTabBox">
-                <div className="windBox">
-                  <div className="windHeader">
-                    <img src="../assets/icon_wind.png" />
-                    <h3> Wind</h3>
-                  </div>
+              <div>
+                <div className="dailyForecastTabBox">
+                  <div className="windBox">
+                    <div>
+                      <div className="windDescription">
+                        <span><ThermostatIcon style={{ color: "white", fontSize: 22 }} /> Feels like: {getRoundTemp(currentData.current.apparent_temperature)}&deg;</span>
+                        <span><WaterIcon style={{ color: "white", fontSize: 22 }} /> Humidity: {currentData.current.relative_humidity_2m} %</span>
+                      </div>
 
-                  <div className="windDescription">
-                    <span>
-                      <img className="sunImg" src="../assets/icon_compass.png" />
-                      {windToTextualDescription(currentData.current.wind_direction_10m)}
-                    </span>
+                      <div className="windDescription">
+                        <span><CompassIcon style={{ color: "white", fontSize: 22 }} /> Wind: {windToTextualDescription(currentData.current.wind_direction_10m)}</span>
+                        <span><SpeedIcon style={{ color: "white", fontSize: 22 }} /> Speed {currentData.current.wind_speed_10m} km/h</span>
+                      </div>
 
-                    <span>
-                      <img className="sunImg" src="../assets/icon_speed.png" />
-                      {currentData.current.wind_speed_10m} km/h
-                    </span>
+                      <div className="windDescription">
+                        <span><WaterDropIcon style={{ color: "white", fontSize: 22 }} /> Precipitation: {currentData.current.precipitation} mm</span>
+                        <span><UVIndexIcon style={{ color: "white", fontSize: 22 }} /> UV Index: {currentData.daily.uv_index_max} </span>
+                      </div>
+                    </div>
+
+                    <Compass directionDegree={currentData.current.wind_direction_10m} />
                   </div>
-                  <Compass
-                    directionDegree={currentData.current.wind_direction_10m}
-                  />
                 </div>
-                {/* <span>Sunrise: {getTimeFromDate(currentData.daily.sunrise[0])}</span>
-            <span>Sunset: {getTimeFromDate(currentData.daily.sunset[0])}</span>
-            <span>Apparent Temp: {getRoundTemp(currentData.current.apparent_temperature)}&deg;</span>
-            <span>precipitation: {currentData.current.precipitation} mm</span>
-            <span>wind_direction: {currentData.current.wind_direction_10m} &deg;</span>
-            <span>wind_speed: {currentData.current.wind_speed_10m} km/h</span>
-            <span>relative_humidity: {currentData.current.relative_humidity_2m} %</span>
-            <span>precipitation_sum: {currentData.daily.precipitation_sum} mm</span>
-            <span>uv_index: {currentData.daily.uv_index_max} </span> */}
               </div>
             )}
           </div>

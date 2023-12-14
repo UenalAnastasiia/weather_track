@@ -30,6 +30,10 @@
   border-radius: 24px;
 }
 
+.pos-rel {
+  position: relative;
+}
+
 /****** Current Weather ******/
 
 .wrapper {
@@ -226,17 +230,21 @@
 /****** Daily Forecast ******/
 
 /* .dailyForecastTab {
-  justify-content: space-around !important;
+  
 } */
 
 .dailyForecastTab span {
   margin-left: 4px !important;
   margin-right: 4px !important;
+  width: fit-content;
+  flex-direction: row !important; 
 }
 
 .dailyForecastTabBox {
   width: 37vw;
-  height: 20vh;
+  height: 26vh;
+  overflow-y: auto;
+  margin-top: -18px;
   /* display: flex;
   flex-wrap: wrap;
   align-items: center;
@@ -254,7 +262,7 @@
   justify-content: center !important;
   align-items: center !important;
   flex-direction: row !important;
-  margin: 8px !important;
+  margin: 4px !important;
 }
 
 .windBox div >span img {
@@ -266,9 +274,6 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  position: absolute;
-  top: 4px;
-  left: 142px;
 }
 
 .windHeader >img {
@@ -425,7 +430,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  margin-top: -18px;
+  margin-top: 2px;
 }
 
 .compass > .arrow {
