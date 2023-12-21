@@ -113,6 +113,12 @@
   .sunImg {
     width: 45px;
   }
+
+  .searchBtn {
+    position: absolute;
+    top: 8px;
+    right: 8px;
+  }
   
   /****** Close Current Weather ******/
   
