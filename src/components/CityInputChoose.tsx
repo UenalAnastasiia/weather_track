@@ -4,6 +4,7 @@ import CurrentWeather from "./currentWeather_components/CurrentWeather";
 import WeatherService from "../API/weatherService";
 import Modal from '@mui/material/Modal';
 import Box from '@mui/material/Box';
+import CityNavbar from "./CityNavbar";
 
 const CityInputChoose = () => {
   const [inputValue, setInputValue] = useState("");
@@ -81,7 +82,10 @@ const CityInputChoose = () => {
       </Modal>
 
       {show ? (
-        <CurrentWeather key={cityData.name} name={cityData.name} />
+        <div className="currentNavDiv">
+          <CityNavbar />
+          <CurrentWeather key={cityData.name} name={cityData.name} />
+        </div>
       ) : // <Link to="/current"><CurrentWeather name={cityData.name} /></Link>
       null}
     </div>
