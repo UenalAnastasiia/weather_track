@@ -1,6 +1,5 @@
 import { useState, useEffect } from "react";
 import weatherService from "../../API/weatherService";
-import { useFetching } from "../../hooks/useFetching";
 import Card from "react-bootstrap/Card";
 import WeatherImg from "../weather_infos/WeatherImg";
 import WeatherDescription from "../weather_infos/WeatherDescription";
@@ -16,7 +15,9 @@ const CurrentWeather = (props) => {
   const [loading, setLoading] = useState(true);
   const [weatherData, setWeatherData] = useState(Object);
   const [openSearchModal, setOpenSearchModal] = useState(false);
-  const handleOpenSearchModal = () => setOpenSearchModal(true);
+  const handleOpenSearchModal = () => {
+    setOpenSearchModal(true)
+  };
   const handleCloseSearchModal = () => setOpenSearchModal(false);
 
   
@@ -32,11 +33,12 @@ const CurrentWeather = (props) => {
     p: 4,
   };
 
-  const [fetchAPIData, postError] = useFetching(async () => {
+
+  const fetchAPIData = async () => {
     const todayWeather = await weatherService.fetchTodayWeather();
     setWeatherData(todayWeather);
     setLoading(false);
-  });
+  };
 
 
   useEffect(() => {
@@ -92,29 +94,26 @@ const CurrentWeather = (props) => {
         {!loading && (
           <Card.Body>
             <div>
-              {postError && <h1>Es ist ein Fehler aufgetreten: {postError}</h1>}
-
               {weatherData && (
                 <div>
-                  <Button className="searchBtn" onClick={handleOpenSearchModal}><SearchIcon style={{ color: "#F02222", fontSize: 32 }} /></Button>
+                  <Button className="searchBtn" onClick={handleOpenSearchModal}>
+                    <SearchIcon style={{ color: "#F02222", fontSize: 32 }} />
+                  </Button>
 
                   <div className="currentDataBox">
                     <div className="circleBox">
-                        <div className="circle">
-                            <WeatherImg
-                              sharedCode={getCurrentData(weatherData, weatherData.minutely_15.weather_code, 'weatherCode')}
-                              hourlyCheck={false} />
-                        </div>
+                      <div className="circle">
+                        <WeatherImg sharedCode={getCurrentData(weatherData, weatherData.minutely_15.weather_code, "weatherCode")}
+                          hourlyCheck={false} />
+                      </div>
                     </div>
 
                     <div className="tempDescrBox">
-
                       <h1>{props.name}</h1>
-
-                      <h1 className="currentTempH1">{getCurrentData(weatherData, weatherData.minutely_15.temperature_2m, 'temperature')}&deg;</h1>
+                      <h1 className="currentTempH1">{getCurrentData(weatherData, weatherData.minutely_15.temperature_2m, "temperature")}&deg; </h1>
                       <WeatherDescription sharedData={weatherData.daily} />
                       <h2>
-                        Max: {getRoundTemp(weatherData.daily.temperature_2m_max[0])}&deg;
+                        Max: {getRoundTemp(weatherData.daily.temperature_2m_max[0])}&deg; 
                         Min: {getRoundTemp(weatherData.daily.temperature_2m_min[0])}&deg;
                       </h2>
 

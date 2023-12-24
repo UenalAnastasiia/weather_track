@@ -1,11 +1,9 @@
-import { forwardRef, useImperativeHandle, useState } from "react";
-import { useFetching } from "../hooks/useFetching";
+import { useState } from "react";
 import CoordinatesService from "../API/coordinatesService";
 import CurrentWeather from "./currentWeather_components/CurrentWeather";
 import WeatherService from "../API/weatherService";
 import Modal from '@mui/material/Modal';
 import Box from '@mui/material/Box';
-import Button from '@mui/material/Button';
 
 const CityInputChoose = () => {
   const [inputValue, setInputValue] = useState("");
@@ -27,21 +25,47 @@ const CityInputChoose = () => {
     p: 4,
   };
 
-  const [fetchAPIData, postError] = useFetching(async () => {
-    const cData = await CoordinatesService.fetchCoordinateAPI(inputValue);
-    setCityData(cData.results[0]);
-    setShow(true);
 
-    WeatherService.getCoordinatesForUrl(
-      cData.results[0].latitude,
-      cData.results[0].longitude
-    );
-  });
+  const fetchAPIData = async (data) => {
+    const cData = await CoordinatesService.fetchCoordinateAPI(data);
+
+    try {
+      setCityData(cData.results[0]);
+      setShow(true);
+      WeatherService.getCoordinatesForUrl(
+        cData.results[0].latitude,
+        cData.results[0].longitude
+      ); 
+      checkLocalStorage(cData.results[0].name);  
+    } catch (e) {
+      // alert('City not found');
+      console.error(e);
+      handleOpenSearchModal();
+      return <CityInputChoose /> 
+    }
+  }
+
+
+  const checkLocalStorage = (name: string) => {
+    let storedCities = JSON.parse(localStorage.getItem("WeatherCity"));
+    let includesName = storedCities.includes(name);
+
+    storedCities.length > 0 ? includesName ? console.log() : pushToLocalStorage(name) : pushToLocalStorage(name);
+  }
+
+
+  const pushToLocalStorage = (name: string) => {
+    let data = JSON.parse(localStorage.getItem("WeatherCity"));
+    data.push(name);
+    localStorage.setItem("WeatherCity", JSON.stringify(data));
+  }
+
 
   const handleSearchCity = () => {
     fetchAPIData(inputValue);
     setOpenSearchModal(false);
   };
+
 
   return (
     <div>
@@ -57,7 +81,7 @@ const CityInputChoose = () => {
       </Modal>
 
       {show ? (
-        <CurrentWeather name={cityData.name} />
+        <CurrentWeather key={cityData.name} name={cityData.name} />
       ) : // <Link to="/current"><CurrentWeather name={cityData.name} /></Link>
       null}
     </div>
