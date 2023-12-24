@@ -86,8 +86,7 @@ const CityInputChoose = () => {
           <CityNavbar />
           <CurrentWeather key={cityData.name} name={cityData.name} />
         </div>
-      ) : // <Link to="/current"><CurrentWeather name={cityData.name} /></Link>
-      null}
+      ) : null}
     </div>
   );
 };
