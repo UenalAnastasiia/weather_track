@@ -5,14 +5,17 @@ import WeatherService from "../API/weatherService";
 import Modal from '@mui/material/Modal';
 import Box from '@mui/material/Box';
 import CityNavbar from "./CityNavbar";
+import { useNavigate } from "react-router-dom";
 
 const CityInputChoose = () => {
   const [inputValue, setInputValue] = useState("");
   const [cityData, setCityData] = useState(Object);
   const [show, setShow] = useState(false);
+  const [weatherData, setWeatherData] = useState(Object);
   const [openSearchModal, setOpenSearchModal] = useState(true);
   const handleOpenSearchModal = () => setOpenSearchModal(true);
   const handleCloseSearchModal = () => setOpenSearchModal(false);
+  const router = useNavigate();
 
   const style = {
     position: 'absolute' as 'absolute',
@@ -31,34 +34,60 @@ const CityInputChoose = () => {
     const cData = await CoordinatesService.fetchCoordinateAPI(data);
 
     try {
-      setCityData(cData.results[0]);
-      setShow(true);
-      WeatherService.getCoordinatesForUrl(
-        cData.results[0].latitude,
-        cData.results[0].longitude
-      ); 
-      checkLocalStorage(cData.results[0].name);  
+      tryFetch(cData.results[0]);
     } catch (e) {
       // alert('City not found');
       console.error(e);
       handleOpenSearchModal();
       return <CityInputChoose /> 
     }
+
+    loadDataFromAPI();
   }
 
 
-  const checkLocalStorage = (name: string) => {
+  const tryFetch = (data) => {
+    setCityData(data);
+      WeatherService.getCoordinatesForUrl(
+        data.latitude,
+        data.longitude
+      ); 
+
+      checkLocalStorage({name: data.name, latitude: data.latitude, longitude: data.longitude}); 
+      setTimeout(() => {
+        setShow(true);
+        // router(`/current/${data.name}`);
+    }, 1000);
+  }
+
+
+  const loadDataFromAPI = async () => {
+    const todayWeather = await WeatherService.fetchTodayWeather();
+    setWeatherData(todayWeather); 
+  }
+
+
+  const checkLocalStorage = (data) => {
     let storedCities = JSON.parse(localStorage.getItem("WeatherCity"));
-    let includesName = storedCities.includes(name);
+    let found = true;
 
-    storedCities.length > 0 ? includesName ? console.log() : pushToLocalStorage(name) : pushToLocalStorage(name);
+    if (storedCities.length > 0) {
+      for(let i = 0; i < storedCities.length; i++) {
+        if (storedCities[i].name == data.name) {
+          found = true;
+          break
+        } else found = false;
+      }
+    } else found = false;
+
+    found == true ? console.log() : pushToLocalStorage(data);
   }
 
 
-  const pushToLocalStorage = (name: string) => {
-    let data = JSON.parse(localStorage.getItem("WeatherCity"));
-    data.push(name);
-    localStorage.setItem("WeatherCity", JSON.stringify(data));
+  const pushToLocalStorage = (data) => {
+    let JSONdata = JSON.parse(localStorage.getItem("WeatherCity"));
+    JSONdata.push({name: data.name, latitude: data.latitude, longitude: data.longitude});
+    localStorage.setItem("WeatherCity", JSON.stringify(JSONdata));
   }
 
 
@@ -84,7 +113,9 @@ const CityInputChoose = () => {
       {show ? (
         <div className="currentNavDiv">
           <CityNavbar />
-          <CurrentWeather key={cityData.name} name={cityData.name} />
+          {weatherData && (
+          <CurrentWeather key={cityData.name} name={cityData.name} weatherData={weatherData} />)
+          }
         </div>
       ) : null}
     </div>

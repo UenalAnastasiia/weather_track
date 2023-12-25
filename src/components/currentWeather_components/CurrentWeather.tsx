@@ -35,9 +35,10 @@ const CurrentWeather = (props) => {
 
 
   const fetchAPIData = async () => {
-    const todayWeather = await weatherService.fetchTodayWeather();
-    setWeatherData(todayWeather);
+    // const todayWeather = await weatherService.fetchTodayWeather();
+    setWeatherData(props.weatherData);
     setLoading(false);
+    console.log(props.weatherData);
   };
 
 
