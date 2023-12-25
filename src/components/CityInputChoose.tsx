@@ -47,7 +47,7 @@ const CityInputChoose = () => {
 
 
   const tryFetch = (data) => {
-    setCityData(data);
+    setCityData({name: data.name, latitude: data.latitude, longitude: data.longitude});
       WeatherService.getCoordinatesForUrl(
         data.latitude,
         data.longitude
@@ -112,10 +112,7 @@ const CityInputChoose = () => {
 
       {show ? (
         <div className="currentNavDiv">
-          <CityNavbar />
-          {weatherData && (
-          <CurrentWeather key={cityData.name} name={cityData.name} weatherData={weatherData} />)
-          }
+          <CityNavbar data={cityData} />
         </div>
       ) : null}
     </div>

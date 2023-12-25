@@ -20,6 +20,8 @@ const CurrentWeather = (props) => {
   };
   const handleCloseSearchModal = () => setOpenSearchModal(false);
 
+  const [coord, setCoord] = useState(Object);
+
   
   const style = {
     position: 'absolute' as 'absolute',
@@ -38,7 +40,6 @@ const CurrentWeather = (props) => {
     // const todayWeather = await weatherService.fetchTodayWeather();
     setWeatherData(props.weatherData);
     setLoading(false);
-    console.log(props.weatherData);
   };
 
 
