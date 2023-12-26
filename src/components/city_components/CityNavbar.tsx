@@ -14,6 +14,7 @@ const CityNavbar = (props) => {
   let localLength = Array.from(Array(localItems.length).keys());
 
   const [show, setShow] = useState(false);
+  const [reloadData, setReloadData] = useState(false);
   const [weatherData, setWeatherData] = useState(Object);
   const [choosenCityName, setchoosenCityName] = useState(Object);
   const navigate = useNavigate()
@@ -24,9 +25,15 @@ const CityNavbar = (props) => {
 
 
   const openCityWeather = async (city) => {
+    setReloadData(true);
     WeatherService.getCoordinatesForUrl(city.latitude, city.longitude);
     setchoosenCityName(city.name);
 
+    shareDataToNextComponent(city);
+  };
+
+
+  const shareDataToNextComponent = async (city) => {
     const todayWeather = await WeatherService.fetchTodayWeather();
     setWeatherData(todayWeather);
 
@@ -34,8 +41,9 @@ const CityNavbar = (props) => {
 
     setTimeout(() => {
       setShow(true);
+      setReloadData(false);
     }, 1000);
-  };
+  }
 
 
   return (
@@ -70,9 +78,12 @@ const CityNavbar = (props) => {
             </div>
           )}
 
-          <div className="currentNavDiv">
-            <CurrentWeather key={choosenCityName} name={choosenCityName} weatherData={weatherData} />
-          </div>
+          {!reloadData ? (
+            <div className="currentNavDiv">
+                <CurrentWeather key={choosenCityName} name={choosenCityName} weatherData={weatherData} />
+            </div>
+            ) : null
+          }
         </div>
       ) : null}
     </div>
