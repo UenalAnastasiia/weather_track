@@ -5,7 +5,7 @@ import ButtonGroup from "@mui/material/ButtonGroup";
 import CurrentWeather from "../currentWeather_components/CurrentWeather";
 import WeatherService from "../../API/weatherService";
 import StorageService from "../../services/storageService";
-import { IconButton } from "@mui/material";
+import { CircularProgress, IconButton } from "@mui/material";
 import AddIcon from '@mui/icons-material/Add';
 import { useNavigate } from "react-router-dom";
 
@@ -17,6 +17,7 @@ const CityNavbar = (props) => {
   const [reloadData, setReloadData] = useState(false);
   const [weatherData, setWeatherData] = useState(Object);
   const [choosenCityName, setchoosenCityName] = useState(Object);
+  const [showSpinner, setShowSpinner] = useState(true);
   const navigate = useNavigate()
 
   useEffect(() => {
@@ -26,6 +27,7 @@ const CityNavbar = (props) => {
 
   const openCityWeather = async (city) => {
     setReloadData(true);
+    setShowSpinner(true);
     WeatherService.getCoordinatesForUrl(city.latitude, city.longitude);
     setchoosenCityName(city.name);
 
@@ -42,6 +44,7 @@ const CityNavbar = (props) => {
     setTimeout(() => {
       setShow(true);
       setReloadData(false);
+      setShowSpinner(false);
     }, 1000);
   }
 
@@ -78,7 +81,10 @@ const CityNavbar = (props) => {
             </div>
           )}
 
+          {showSpinner ? <CircularProgress /> : null}
+
           {!reloadData ? (
+            
             <div className="currentNavDiv">
                 <CurrentWeather key={choosenCityName} name={choosenCityName} weatherData={weatherData} />
             </div>

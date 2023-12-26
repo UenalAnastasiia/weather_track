@@ -29,3 +29,9 @@
   background-color: #6416be57;
   border-radius: 24px;
 }
+
+.MuiCircularProgress-indeterminate {
+  width: 100px !important;
+  height: 100px !important;
+  color: #7f0101 !important;
+}
