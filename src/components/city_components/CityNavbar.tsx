@@ -1,9 +1,13 @@
+import "../../styles/CityNavbar.css";
 import { useState, useEffect } from "react";
 import Button from "@mui/material/Button";
 import ButtonGroup from "@mui/material/ButtonGroup";
-import CurrentWeather from "./currentWeather_components/CurrentWeather";
-import WeatherService from "../API/weatherService";
-import StorageService from "../services/storageService";
+import CurrentWeather from "../currentWeather_components/CurrentWeather";
+import WeatherService from "../../API/weatherService";
+import StorageService from "../../services/storageService";
+import { IconButton } from "@mui/material";
+import AddIcon from '@mui/icons-material/Add';
+import { useNavigate } from "react-router-dom";
 
 const CityNavbar = (props) => {
   const [localItems, setLocalItems] = useState(JSON.parse(localStorage.getItem("WeatherCity")));
@@ -12,6 +16,7 @@ const CityNavbar = (props) => {
   const [show, setShow] = useState(false);
   const [weatherData, setWeatherData] = useState(Object);
   const [choosenCityName, setchoosenCityName] = useState(Object);
+  const navigate = useNavigate()
 
   useEffect(() => {
     openCityWeather(props.data);
@@ -43,17 +48,25 @@ const CityNavbar = (props) => {
                     <Button onClick={() => openCityWeather(localItems[0])}>
                     {localItems[0].name}
                     </Button>
+
+                    <IconButton color="secondary" onClick={() => navigate('/search') }>
+                      <AddIcon />
+                    </IconButton>
                 </ButtonGroup>
             </div>
           ) : (
             <div className="cityNavDiv">
-              {localLength.map((index) => (
-                <ButtonGroup key={index} orientation="vertical" variant="contained" color="secondary">
+              <ButtonGroup key={1} orientation="vertical" variant="contained" color="secondary">
+                {localLength.map((index) => (
                   <Button key={index} onClick={() => openCityWeather(localItems[index])}>
                     {localItems[index].name}
                   </Button>
-                </ButtonGroup>
-              ))}
+                ))}
+
+                  <IconButton color="secondary" onClick={() => navigate('/search') }>
+                    <AddIcon />
+                  </IconButton>
+              </ButtonGroup>
             </div>
           )}
 

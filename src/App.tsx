@@ -1,9 +1,6 @@
 import "./styles/App.css";
-import "./styles/BgAnimation.css";
-import "./styles/Tabs.css";
-import "./styles/CurrentWeather.css";
-import AppRouter from "./components/AppRouter";
-import BgAnimation from "./components/BgAnimation";
+import AppRouter from "./components/home_components/AppRouter";
+import BgAnimation from "./components/home_components/BgAnimation";
 
 
 function App() {

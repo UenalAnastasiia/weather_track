@@ -8,6 +8,7 @@
     bottom: 0;
     left: 0;
     width: 37vw;
+    max-width: 570px;
     height: 20vh;
     background: #7e63c5db;
     backdrop-filter: blur(10px);
@@ -55,6 +56,7 @@
   
 .dailyForecastTabBox {
     width: 37vw;
+    max-width: 570px;
     height: 26vh;
     overflow-y: auto;
     margin-top: -18px;

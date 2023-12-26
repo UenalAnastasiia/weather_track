@@ -1,43 +1,18 @@
+import "../../styles/CurrentWeather.css";
+import "../../styles/Tabs.css";
 import { useState, useEffect } from "react";
-import weatherService from "../../API/weatherService";
 import Card from "react-bootstrap/Card";
 import WeatherImg from "../weather_infos/WeatherImg";
 import WeatherDescription from "../weather_infos/WeatherDescription";
 import CurrentTabs from "./CurrentTabs";
-import SearchIcon from "@mui/icons-material/ImageSearch";
-import Modal from '@mui/material/Modal';
-import Box from '@mui/material/Box';
-import Button from '@mui/material/Button';
-import CityInputChoose from "../CityInputChoose";
 
 
 const CurrentWeather = (props) => {
   const [loading, setLoading] = useState(true);
   const [weatherData, setWeatherData] = useState(Object);
-  const [openSearchModal, setOpenSearchModal] = useState(false);
-  const handleOpenSearchModal = () => {
-    setOpenSearchModal(true)
-  };
-  const handleCloseSearchModal = () => setOpenSearchModal(false);
-
-  const [coord, setCoord] = useState(Object);
-
-  
-  const style = {
-    position: 'absolute' as 'absolute',
-    top: '50%',
-    left: '50%',
-    transform: 'translate(-50%, -50%)',
-    width: 400,
-    bgcolor: 'background.paper',
-    border: '2px solid #000',
-    boxShadow: 24,
-    p: 4,
-  };
 
 
   const fetchAPIData = async () => {
-    // const todayWeather = await weatherService.fetchTodayWeather();
     setWeatherData(props.weatherData);
     setLoading(false);
   };
@@ -98,10 +73,6 @@ const CurrentWeather = (props) => {
             <div>
               {weatherData && (
                 <div>
-                  <Button className="searchBtn" onClick={handleOpenSearchModal}>
-                    <SearchIcon style={{ color: "#F02222", fontSize: 32 }} />
-                  </Button>
-
                   <div className="currentDataBox">
                     <div className="circleBox">
                       <div className="circle">
@@ -141,18 +112,7 @@ const CurrentWeather = (props) => {
             </div>
           </Card.Body>
         )}
-      </Card>
-
-      <Modal
-        open={openSearchModal}
-        onClose={handleCloseSearchModal}
-        aria-labelledby="modal-modal-title"
-        aria-describedby="modal-modal-description"
-      >
-        <Box sx={style}>
-          <CityInputChoose />
-        </Box>
-      </Modal>
+      </Card>                           
     </div>
   );
 };

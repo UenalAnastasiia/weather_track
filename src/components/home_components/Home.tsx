@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
-import CityInputChoose from "./CityInputChoose";
-import CityNavbar from "./CityNavbar";
+import CitySearch from "../city_components/CitySearch";
+import CityNavbar from "../city_components/CityNavbar";
 
 const Home = () => {
   const [localEmpty, setLocalEmpty] = useState(true);
@@ -13,11 +13,12 @@ const Home = () => {
 
   const checkStorage = () => {
     const storedData = localStorage.getItem("WeatherCity");
+    let JSONData = JSON.parse(storedData);
 
-    if (storedData === null || JSON.parse(storedData).length === 0) {
+    if (storedData === null || JSONData.length === 0) {
       localStorage.setItem("WeatherCity", JSON.stringify([]));
     } else {
-      setLocalFirstElement(JSON.parse(storedData)[0]);
+      JSONData.length === 1 ? setLocalFirstElement(JSONData[0]) : setLocalFirstElement(JSONData[JSONData.length - 1]);
       setLocalEmpty(false);
     }
   }
@@ -26,7 +27,7 @@ const Home = () => {
   return (
     <div>
       {localEmpty ? (
-        <CityInputChoose />
+        <CitySearch />
       ) : (
         <CityNavbar data={localFirstElement} />
       )}

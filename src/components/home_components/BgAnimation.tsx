@@ -1,4 +1,4 @@
-import React from "react";
+import "../../styles/BgAnimation.css";
 
 const BgAnimation = () => {
   return (
