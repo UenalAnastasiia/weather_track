@@ -3,58 +3,34 @@ import Button from "@mui/material/Button";
 import ButtonGroup from "@mui/material/ButtonGroup";
 import CurrentWeather from "./currentWeather_components/CurrentWeather";
 import WeatherService from "../API/weatherService";
+import StorageService from "../services/storageService";
 
 const CityNavbar = (props) => {
-    const [localItems, setLocalItems] = useState(JSON.parse(localStorage.getItem("WeatherCity")));
-    let localLength = Array.from(Array(localItems.length).keys());
-  
-    const [show, setShow] = useState(false);
-    const [weatherData, setWeatherData] = useState(Object);
-    const [choosenCityName, setchoosenCityName] = useState(Object);
-  
-  
-    useEffect(() => {
-      openCityWeather(props.data);
-    }, []);
-  
-  
-    const openCityWeather = async (city) => {
-      WeatherService.getCoordinatesForUrl(city.latitude, city.longitude);
-      setchoosenCityName(city.name);
-  
-      const todayWeather = await WeatherService.fetchTodayWeather();
-      setWeatherData(todayWeather);
-  
-      checkLocalStorage(city);  
-  
-      setTimeout(() => {
-          setShow(true);
-      }, 1000);
-    }
-  
-  
-    const checkLocalStorage = (data) => {
-      let storedCities = JSON.parse(localStorage.getItem("WeatherCity"));
-      let found = true;
-  
-      if (storedCities.length > 0) {
-        for(let i = 0; i < storedCities.length; i++) {
-          if (storedCities[i].name == data.name) {
-            found = true;
-            break
-          } else found = false;
-        }
-      } else found = false;
-  
-      found == true ? console.log() : pushToLocalStorage(data);
-    }
-  
-  
-    const pushToLocalStorage = (data) => {
-      let JSONdata = JSON.parse(localStorage.getItem("WeatherCity"));
-      JSONdata.push({name: data.name, latitude: data.latitude, longitude: data.longitude});
-      localStorage.setItem("WeatherCity", JSON.stringify(JSONdata));
-    }
+  const [localItems, setLocalItems] = useState(JSON.parse(localStorage.getItem("WeatherCity")));
+  let localLength = Array.from(Array(localItems.length).keys());
+
+  const [show, setShow] = useState(false);
+  const [weatherData, setWeatherData] = useState(Object);
+  const [choosenCityName, setchoosenCityName] = useState(Object);
+
+  useEffect(() => {
+    openCityWeather(props.data);
+  }, []);
+
+
+  const openCityWeather = async (city) => {
+    WeatherService.getCoordinatesForUrl(city.latitude, city.longitude);
+    setchoosenCityName(city.name);
+
+    const todayWeather = await WeatherService.fetchTodayWeather();
+    setWeatherData(todayWeather);
+
+    StorageService.checkStorageData(city);
+
+    setTimeout(() => {
+      setShow(true);
+    }, 1000);
+  };
 
 
   return (

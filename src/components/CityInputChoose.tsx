@@ -1,21 +1,20 @@
 import { useState } from "react";
 import CoordinatesService from "../API/coordinatesService";
-import CurrentWeather from "./currentWeather_components/CurrentWeather";
 import WeatherService from "../API/weatherService";
 import Modal from '@mui/material/Modal';
 import Box from '@mui/material/Box';
 import CityNavbar from "./CityNavbar";
-import { useNavigate } from "react-router-dom";
+import StorageService from "../services/storageService";
 
 const CityInputChoose = () => {
   const [inputValue, setInputValue] = useState("");
   const [cityData, setCityData] = useState(Object);
   const [show, setShow] = useState(false);
-  const [weatherData, setWeatherData] = useState(Object);
   const [openSearchModal, setOpenSearchModal] = useState(true);
+  
   const handleOpenSearchModal = () => setOpenSearchModal(true);
   const handleCloseSearchModal = () => setOpenSearchModal(false);
-  const router = useNavigate();
+
 
   const style = {
     position: 'absolute' as 'absolute',
@@ -41,8 +40,6 @@ const CityInputChoose = () => {
       handleOpenSearchModal();
       return <CityInputChoose /> 
     }
-
-    loadDataFromAPI();
   }
 
 
@@ -53,41 +50,11 @@ const CityInputChoose = () => {
         data.longitude
       ); 
 
-      checkLocalStorage({name: data.name, latitude: data.latitude, longitude: data.longitude}); 
+      StorageService.checkStorageData({name: data.name, latitude: data.latitude, longitude: data.longitude})
+
       setTimeout(() => {
         setShow(true);
-        // router(`/current/${data.name}`);
     }, 1000);
-  }
-
-
-  const loadDataFromAPI = async () => {
-    const todayWeather = await WeatherService.fetchTodayWeather();
-    setWeatherData(todayWeather); 
-  }
-
-
-  const checkLocalStorage = (data) => {
-    let storedCities = JSON.parse(localStorage.getItem("WeatherCity"));
-    let found = true;
-
-    if (storedCities.length > 0) {
-      for(let i = 0; i < storedCities.length; i++) {
-        if (storedCities[i].name == data.name) {
-          found = true;
-          break
-        } else found = false;
-      }
-    } else found = false;
-
-    found == true ? console.log() : pushToLocalStorage(data);
-  }
-
-
-  const pushToLocalStorage = (data) => {
-    let JSONdata = JSON.parse(localStorage.getItem("WeatherCity"));
-    JSONdata.push({name: data.name, latitude: data.latitude, longitude: data.longitude});
-    localStorage.setItem("WeatherCity", JSON.stringify(JSONdata));
   }
 
 
