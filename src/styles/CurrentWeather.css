@@ -145,5 +145,12 @@
   .weatherIcon {
     width: 42px;
   }
+
+  .countryFlagImg {
+    position: absolute;
+    right: 16px;
+    top: 16px;
+    width: 42px;
+  }
   
   /****** Close Weather Img ******/

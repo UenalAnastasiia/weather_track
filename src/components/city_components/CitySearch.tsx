@@ -48,13 +48,13 @@ const CitySearch = () => {
 
 
   const tryFetch = (data) => {
-    setCityData({name: data.name, latitude: data.latitude, longitude: data.longitude, timezone: data.timezone});
+    setCityData({name: data.name, latitude: data.latitude, longitude: data.longitude, timezone: data.timezone, code: data.country_code});
       WeatherService.getCoordinatesForUrl(
         data.latitude,
         data.longitude
       );
 
-      StorageService.checkStorageData({name: data.name, latitude: data.latitude, longitude: data.longitude, timezone: data.timezone})
+      StorageService.checkStorageData({name: data.name, latitude: data.latitude, longitude: data.longitude, timezone: data.timezone, code: data.country_code})
       navigate('/track');
       setTimeout(() => {
         setShowWeather(true);

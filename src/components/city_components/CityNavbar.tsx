@@ -21,7 +21,7 @@ const CityNavbar = (props) => {
   const navigate = useNavigate()
 
   useEffect(() => {
-    openCityWeather(props.data);
+    openCityWeather(props.data); 
   }, []);
 
 
@@ -55,7 +55,7 @@ const CityNavbar = (props) => {
             <div className="cityNavDiv">
                 <ButtonGroup orientation="vertical" variant="contained" color="secondary">
                     <Button onClick={() => openCityWeather(localItems[0])}>
-                    {localItems[0].name}
+                      {localItems[0].name}
                     </Button>
 
                     <IconButton color="secondary" onClick={() => navigate('/search') }>

@@ -6,6 +6,7 @@ import WeatherImg from "../weather_infos/WeatherImg";
 import WeatherDescription from "../weather_infos/WeatherDescription";
 import CurrentTabs from "./CurrentTabs";
 import WeatherService from "../../API/weatherService";
+import StorageService from "../../services/storageService";
 
 
 const CurrentWeather = (props) => {
@@ -16,6 +17,8 @@ const CurrentWeather = (props) => {
   const fetchAPIData = async () => {
     setWeatherData(props.weatherData);
     setLoading(false);
+
+
   };
 
 
@@ -33,7 +36,7 @@ const CurrentWeather = (props) => {
     let currdate = roundTimeQuarterHour();
     let dataResult = [];
 
-    for (let index = 0; index < 95; index++) {
+    for (let index = 0; index < 192; index++) {
       if (weatherInfo.minutely_15.time[index] === currdate && dataTyp === "temperature") {            
         dataResult.push(getRoundTemp(data[index]));
       } else if (weatherInfo.minutely_15.time[index] === currdate && dataTyp === "weatherCode") {
@@ -76,6 +79,8 @@ const CurrentWeather = (props) => {
         {!loading && (
           <Card.Body>
             <div>
+            <img className="countryFlagImg" src={StorageService.imgURL || ''} />
+
               {weatherData && (
                 <div>
                   <div className="currentDataBox">
