@@ -146,7 +146,7 @@
     height: fit-content;
     flex-wrap: wrap;
     opacity: 1;
-    margin-bottom: 24px;
+    /* margin-bottom: 24px; */
 }
   
 .moreForecastTab span {
@@ -210,6 +210,10 @@
     padding: 0 !important;
     border-radius: 10px !important;
     background-color: #9c1b1b29 !important;
+}
+
+.css-10vg0a6-MuiResponsiveChart-container {
+    width: unset;
 }
   
 /****** Close MoreForecastTab ******/
