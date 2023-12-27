@@ -5,6 +5,7 @@ import Card from "react-bootstrap/Card";
 import WeatherImg from "../weather_infos/WeatherImg";
 import WeatherDescription from "../weather_infos/WeatherDescription";
 import CurrentTabs from "./CurrentTabs";
+import WeatherService from "../../API/weatherService";
 
 
 const CurrentWeather = (props) => {
@@ -53,8 +54,12 @@ const CurrentWeather = (props) => {
 
 
   const roundTimeQuarterHour = () => {
+    let timezoneURL = WeatherService.timezoneURL[0].country + '/' + WeatherService.timezoneURL[0].city;
+    
     let round = 1000 * 60 * 15;
-    let today = new Date();
+    let cityData = new Date().toLocaleString("en-US", {timeZone: timezoneURL});
+    let today = new Date(cityData);
+ 
     let timeToReturn = new Date(Math.floor(today.getTime() / round) * round);
 
     let timeResult = ("0" + timeToReturn.getHours()).slice(-2) + ":" + ("0" + timeToReturn.getMinutes()).slice(-2);

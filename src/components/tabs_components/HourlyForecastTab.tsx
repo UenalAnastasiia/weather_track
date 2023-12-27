@@ -1,5 +1,6 @@
 import Moment from "react-moment";
 import WeatherImg from "../weather_infos/WeatherImg";
+import WeatherService from "../../API/weatherService";
 
 const HourlyForecastTab = (data: any) => {
   const getRoundTemp = (temp: any) => {
@@ -8,8 +9,11 @@ const HourlyForecastTab = (data: any) => {
 
 
   const roundTimeToHour = () => {
+    let timezoneURL = WeatherService.timezoneURL[0].country + '/' + WeatherService.timezoneURL[0].city;
+
     let round = 1000 * 60 * 60;
-    let today = new Date();
+    let cityData = new Date().toLocaleString("en-US", {timeZone: timezoneURL});
+    let today = new Date(cityData);
     let timeToReturn = new Date(Math.floor(today.getTime() / round) * round);
 
     let timeResult = ("0" + timeToReturn.getHours()).slice(-2) + ":" + ("0" + timeToReturn.getMinutes()).slice(-2);

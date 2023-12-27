@@ -30,7 +30,7 @@ const CityNavbar = (props) => {
     setShowSpinner(true);
     WeatherService.getCoordinatesForUrl(city.latitude, city.longitude);
     setchoosenCityName(city.name);
-
+    StorageService.checkStorageData(city);
     shareDataToNextComponent(city);
   };
 
@@ -38,8 +38,6 @@ const CityNavbar = (props) => {
   const shareDataToNextComponent = async (city) => {
     const todayWeather = await WeatherService.fetchTodayWeather();
     setWeatherData(todayWeather);
-
-    StorageService.checkStorageData(city);
 
     setTimeout(() => {
       setShow(true);

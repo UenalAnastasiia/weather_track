@@ -1,6 +1,9 @@
+import WeatherService from "../API/weatherService";
+
 export default class StorageService {
     
   static checkStorageData(data) {
+    this.formatTimezone(data.timezone);
     let storedCities = JSON.parse(localStorage.getItem("WeatherCity"));
     let found = true;
 
@@ -22,7 +25,14 @@ export default class StorageService {
       name: data.name,
       latitude: data.latitude,
       longitude: data.longitude,
+      timezone: data.timezone
     });
     localStorage.setItem("WeatherCity", JSON.stringify(JSONdata));
   }
+
+
+  static formatTimezone(data: string) {
+    let splitResult = data.split('/');
+    WeatherService.getTimezone(splitResult[0], splitResult[1]); 
+  };
 }

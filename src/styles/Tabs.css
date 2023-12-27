@@ -33,13 +33,13 @@
   
 .weeklyForecastTab p {
     margin: 0;
-    width: 46px;
+    width: 52px;
 }
   
 .weeklyForecastTab span {
     margin-left: 8px !important;
     margin-right: 8px !important;
-    padding: 10px !important;
+    padding: 6px !important;
 }
   
 /****** Close Forecast Tabs ******/
