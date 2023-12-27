@@ -24,7 +24,6 @@ const Home = () => {
     if (storedData === null || JSONData.length === 0) {
       localStorage.setItem("WeatherCity", JSON.stringify([]));
     } else {
-      // setLocalFirstElement(JSONData[0])
       JSONData.length === 1 ? setLocalFirstElement(JSONData[0]) : setLocalFirstElement(JSONData[JSONData.length - 1]);
       setLocalEmpty(false);
     }

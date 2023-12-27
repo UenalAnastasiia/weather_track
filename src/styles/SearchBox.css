@@ -1,0 +1,56 @@
+.searchBox {
+    width: 40vw;
+    max-width: 620px;
+    height: 50vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    position: relative;
+    background-color: #160e2a6b;
+    border-radius: 32px;
+    box-shadow: 0px 0px 18px 6px #fdfdfdad;
+}
+
+.searchBox h1 {
+    margin-bottom: 32px;
+    margin-top: 0;
+    color: white;
+    font-size: 48px;
+    font-weight: 800;
+}
+
+.inputFieldBox {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    height: 20vh;
+}
+
+.searchBtns {
+    display: flex;
+    justify-content: space-around;
+}
+
+.css-hjtp1-MuiInputBase-root-MuiOutlinedInput-root {
+    /* background-color: #ea89fbc4; */
+    background: #7e63c5db;
+    color: white;
+    box-shadow: 0px 0px 18px 3px #fdfdfdad;
+}
+
+.css-15jws13-MuiFormLabel-root-MuiInputLabel-root.Mui-focused {
+    color: white;
+}
+
+.css-rw1vm2-MuiInputBase-root-MuiOutlinedInput-root.Mui-focused .MuiOutlinedInput-notchedOutline {
+    color: white;
+}
+
+.css-1v4qvbo-MuiFormLabel-root-MuiInputLabel-root {
+    color: white;
+}
+
+.css-1u3bzj6-MuiFormControl-root-MuiTextField-root {
+    width: 320px;
+}

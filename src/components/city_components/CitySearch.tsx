@@ -1,4 +1,5 @@
-import React, { useState } from "react";
+import "../../styles/SearchBox.css";
+import React, { useEffect, useState } from "react";
 import CoordinatesService from "../../API/coordinatesService";
 import WeatherService from "../../API/weatherService";
 import CityNavbar from "./CityNavbar";
@@ -7,21 +8,29 @@ import { useNavigate } from "react-router-dom";
 import Snackbar from '@mui/material/Snackbar';
 import MuiAlert, { AlertProps } from '@mui/material/Alert';
 import CircularProgress from '@mui/material/CircularProgress';
+import TextField from '@mui/material/TextField';
+import Button from "@mui/material/Button";
 
-const Alert = React.forwardRef<HTMLDivElement, AlertProps>(function Alert(
-  props,
-  ref,
-) {
+const Alert = React.forwardRef<HTMLDivElement, AlertProps>(function Alert(props, ref) {
   return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
 });
 
+ 
 const CitySearch = () => {
   const [inputValue, setInputValue] = useState("");
   const [cityData, setCityData] = useState(Object);
   const [showWeather, setShowWeather] = useState(false);
   const [showSpinner, setShowSpinner] = useState(false);
+  const [showBackBtn, setShowBackBtn] = useState(false);
   const [open, setOpen] = React.useState(false);
-  const navigate = useNavigate()
+  const navigate = useNavigate();
+
+
+  useEffect(() => {
+    const storedData = localStorage.getItem("WeatherCity");
+    let JSONData = JSON.parse(storedData);
+    storedData === null || JSONData.length === 0 ? setShowBackBtn(false) : setShowBackBtn(true);
+  }, []);
 
 
   const fetchAPIData = async (data) => {
@@ -77,18 +86,28 @@ const CitySearch = () => {
 
   return (
     <div>
-      {showSpinner ? <CircularProgress /> : null}
-
-      {showWeather ? (
-        <div className="currentNavDiv">
-          <CityNavbar data={cityData} />
-        </div>
-      ) : (
+      {showSpinner ? <CircularProgress /> : (
       <div>
-        <button onClick={() =>  navigate('/track')}>back</button>
-        <input value={inputValue} type="text" onChange={handleChangeInput}></input>
-        <button onClick={handleSearchCity}>search</button>
-      </div>)}
+        {showWeather ? (
+          <div className="currentNavDiv">
+            <CityNavbar data={cityData} />
+          </div>
+          ) : (
+          <div className="searchBox">
+            <h1>Search Your City</h1>
+            <div className="inputFieldBox">
+              <TextField label="City" variant="outlined" value={inputValue} onChange={handleChangeInput} color="secondary" placeholder="Enter city name" autoComplete="off"/>
+              <div className="searchBtns">
+                {showBackBtn ? <Button variant="contained" color="secondary" onClick={() =>  navigate('/track')}>back</Button> : null}
+                <Button variant="contained" color="secondary" onClick={handleSearchCity} disabled={!inputValue}>search</Button>
+              </div>
+              
+            </div>
+          </div>
+        )}
+      </div>
+      )}
+
 
       <Snackbar open={open} autoHideDuration={6000} anchorOrigin={{ vertical: 'top', horizontal: 'center' }} onClose={handleClose}>
         <Alert onClose={handleClose} severity="warning" sx={{ width: '100%' }}>
