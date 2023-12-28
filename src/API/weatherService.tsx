@@ -1,10 +1,16 @@
 export default class WeatherService {
   static coordinatesURL = [];
+  static archivURL = [];
   static timezoneURL = [];
+  static cityCoordinates = [];
+  static cityName: string;
 
 
-  static getCoordinatesForUrl(latitude: number, longitude: number) {
-    this.coordinatesURL = [`https://api.open-meteo.com/v1/forecast?latitude=${latitude}&longitude=${longitude}`]
+  static getCoordinatesForUrl(latitude: number, longitude: number, name: string) {
+    this.coordinatesURL = [`https://api.open-meteo.com/v1/forecast?latitude=${latitude}&longitude=${longitude}`];
+    this.archivURL = [`https://archive-api.open-meteo.com/v1/archive?latitude=${latitude}&longitude=${longitude}`];
+    this.cityCoordinates = [{latitude: latitude, longitude: longitude}];
+    this.cityName = name;
   }
 
   static getTimezone(country: string, city: string) {
@@ -34,6 +40,16 @@ export default class WeatherService {
   static async fetchWeeklyWeather() {
     const data = await fetch(
       `${this.coordinatesURL}&daily=weather_code,temperature_2m_max,temperature_2m_min,sunrise,sunset,precipitation_probability_max,wind_speed_10m_max&forecast_days=10`
+    );
+
+    const jsonData = await data.json();
+    return jsonData;
+  }
+
+
+  static async fetchHistoryWeather(start, end) {
+    const data = await fetch(
+      `https://archive-api.open-meteo.com/v1/archive?latitude=${this.cityCoordinates[0].latitude}&longitude=${this.cityCoordinates[0].longitude}&start_date=${start}&end_date=${end}&daily=temperature_2m_mean`
     );
 
     const jsonData = await data.json();

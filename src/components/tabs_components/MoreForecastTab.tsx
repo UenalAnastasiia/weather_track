@@ -94,7 +94,8 @@ const MoreForecastTab = (props: DialogModal) => {
             ))}
           </div>
 
-          <LineChartUI maxData={chartData.maxData} minData={chartData.minData} xLabels={chartData.xLabels}/>
+          <LineChartUI maxData={chartData.maxData} minData={chartData.minData} xLabels={chartData.xLabels} amount={2}
+          desciption={{min: 'Min' + weatherData.daily_units.temperature_2m_min, max: 'Max' + weatherData.daily_units.temperature_2m_max}}/>
         </div>
       )}
     </Dialog>

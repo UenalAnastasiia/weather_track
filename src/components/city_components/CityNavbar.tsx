@@ -28,7 +28,7 @@ const CityNavbar = (props) => {
   const openCityWeather = async (city) => {
     setReloadData(true);
     setShowSpinner(true);
-    WeatherService.getCoordinatesForUrl(city.latitude, city.longitude);
+    WeatherService.getCoordinatesForUrl(city.latitude, city.longitude, city.name);
     setchoosenCityName(city.name);
     StorageService.checkStorageData(city);
     shareDataToNextComponent(city);

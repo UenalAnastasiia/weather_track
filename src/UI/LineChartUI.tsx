@@ -8,8 +8,8 @@ const LineChartUI = (chartData) => {
               width={500}
               height={300}
               series={[
-                { data: chartData.maxData, label: 'Max Degree', color: '#a41313' },
-                { data: chartData.minData, label: 'Min Degree',  color: '#0c0cba'}
+                { data: chartData.maxData, label: chartData.desciption.max, color: '#a41313' },
+                { data: chartData.minData, label: chartData.desciption.max,  color: '#0c0cba'}
               ]}
               xAxis={[{ scaleType: 'point', data: chartData.xLabels }]}/>
         </div>

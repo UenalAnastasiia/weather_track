@@ -118,10 +118,10 @@
     width: 45px;
   }
 
-  .searchBtn {
+  .calendarBtn {
     position: absolute;
-    top: 8px;
-    right: 8px;
+    top: 12px;
+    left: 12px;
   }
   
   /****** Close Current Weather ******/

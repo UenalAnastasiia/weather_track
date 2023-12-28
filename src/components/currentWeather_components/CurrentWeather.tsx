@@ -7,18 +7,20 @@ import WeatherDescription from "../weather_infos/WeatherDescription";
 import CurrentTabs from "./CurrentTabs";
 import WeatherService from "../../API/weatherService";
 import StorageService from "../../services/storageService";
+import { Button } from "@mui/material";
+import { useNavigate } from "react-router-dom";
+import CalendarIcon from "@mui/icons-material/CalendarMonth";
 
 
 const CurrentWeather = (props) => {
   const [loading, setLoading] = useState(true);
   const [weatherData, setWeatherData] = useState(Object);
+  const navigate = useNavigate();
 
 
   const fetchAPIData = async () => {
     setWeatherData(props.weatherData);
     setLoading(false);
-
-
   };
 
 
@@ -79,6 +81,10 @@ const CurrentWeather = (props) => {
         {!loading && (
           <Card.Body>
             <div>
+            <Button className="calendarBtn" onClick={() => navigate('/history')}>
+                    <CalendarIcon style={{ color: "#F02222", fontSize: 32 }} />
+            </Button>
+
             <img className="countryFlagImg" src={StorageService.imgURL || ''} />
 
               {weatherData && (

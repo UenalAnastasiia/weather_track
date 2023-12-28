@@ -51,7 +51,8 @@ const CitySearch = () => {
     setCityData({name: data.name, latitude: data.latitude, longitude: data.longitude, timezone: data.timezone, code: data.country_code});
       WeatherService.getCoordinatesForUrl(
         data.latitude,
-        data.longitude
+        data.longitude,
+        data.name
       );
 
       StorageService.checkStorageData({name: data.name, latitude: data.latitude, longitude: data.longitude, timezone: data.timezone, code: data.country_code})
