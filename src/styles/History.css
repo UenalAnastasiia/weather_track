@@ -1,6 +1,6 @@
 .historyHeader {
     position: absolute;
-    top: 18px;
+    top: 12px;
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -14,12 +14,79 @@
 }
 
 .historyChart {
-    background: #ffffff38 !important;
-    border-radius: 32px !important;
+    background-color: #ffffff38;
+    border-radius: 32px;
     box-shadow: 0px 0px 18px 6px #fdfdfdad;
 }
 
 .backBtn {
     height: fit-content;
     width: fit-content;
+}
+
+.datepickerBoxH1 {
+    margin: 0;
+    color: white;
+    font-weight: 800;
+    font-size: 38px;
+}
+
+.css-1t1j96h-MuiPaper-root-MuiDialog-paper {
+    padding: 24px;
+    height: min-content;
+    width: min-content;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-around;
+    border-radius: 32px;
+    background: rgb(53 2 56 / 55%);
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+    backdrop-filter: blur(6px);
+}
+
+.css-yiavyu-MuiBackdrop-root-MuiDialog-backdrop {
+    background-color: rgb(255 255 255 / 28%);
+}
+
+.css-z3c6am-MuiFormControl-root-MuiTextField-root {
+    width: 20vw;
+}
+
+.closeBtn {
+    position: absolute;
+    top: 10px;
+    right: 16px;
+}
+
+.datepickerDiv {
+    height: 40vh;
+    width: 25vw;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.dateErrorSpan {
+    color: red;
+    font-weight: 800;
+    margin-top: -12px;
+
+}
+
+.css-1d3z3hw-MuiOutlinedInput-notchedOutline {
+    border-color: white !important;
+}
+
+.css-nxo287-MuiInputBase-input-MuiOutlinedInput-input, .css-1yq5fb3-MuiButtonBase-root-MuiIconButton-root {
+    color: white;
+}
+
+.css-1k2u9zb-MuiChartsAxis-root .MuiChartsAxis-tickLabel {
+    fill: white;
+}
+
+.css-1k2u9zb-MuiChartsAxis-root .MuiChartsAxis-line, .css-1k2u9zb-MuiChartsAxis-root .MuiChartsAxis-tick {
+    stroke: white;
 }

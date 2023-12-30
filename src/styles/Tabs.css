@@ -144,6 +144,7 @@
     justify-content: center;
     padding: 12px;
     height: fit-content;
+    width: 45vw;
     flex-wrap: wrap;
     opacity: 1;
     /* margin-bottom: 24px; */
@@ -182,10 +183,9 @@
 }
   
 .moreForecastCloseBtn {
-    display: flex;
-    justify-content: flex-end;
-    margin-top: 16px;
-    margin-right: 32px;
+    position: absolute;
+    top: 8px;
+    right: 24px;
 }
   
 .moreForcastTabH1 {
@@ -197,19 +197,15 @@
 .css-1t1j96h-MuiPaper-root-MuiDialog-paper {
     max-width: none !important;
     max-height: none !important;
-    width: 45vw;
-    height: fit-content;
-    background: #7e63c5db !important;
+    /* width: 45vw !important; */
+    width: min-content;
+    height: min-content;
+    /* height: 90vh !important; */
+    background: rgb(53 2 56 / 55%);
     backdrop-filter: blur(10px);
-    border-radius: 32px !important;
+    border-radius: 32px;
     box-shadow: 4px 4px 4px #fff, -4px -4px 20px #fff, inset -4px -4px 20px #fff, inset 4px 4px 20px #fff !important;
-}
-  
-.css-1sszw6i-MuiButtonBase-root-MuiButton-root {
-    min-width: 36px !important;
-    padding: 0 !important;
-    border-radius: 10px !important;
-    background-color: #9c1b1b29 !important;
+    border: none !important;
 }
 
 .css-10vg0a6-MuiResponsiveChart-container {
