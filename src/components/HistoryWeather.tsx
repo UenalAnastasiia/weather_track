@@ -45,11 +45,15 @@ const HistoryWeather = () => {
     
     const fetchAPIData = async (start, end) => {
         const todayWeather = await WeatherService.fetchHistoryWeather(start, end);
-        setWeatherData(todayWeather);
+        if (todayWeather === 'No coordinates') {
+            navigate('/track');
+        } else {
+            setWeatherData(todayWeather);
 
-        setTimeout(() => {
-            setIsLoading(true);
-        }, 1000);
+            setTimeout(() => {
+                setIsLoading(true);
+            }, 1000);
+        }
     }
 
 

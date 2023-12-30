@@ -48,11 +48,15 @@ export default class WeatherService {
 
 
   static async fetchHistoryWeather(start, end) {
-    const data = await fetch(
-      `https://archive-api.open-meteo.com/v1/archive?latitude=${this.cityCoordinates[0].latitude}&longitude=${this.cityCoordinates[0].longitude}&start_date=${start}&end_date=${end}&daily=temperature_2m_mean`
-    );
-
-    const jsonData = await data.json();
-    return jsonData;
+    if (this.cityCoordinates.length === 0) {
+      return 'No coordinates';
+    } else {
+      const data = await fetch(
+        `https://archive-api.open-meteo.com/v1/archive?latitude=${this.cityCoordinates[0].latitude}&longitude=${this.cityCoordinates[0].longitude}&start_date=${start}&end_date=${end}&daily=temperature_2m_mean`
+      );
+  
+      const jsonData = await data.json();
+      return jsonData;
+    }
   }
 }
