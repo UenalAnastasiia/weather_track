@@ -1,5 +1,6 @@
 import "../../styles/CurrentWeather.css";
 import "../../styles/Tabs.css";
+import * as React from 'react';
 import { useState, useEffect } from "react";
 import Card from "react-bootstrap/Card";
 import WeatherImg from "../weather_infos/WeatherImg";
@@ -7,15 +8,20 @@ import WeatherDescription from "../weather_infos/WeatherDescription";
 import CurrentTabs from "./CurrentTabs";
 import WeatherService from "../../API/weatherService";
 import StorageService from "../../services/storageService";
-import { Button } from "@mui/material";
+import { Button, Popover, Typography } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 import CalendarIcon from "@mui/icons-material/CalendarMonth";
+import CityInfo from "./CityInfo";
 
 
 const CurrentWeather = (props) => {
   const [loading, setLoading] = useState(true);
   const [weatherData, setWeatherData] = useState(Object);
   const navigate = useNavigate();
+  const [anchorEl, setAnchorEl] = useState<HTMLElement | null>(null);
+  const handlePopoverOpen = (event: React.MouseEvent<HTMLElement>) => { setAnchorEl(event.currentTarget) };
+  const handlePopoverClose = () => { setAnchorEl(null) };
+  const open = Boolean(anchorEl);
 
 
   const fetchAPIData = async () => {
@@ -25,7 +31,7 @@ const CurrentWeather = (props) => {
 
 
   useEffect(() => {
-    fetchAPIData();
+    fetchAPIData();   
   }, []);
 
 
@@ -98,7 +104,20 @@ const CurrentWeather = (props) => {
                     </div>
 
                     <div className="tempDescrBox">
-                      <h1>{props.name}</h1>
+                      <Typography aria-owns={open ? 'mouse-over-popover' : undefined} aria-haspopup="true"
+                          onMouseEnter={handlePopoverOpen} onMouseLeave={handlePopoverClose}>
+                         {props.name}
+                      </Typography>
+
+                      <Popover id="mouse-over-popover"
+                          sx={{ pointerEvents: 'none' }} open={open} anchorEl={anchorEl}
+                          anchorOrigin={{ vertical: 'bottom', horizontal: 'left' }}
+                          transformOrigin={{ vertical: 'top', horizontal: 'left' }}
+                          onClose={handlePopoverClose}
+                          disableRestoreFocus>
+                          <CityInfo cityData={props.cityData} />
+                      </Popover>
+
                       <h1 className="currentTempH1">{getCurrentData(weatherData, weatherData.minutely_15.temperature_2m, "temperature")}&deg; </h1>
                       <WeatherDescription sharedData={weatherData.daily} />
                       <h2>

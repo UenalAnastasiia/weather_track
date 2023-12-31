@@ -123,6 +123,13 @@
     top: 12px;
     left: 12px;
   }
+
+  .css-ahj2mt-MuiTypography-root {
+    font-size: 56px;
+    font-weight: 800;
+    margin-bottom: -24px;
+    cursor: pointer;
+  }
   
   /****** Close Current Weather ******/
   

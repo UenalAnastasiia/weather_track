@@ -8,6 +8,7 @@ import StorageService from "../../services/storageService";
 import { CircularProgress, IconButton } from "@mui/material";
 import AddIcon from '@mui/icons-material/Add';
 import { useNavigate } from "react-router-dom";
+import CoordinatesService from "../../API/coordinatesService";
 
 const CityNavbar = (props) => {
   const [localItems, setLocalItems] = useState(JSON.parse(localStorage.getItem("WeatherCity")));
@@ -16,6 +17,7 @@ const CityNavbar = (props) => {
   const [show, setShow] = useState(false);
   const [reloadData, setReloadData] = useState(false);
   const [weatherData, setWeatherData] = useState(Object);
+  const [cityData, setCityData] = useState(Object);
   const [choosenCityName, setchoosenCityName] = useState(Object);
   const [showSpinner, setShowSpinner] = useState(true);
   const navigate = useNavigate()
@@ -32,6 +34,8 @@ const CityNavbar = (props) => {
     setchoosenCityName(city.name);
     StorageService.checkStorageData(city);
     shareDataToNextComponent(city);
+    let fetchCityData = await CoordinatesService.fetchCoordinateAPI(city.name);
+    setCityData(fetchCityData.results[0]);    
   };
 
 
@@ -84,7 +88,7 @@ const CityNavbar = (props) => {
           {!reloadData ? (
             
             <div className="currentNavDiv">
-                <CurrentWeather key={choosenCityName} name={choosenCityName} weatherData={weatherData} />
+                <CurrentWeather key={choosenCityName} name={choosenCityName} weatherData={weatherData} cityData={cityData}/>
             </div>
             ) : null
           }
