@@ -1,15 +1,13 @@
 import "../../styles/SearchBox.css";
 import React, { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import CoordinatesService from "../../API/coordinatesService";
 import WeatherService from "../../API/weatherService";
 import CityNavbar from "./CityNavbar";
 import StorageService from "../../services/storageService";
-import { useNavigate } from "react-router-dom";
-import Snackbar from '@mui/material/Snackbar';
 import MuiAlert, { AlertProps } from '@mui/material/Alert';
-import CircularProgress from '@mui/material/CircularProgress';
-import TextField from '@mui/material/TextField';
-import Button from "@mui/material/Button";
+import {CircularProgress, Snackbar, TextField, Button} from '@mui/material';
+
 
 const Alert = React.forwardRef<HTMLDivElement, AlertProps>(function Alert(props, ref) {
   return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;

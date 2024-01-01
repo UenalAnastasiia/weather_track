@@ -2,6 +2,7 @@ import "../../styles/CurrentWeather.css";
 import "../../styles/Tabs.css";
 import * as React from 'react';
 import { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import Card from "react-bootstrap/Card";
 import WeatherImg from "../weather_infos/WeatherImg";
 import WeatherDescription from "../weather_infos/WeatherDescription";
@@ -9,7 +10,6 @@ import CurrentTabs from "./CurrentTabs";
 import WeatherService from "../../API/weatherService";
 import StorageService from "../../services/storageService";
 import { Button, Popover, Typography } from "@mui/material";
-import { useNavigate } from "react-router-dom";
 import CalendarIcon from "@mui/icons-material/CalendarMonth";
 import CityInfo from "./CityInfo";
 

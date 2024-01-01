@@ -1,14 +1,10 @@
 import "../../styles/Compass.css";
 import { useState, useEffect } from "react";
-import weatherService from "../../API/weatherService";
 import { useFetching } from "../../hooks/useFetching";
+import weatherService from "../../API/weatherService";
 import Compass from "../currentWeather_components/Compass";
-import ThermostatIcon from "@mui/icons-material/Thermostat";
-import WaterIcon from "@mui/icons-material/Water";
-import WaterDropIcon from "@mui/icons-material/WaterDrop";
-import UVIndexIcon from "@mui/icons-material/WbSunny";
-import CompassIcon from "@mui/icons-material/Explore";
-import SpeedIcon from "@mui/icons-material/WindPower";
+import {Thermostat, Water, WaterDrop, WbSunny, Explore, WindPower } from "@mui/icons-material";
+
 
 const DailyForecastTab = () => {
   const [loading, setLoading] = useState(true);
@@ -70,18 +66,18 @@ const DailyForecastTab = () => {
                   <div className="dailyTabBox">
                     <div>
                       <div className="dailyTabDescription">
-                        <span><ThermostatIcon style={{ color: "white", fontSize: 22 }} /> Feels like: {getRoundTemp(currentData.current.apparent_temperature)}&deg;</span>
-                        <span><WaterIcon style={{ color: "white", fontSize: 22 }} /> Humidity: {currentData.current.relative_humidity_2m} %</span>
+                        <span><Thermostat style={{ color: "white", fontSize: 22 }} /> Feels like: {getRoundTemp(currentData.current.apparent_temperature)}&deg;</span>
+                        <span><Water style={{ color: "white", fontSize: 22 }} /> Humidity: {currentData.current.relative_humidity_2m} %</span>
                       </div>
 
                       <div className="dailyTabDescription">
-                        <span><CompassIcon style={{ color: "white", fontSize: 22 }} /> Windway: {windToTextualDescription(currentData.current.wind_direction_10m)}</span>
-                        <span><SpeedIcon style={{ color: "white", fontSize: 22 }} /> Speed {currentData.current.wind_speed_10m} km/h</span>
+                        <span><Explore style={{ color: "white", fontSize: 22 }} /> Windway: {windToTextualDescription(currentData.current.wind_direction_10m)}</span>
+                        <span><WindPower style={{ color: "white", fontSize: 22 }} /> Speed {currentData.current.wind_speed_10m} km/h</span>
                       </div>
 
                       <div className="dailyTabDescription">
-                        <span><WaterDropIcon style={{ color: "white", fontSize: 22 }} /> Rainfall: {currentData.current.precipitation} mm</span>
-                        <span><UVIndexIcon style={{ color: "white", fontSize: 22 }} /> UV-Index: {currentData.daily.uv_index_max} </span>
+                        <span><WaterDrop style={{ color: "white", fontSize: 22 }} /> Rainfall: {currentData.current.precipitation} mm</span>
+                        <span><WbSunny style={{ color: "white", fontSize: 22 }} /> UV-Index: {currentData.daily.uv_index_max} </span>
                       </div>
                     </div>
 

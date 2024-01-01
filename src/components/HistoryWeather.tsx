@@ -1,18 +1,13 @@
 import "../styles/History.css";
+import { useNavigate } from "react-router-dom";
 import { useState, useEffect } from "react";
 import WeatherService from "../API/weatherService";
 import { LineChart } from '@mui/x-charts/LineChart';
-import Button from "@mui/material/Button";
-import { useNavigate } from "react-router-dom";
-import CalendarIcon from "@mui/icons-material/CalendarMonth";
-import BackIcon from "@mui/icons-material/ArrowBack";
-import { CircularProgress, IconButton } from "@mui/material";
+import { CircularProgress, IconButton, Button, Dialog } from "@mui/material";
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { DatePicker } from '@mui/x-date-pickers/DatePicker';
-import { Dialog } from "@mui/material";
-import CloseIcon from "@mui/icons-material/Close";
-import InfoIcon from "@mui/icons-material/Info";
+import { Close, Info, CalendarMonth, ArrowBack } from "@mui/icons-material";
 import LightTooltip from "../UI/LightTooltip";
 
 
@@ -101,17 +96,17 @@ const HistoryWeather = () => {
         <div>
             <div className="historyHeader">
                 <Button variant="contained" color="secondary" onClick={() =>  navigate('/track')} className="backBtn">
-                    <BackIcon style={{ color: "white", fontSize: 24 }} />
+                    <ArrowBack style={{ color: "white", fontSize: 24 }} />
                 </Button>
         
                 <div className="historyHeaderH2">
                     <h2>Weather History from {cityName}</h2>
-                    <LightTooltip title="Since 01/01/2000"><InfoIcon style={{ color: "white", fontSize: 18 }} /></LightTooltip>
+                    <LightTooltip title="Since 01/01/2000"><Info style={{ color: "white", fontSize: 18 }} /></LightTooltip>
                 </div>
 
                 <LightTooltip title="Choose date">
                     <Button variant="contained" color="secondary" onClick={() => setShowDatepicker(true)}>
-                        <CalendarIcon style={{ color: "white", fontSize: 24 }} />
+                        <CalendarMonth style={{ color: "white", fontSize: 24 }} />
                     </Button>
                 </LightTooltip>
             </div>
@@ -123,7 +118,7 @@ const HistoryWeather = () => {
                             <Dialog onClose={handleCloseDialog} open={showDatepicker}>
                                 <div className="datepickerDiv">
                                     <IconButton onClick={handleCloseDialog} className="closeBtn">
-                                        <CloseIcon style={{ color: "white", fontSize: 24 }}/>
+                                        <Close style={{ color: "white", fontSize: 24 }}/>
                                     </IconButton>
                                     <h1 className="datepickerBoxH1">Choose date</h1>
 

@@ -5,7 +5,6 @@ import { useFetching } from "../../hooks/useFetching";
 import WeatherImg from "../weather_infos/WeatherImg";
 import { DialogModal } from "../../interfaces/DialogModal";
 import { Dialog, IconButton } from "@mui/material";
-import Button from '@mui/material/Button';
 import LineChartUI from "../../UI/LineChartUI";
 import CloseIcon from "@mui/icons-material/Close";
 

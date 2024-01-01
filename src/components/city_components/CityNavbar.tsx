@@ -1,14 +1,12 @@
 import "../../styles/CityNavbar.css";
 import { useState, useEffect } from "react";
-import Button from "@mui/material/Button";
-import ButtonGroup from "@mui/material/ButtonGroup";
+import { useNavigate } from "react-router-dom";
 import CurrentWeather from "../currentWeather_components/CurrentWeather";
 import WeatherService from "../../API/weatherService";
-import StorageService from "../../services/storageService";
-import { CircularProgress, IconButton } from "@mui/material";
-import AddIcon from '@mui/icons-material/Add';
-import { useNavigate } from "react-router-dom";
 import CoordinatesService from "../../API/coordinatesService";
+import StorageService from "../../services/storageService";
+import { Button, ButtonGroup, CircularProgress, IconButton } from "@mui/material";
+import AddIcon from '@mui/icons-material/Add';
 import LightTooltip from "../../UI/LightTooltip";
 
 
