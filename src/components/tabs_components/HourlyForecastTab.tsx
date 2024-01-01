@@ -17,7 +17,7 @@ const HourlyForecastTab = (data: any) => {
     let timeToReturn = new Date(Math.floor(today.getTime() / round) * round);
 
     let timeResult = ("0" + timeToReturn.getHours()).slice(-2) + ":" + ("0" + timeToReturn.getMinutes()).slice(-2);
-    let currdateFormat = today.getFullYear() + '-' + (today.getMonth() + 1) + '-' + ('0' + today.getDate()).slice(-2) + 'T' + timeResult;
+    let currdateFormat = today.getFullYear() + '-' + ('0' + (today.getMonth() + 1)).slice(-2) + '-' + ('0' + today.getDate()).slice(-2) + 'T' + timeResult;
 
     return currdateFormat
   };

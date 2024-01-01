@@ -36,7 +36,7 @@ const Home = () => {
         <CitySearch />
       ) : (
         <div>
-          {showSpinner ? <CircularProgress /> : null}
+          {showSpinner && <CircularProgress />}
           <CityNavbar data={localFirstElement} />
         </div>
       )}

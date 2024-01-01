@@ -7,6 +7,7 @@ function App() {
 
   return (
     <div className="App">
+      <h1 className="logoH1">WTrack</h1>
       <BgAnimation />
       <AppRouter />
     </div>

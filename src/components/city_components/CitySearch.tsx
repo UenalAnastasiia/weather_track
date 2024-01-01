@@ -99,7 +99,7 @@ const CitySearch = () => {
             <div className="inputFieldBox">
               <TextField label="City" variant="outlined" value={inputValue} onChange={handleChangeInput} color="secondary" placeholder="Enter city name" autoComplete="off"/>
               <div className="searchBtns">
-                {showBackBtn ? <Button variant="contained" color="secondary" onClick={() =>  navigate('/track')}>back</Button> : null}
+                {showBackBtn && <Button variant="contained" color="secondary" onClick={() =>  navigate('/track')}>back</Button>}
                 <Button variant="contained" color="secondary" onClick={handleSearchCity} disabled={!inputValue}>search</Button>
               </div>
               

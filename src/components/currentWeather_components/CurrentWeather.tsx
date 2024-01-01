@@ -45,7 +45,7 @@ const CurrentWeather = (props) => {
     let dataResult = [];
 
     for (let index = 0; index < 192; index++) {
-      if (weatherInfo.minutely_15.time[index] === currdate && dataTyp === "temperature") {            
+      if (weatherInfo.minutely_15.time[index] === currdate && dataTyp === "temperature") {       
         dataResult.push(getRoundTemp(data[index]));
       } else if (weatherInfo.minutely_15.time[index] === currdate && dataTyp === "weatherCode") {
         dataResult.push(data[index]);
@@ -74,7 +74,7 @@ const CurrentWeather = (props) => {
     let timeToReturn = new Date(Math.floor(today.getTime() / round) * round);
 
     let timeResult = ("0" + timeToReturn.getHours()).slice(-2) + ":" + ("0" + timeToReturn.getMinutes()).slice(-2);
-    let currdateFormat = today.getFullYear() + '-' + (today.getMonth() + 1) + '-' + ('0' + today.getDate()).slice(-2) + 'T' + timeResult;
+    let currdateFormat = today.getFullYear() + '-' + ('0' + (today.getMonth() + 1)).slice(-2) + '-' + ('0' + today.getDate()).slice(-2) + 'T' + timeResult;
 
     return currdateFormat;
   };
@@ -106,7 +106,7 @@ const CurrentWeather = (props) => {
                     <div className="tempDescrBox">
                       <Typography aria-owns={open ? 'mouse-over-popover' : undefined} aria-haspopup="true"
                           onMouseEnter={handlePopoverOpen} onMouseLeave={handlePopoverClose}>
-                         {props.name}
+                         <span className="cityNameSpan">{props.name}</span>
                       </Typography>
 
                       <Popover id="mouse-over-popover"

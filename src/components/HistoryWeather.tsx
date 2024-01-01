@@ -12,7 +12,8 @@ import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { DatePicker } from '@mui/x-date-pickers/DatePicker';
 import { Dialog } from "@mui/material";
 import CloseIcon from "@mui/icons-material/Close";
-import Tooltip from '@mui/material/Tooltip';
+import InfoIcon from "@mui/icons-material/Info";
+import LightTooltip from "../UI/LightTooltip";
 
 
 const HistoryWeather = () => {
@@ -102,17 +103,22 @@ const HistoryWeather = () => {
                 <Button variant="contained" color="secondary" onClick={() =>  navigate('/track')} className="backBtn">
                     <BackIcon style={{ color: "white", fontSize: 24 }} />
                 </Button>
-                <h2>Weather History from {cityName}</h2>
-                <Tooltip title="Choose date">
+        
+                <div className="historyHeaderH2">
+                    <h2>Weather History from {cityName}</h2>
+                    <LightTooltip title="Since 01/01/2000"><InfoIcon style={{ color: "white", fontSize: 18 }} /></LightTooltip>
+                </div>
+
+                <LightTooltip title="Choose date">
                     <Button variant="contained" color="secondary" onClick={() => setShowDatepicker(true)}>
                         <CalendarIcon style={{ color: "white", fontSize: 24 }} />
                     </Button>
-                </Tooltip>
+                </LightTooltip>
             </div>
 
             {isLoading ? (
                 <div>
-                    {showDatepicker ? (
+                    {showDatepicker &&
                         <div>
                             <Dialog onClose={handleCloseDialog} open={showDatepicker}>
                                 <div className="datepickerDiv">
@@ -122,33 +128,33 @@ const HistoryWeather = () => {
                                     <h1 className="datepickerBoxH1">Choose date</h1>
 
                                     <LocalizationProvider dateAdapter={AdapterDayjs}>
-
-                                        <DatePicker disableFuture 
+                                        <DatePicker disableFuture shouldDisableDate={disablePrevDates('01/01/2000')}
                                             onChange={(date) => { dateValue(date, 'start') }} 
                                             slotProps={{
                                                 textField: {
                                                 helperText: 'MM/DD/YYYY',
+                                                placeholder: 'Enter start date'
                                                 }
                                         }}/>
+
                                         <DatePicker disableFuture shouldDisableDate={disablePrevDates(startDate)}
                                             onChange={(date) => { dateValue(date, 'end') }}                                            
                                             slotProps={{
                                                 textField: {
                                                 helperText: 'MM/DD/YYYY',
+                                                placeholder: 'Enter end date'
                                             }
                                         }}/>
                                     </LocalizationProvider>
 
-                                    {dateError ? (
-                                        <span className="dateErrorSpan">Error in date</span>
-                                    ) : null}
+                                    {dateError && <span className="dateErrorSpan">Error in date</span>}
                                 
                                     <Button variant="contained" color="secondary" onClick={fetchNewChart}>
                                         Search
                                     </Button>
                                 </div>
                             </Dialog>
-                        </div>) : null
+                        </div>
                     }
 
                     <div className="historyChart">
@@ -165,7 +171,8 @@ const HistoryWeather = () => {
                                     fill: 'white',
                                   },
                                 },
-                            }}/>
+                            }}
+                        />
                     </div>
                 </div>
             ) : <CircularProgress />}

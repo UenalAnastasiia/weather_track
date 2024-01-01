@@ -8,11 +8,6 @@
     left: 5%;
 }
 
-.historyHeader >h2 {
-    color: white;
-    font-weight: 800;
-}
-
 .historyChart {
     background-color: #ffffff38;
     border-radius: 32px;
@@ -29,6 +24,7 @@
     color: white;
     font-weight: 800;
     font-size: 38px;
+    cursor: context-menu;
 }
 
 .css-1t1j96h-MuiPaper-root-MuiDialog-paper {
@@ -89,4 +85,22 @@
 
 .css-1k2u9zb-MuiChartsAxis-root .MuiChartsAxis-line, .css-1k2u9zb-MuiChartsAxis-root .MuiChartsAxis-tick {
     stroke: white;
+}
+
+.css-1wc848c-MuiFormHelperText-root {
+    color: rgb(186 186 186 / 60%);
+    cursor: context-menu;
+}
+
+.historyHeaderH2 {
+    color: white;
+    font-weight: 800;
+    position: relative;
+}
+
+.historyHeaderH2 >.css-i4bv87-MuiSvgIcon-root {
+    position: absolute;
+    top: 20px;
+    right: -24px;
+    cursor: pointer;
 }

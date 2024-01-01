@@ -5,6 +5,19 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  cursor: context-menu;
+}
+
+.logoH1 {
+  position: absolute;
+  bottom: 12px;
+  left: 24px;
+  text-shadow: 0px 0px 0px #b393d3, 0px 0px 0px #b393d3, 0px 0px 10px #b393d3, 0px 0px 6px #b393d3;
+  color: transparent;
+  background-clip: text;
+  font-size: 46px;
+  font-weight: 800;
+  margin: 0;
 }
 
 *::-webkit-scrollbar {

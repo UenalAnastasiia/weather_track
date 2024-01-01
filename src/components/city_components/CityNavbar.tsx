@@ -9,6 +9,8 @@ import { CircularProgress, IconButton } from "@mui/material";
 import AddIcon from '@mui/icons-material/Add';
 import { useNavigate } from "react-router-dom";
 import CoordinatesService from "../../API/coordinatesService";
+import LightTooltip from "../../UI/LightTooltip";
+
 
 const CityNavbar = (props) => {
   const [localItems, setLocalItems] = useState(JSON.parse(localStorage.getItem("WeatherCity")));
@@ -53,7 +55,7 @@ const CityNavbar = (props) => {
 
   return (
     <div>
-      {show ? (
+      {show && 
         <div>
           {localLength.length === 1 ? (
             <div className="cityNavDiv">
@@ -62,38 +64,40 @@ const CityNavbar = (props) => {
                       {localItems[0].name}
                     </Button>
 
-                    <IconButton color="secondary" onClick={() => navigate('/search') }>
-                      <AddIcon />
-                    </IconButton>
+                    <LightTooltip title="Add city">
+                      <IconButton color="secondary" onClick={() => navigate('/search') }>
+                        <AddIcon />
+                      </IconButton>
+                    </LightTooltip>
                 </ButtonGroup>
             </div>
           ) : (
             <div className="cityNavDiv">
-              <ButtonGroup key={1} orientation="vertical" variant="contained" color="secondary">
-                {localLength.map((index) => (
-                  <Button key={index} onClick={() => openCityWeather(localItems[index])}>
-                    {localItems[index].name}
-                  </Button>
-                ))}
+                <ButtonGroup key={1} orientation="vertical" variant="contained" color="secondary">
+                  {localLength.map((index) => (
+                    <Button key={index} onClick={() => openCityWeather(localItems[index])}>
+                      {localItems[index].name}
+                    </Button>
+                  ))}
 
-                  <IconButton color="secondary" onClick={() => navigate('/search') }>
-                    <AddIcon />
-                  </IconButton>
-              </ButtonGroup>
+                    <LightTooltip title="add city">
+                      <IconButton color="secondary" onClick={() => navigate('/search') }>
+                        <AddIcon />
+                      </IconButton>
+                    </LightTooltip>
+                </ButtonGroup>
             </div>
           )}
 
-          {showSpinner ? <CircularProgress /> : null}
+          {showSpinner && <CircularProgress />}
 
-          {!reloadData ? (
-            
+          {!reloadData && 
             <div className="currentNavDiv">
                 <CurrentWeather key={choosenCityName} name={choosenCityName} weatherData={weatherData} cityData={cityData}/>
             </div>
-            ) : null
           }
         </div>
-      ) : null}
+      }
     </div>
   );
 };

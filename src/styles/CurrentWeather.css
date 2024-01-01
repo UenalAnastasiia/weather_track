@@ -63,6 +63,7 @@
     font-size: 54px;
     margin: 0;
     margin-bottom: -20px;
+    margin-top: -20px;
   }
   
   .tempDescrBox h2 {
@@ -124,10 +125,9 @@
     left: 12px;
   }
 
-  .css-ahj2mt-MuiTypography-root {
+  .cityNameSpan {
     font-size: 56px;
     font-weight: 800;
-    margin-bottom: -24px;
     cursor: pointer;
   }
   
@@ -161,3 +161,13 @@
   }
   
   /****** Close Weather Img ******/
+
+  /****** City Info ******/
+
+  .cityInfoBox {
+    display: flex;
+    flex-direction: column;
+    padding: 8px;
+  }
+
+  /****** Close City Info ******/

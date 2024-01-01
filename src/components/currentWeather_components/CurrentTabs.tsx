@@ -8,6 +8,7 @@ import DailyForecastTab from "../tabs_components/DailyForecastTab";
 import HourlyForecastTab from "../tabs_components/HourlyForecastTab";
 import WeeklyForecastTab from "../tabs_components/WeeklyForecastTab";
 import MoreForecastTab from "../tabs_components/MoreForecastTab";
+import LightTooltip from "../../UI/LightTooltip";
 
 
 const CurrentTabs = (data: any) => {
@@ -39,7 +40,9 @@ const CurrentTabs = (data: any) => {
             <Tab label="Hourly Forecast" value="hourly" />
             <Tab label="Daily Forecast" value="daily" />
             <Tab label="Weekly Forecast" value="weekly" />
-            <Tab label="..." value="more_forecast" onClick={handleClickOpenDialog} />
+            <LightTooltip title="Forecast for 10 days">
+              <Tab label="..." value="more_forecast" onClick={handleClickOpenDialog} />
+            </LightTooltip>
           </TabList>
         </Box>
         <TabPanel value="hourly">
