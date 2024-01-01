@@ -1,3 +1,22 @@
+.welcomeSearchBox {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.welcomeH1 {
+  font-size: 56px;
+  font-weight: 600;
+  margin-top: -12px;
+  margin-bottom: 12px;
+  font-family: "Baloo";
+  color: #caa7e9;
+  text-shadow: 2px 2px 0px  #957dad,
+               4px 4px 0px #ee4b2b,
+               8px 8px 0px #391204,
+               10px 10px 0px #553c9a;
+}
+
 .searchBox {
     width: 40vw;
     max-width: 620px;

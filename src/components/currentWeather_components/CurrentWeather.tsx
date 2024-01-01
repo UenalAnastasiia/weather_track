@@ -12,6 +12,7 @@ import StorageService from "../../services/storageService";
 import { Button, Popover, Typography } from "@mui/material";
 import CalendarIcon from "@mui/icons-material/CalendarMonth";
 import CityInfo from "./CityInfo";
+import LightTooltip from "../../UI/LightTooltip";
 
 
 const CurrentWeather = (props) => {
@@ -87,9 +88,11 @@ const CurrentWeather = (props) => {
         {!loading && (
           <Card.Body>
             <div>
-            <Button className="calendarBtn" onClick={() => navigate('/history')}>
-                    <CalendarIcon style={{ color: "#F02222", fontSize: 32 }} />
-            </Button>
+            <LightTooltip title="Weather History">
+              <Button className="calendarBtn" onClick={() => navigate('/history')}>
+                      <CalendarIcon style={{ color: "#F02222", fontSize: 32 }} />
+              </Button>
+            </LightTooltip>
 
             <img className="countryFlagImg" src={StorageService.imgURL || ''} />
 

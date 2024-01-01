@@ -19,6 +19,7 @@ const CitySearch = () => {
   const [cityData, setCityData] = useState(Object);
   const [showWeather, setShowWeather] = useState(false);
   const [showSpinner, setShowSpinner] = useState(false);
+  const [firstOpen, setFirstOpen] = useState(true);
   const [showBackBtn, setShowBackBtn] = useState(false);
   const [open, setOpen] = React.useState(false);
   const navigate = useNavigate();
@@ -27,7 +28,14 @@ const CitySearch = () => {
   useEffect(() => {
     const storedData = localStorage.getItem("WeatherCity");
     let JSONData = JSON.parse(storedData);
-    storedData === null || JSONData.length === 0 ? setShowBackBtn(false) : setShowBackBtn(true);
+
+    if (storedData === null || JSONData.length === 0) {
+      setFirstOpen(true);
+      setShowBackBtn(false);
+    } else {
+      setFirstOpen(false);
+      setShowBackBtn(true);
+    }
   }, []);
 
 
@@ -92,15 +100,19 @@ const CitySearch = () => {
             <CityNavbar data={cityData} />
           </div>
           ) : (
-          <div className="searchBox">
-            <h1>Search Your City</h1>
-            <div className="inputFieldBox">
-              <TextField label="City" variant="outlined" value={inputValue} onChange={handleChangeInput} color="secondary" placeholder="Enter city name" autoComplete="off"/>
-              <div className="searchBtns">
-                {showBackBtn && <Button variant="contained" color="secondary" onClick={() =>  navigate('/track')}>back</Button>}
-                <Button variant="contained" color="secondary" onClick={handleSearchCity} disabled={!inputValue}>search</Button>
+          <div className="welcomeSearchBox">
+            {firstOpen && <h1 className="welcomeH1">Welcome to weather tracking App</h1>}
+
+            <div className="searchBox">
+              <h1>Search Your City</h1>
+              <div className="inputFieldBox">
+                <TextField label="City" variant="outlined" value={inputValue} onChange={handleChangeInput} color="secondary" placeholder="Enter city name" autoComplete="off"/>
+                <div className="searchBtns">
+                  {showBackBtn && <Button variant="contained" color="secondary" onClick={() =>  navigate('/track')}>back</Button>}
+                  <Button variant="contained" color="secondary" onClick={handleSearchCity} disabled={!inputValue}>search</Button>
+                </div>
+                
               </div>
-              
             </div>
           </div>
         )}
