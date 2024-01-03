@@ -7,10 +7,18 @@
     flex-direction: column;
     justify-content: center;
     color: white;
+    width: 140px;
 }
   
 .currentNavDiv {
     display: flex;
+}
+
+.addIconDiv {
+    width: 140px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
   
 /* .css-1og05nr-MuiButtonGroup-root {

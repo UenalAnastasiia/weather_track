@@ -1,5 +1,5 @@
 import "./styles/App.css";
-import AppRouter from "./components/routes/AppRouter";
+import AppRouter from "./routes/AppRouter";
 import BgAnimation from "./components/home_components/BgAnimation";
 
 
