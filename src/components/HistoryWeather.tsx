@@ -1,4 +1,4 @@
-import "../styles/History.css";
+import "./../styles/History.css";
 import { useNavigate } from "react-router-dom";
 import { useState, useEffect } from "react";
 import WeatherService from "../API/weatherService";
@@ -21,11 +21,33 @@ const HistoryWeather = () => {
     const [showDatepicker, setShowDatepicker] = useState(false);
     const navigate = useNavigate();
 
+    const sxStyle = {
+        paper: {
+            style: { width: 'min-content', height: 'min-content', display: 'flex', alignItems: 'center', justifyContent: 'space-around',
+            backgroundColor: 'rgb(53 2 56 / 55%)', boxShadow: '0 4px 30px rgba(0, 0, 0, 0.1)',
+            backdropFilter: 'blur(6px)', borderRadius: '32px', border: 'none', padding: '24px' }
+        },
+        drop: {
+            backdrop: { style: { backgroundColor: 'rgb(174 174 174 / 50%)' } }
+        },
+        icon: { color: 'white', fontSize: 24 },
+        infoIcon: { color: 'white', fontSize: 18, position: 'absolute', top: '24px', right: '-24px' },
+        picker: {
+            '&.css-z3c6am-MuiFormControl-root-MuiTextField-root': { width: '20vw' }, 
+            '&.css-1d3z3hw-MuiOutlinedInput-notchedOutline': { borderColor: 'white' },
+            '&.css-nxo287-MuiInputBase-input-MuiOutlinedInput-input, &.css-1yq5fb3-MuiButtonBase-root-MuiIconButton-root': { color: 'white' }, 
+            '&.css-1wc848c-MuiFormHelperText-root': { color: 'rgb(186 186 186 / 60%)', cursor: 'context-menu' }
+        },
+        lineChart: { line: { stroke: 'white !important' }, text: { fill: 'white !important' } }
+    }
+
 
     useEffect(() => {
         fetchDate();
         setCityName(WeatherService.cityName);
     }, []);    
+
+    console.log = console.warn = console.error = () => {};
 
 
     const fetchDate = () => {
@@ -96,17 +118,17 @@ const HistoryWeather = () => {
         <div>
             <div className="historyHeader">
                 <Button variant="contained" color="secondary" onClick={() =>  navigate('/track')} className="backBtn">
-                    <ArrowBack style={{ color: "white", fontSize: 24 }} />
+                    <ArrowBack sx={sxStyle.icon} />
                 </Button>
         
                 <div className="historyHeaderH2">
                     <h2>Weather History from {cityName}</h2>
-                    <LightTooltip title="Since 01/01/2000"><Info style={{ color: "white", fontSize: 18 }} /></LightTooltip>
+                    <LightTooltip title="Since 01/01/2000"><Info sx={sxStyle.infoIcon} /></LightTooltip>
                 </div>
 
                 <LightTooltip title="Choose date">
                     <Button variant="contained" color="secondary" onClick={() => setShowDatepicker(true)}>
-                        <CalendarMonth style={{ color: "white", fontSize: 24 }} />
+                        <CalendarMonth sx={sxStyle.icon} />
                     </Button>
                 </LightTooltip>
             </div>
@@ -115,31 +137,25 @@ const HistoryWeather = () => {
                 <div>
                     {showDatepicker &&
                         <div>
-                            <Dialog onClose={handleCloseDialog} open={showDatepicker}>
+                            <Dialog onClose={handleCloseDialog} open={showDatepicker} 
+                                PaperProps={sxStyle.paper} slotProps={sxStyle.drop}>
+
                                 <div className="datepickerDiv">
                                     <IconButton onClick={handleCloseDialog} className="closeBtn">
-                                        <Close style={{ color: "white", fontSize: 24 }}/>
+                                        <Close sx={sxStyle.icon}/>
                                     </IconButton>
                                     <h1 className="datepickerBoxH1">Choose date</h1>
 
                                     <LocalizationProvider dateAdapter={AdapterDayjs}>
                                         <DatePicker disableFuture shouldDisableDate={disablePrevDates('01/01/2000')}
                                             onChange={(date) => { dateValue(date, 'start') }} 
-                                            slotProps={{
-                                                textField: {
-                                                helperText: 'MM/DD/YYYY',
-                                                placeholder: 'Enter start date'
-                                                }
-                                        }}/>
+                                            slotProps={{textField: {helperText: 'MM/DD/YYYY', placeholder: 'Enter start date'}}}
+                                            sx={sxStyle.picker}/>
 
                                         <DatePicker disableFuture shouldDisableDate={disablePrevDates(startDate)}
                                             onChange={(date) => { dateValue(date, 'end') }}                                            
-                                            slotProps={{
-                                                textField: {
-                                                helperText: 'MM/DD/YYYY',
-                                                placeholder: 'Enter end date'
-                                            }
-                                        }}/>
+                                            slotProps={{textField: {helperText: 'MM/DD/YYYY', placeholder: 'Enter end date'}}}
+                                            sx={sxStyle.picker}/>
                                     </LocalizationProvider>
 
                                     {dateError && <span className="dateErrorSpan">Error in date</span>}
@@ -153,19 +169,14 @@ const HistoryWeather = () => {
                     }
 
                     <div className="historyChart">
-                        <LineChart
-                            width={1000}
-                            height={500}
+                        <LineChart sx={sxStyle.lineChart} width={1000} height={500}
                             series={[
-                                { data: weatherData.daily.temperature_2m_mean, label: 'temperature in ' + weatherData.daily_units.temperature_2m_mean, color: '#a41313' }
-                            ]}
+                                { data: weatherData.daily.temperature_2m_mean, 
+                                  label: 'temperature in ' + weatherData.daily_units.temperature_2m_mean, 
+                                  color: '#a41313' }]}
                             xAxis={[{ scaleType: 'point', data: weatherData.daily.time }]}
                             slotProps={{
-                                legend: {
-                                  labelStyle: {
-                                    fill: 'white',
-                                  },
-                                },
+                                legend: { labelStyle: { fill: 'white' } },
                             }}
                         />
                     </div>

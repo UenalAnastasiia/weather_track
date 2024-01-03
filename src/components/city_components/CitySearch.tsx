@@ -21,8 +21,18 @@ const CitySearch = () => {
   const [showSpinner, setShowSpinner] = useState(false);
   const [firstOpen, setFirstOpen] = useState(true);
   const [showBackBtn, setShowBackBtn] = useState(false);
-  const [open, setOpen] = React.useState(false);
+  const [openSnackbar, setOpenSnackbar] = React.useState(false);
   const navigate = useNavigate();
+
+
+  const sxStyle = {
+      field: { background: '#7e63c5db', color: 'white !important', boxShadow: '0px 0px 18px 3px #fdfdfdad', 
+      '&.css-hjtp1-MuiInputBase-root-MuiOutlinedInput-root': { background: '#7e63c5db', color: 'white', boxShadow: '0px 0px 18px 3px #fdfdfdad' },
+      '&.css-1u3bzj6-MuiFormControl-root-MuiTextField-root': { width: '320px' },
+      '& .MuiOutlinedInput-root': { '& fieldset': { borderColor: 'white !important' } },
+      label: { color: 'white !important' },
+      input: { color: 'white !important' } }
+  }
 
 
   useEffect(() => {
@@ -45,8 +55,7 @@ const CitySearch = () => {
     try {
       tryFetch(cData.results[0]);
     } catch (e) {
-      // alert('City not found');
-      setOpen(true);
+      setOpenSnackbar(true);
       console.error(e);
       return <CitySearch /> 
     }
@@ -80,38 +89,59 @@ const CitySearch = () => {
     if (reason === 'clickaway') {
       return;
     }
-    setOpen(false);
+    setOpenSnackbar(false);
     setShowSpinner(false);
     setInputValue("");
   };
 
 
   const handleChangeInput = (e) => {
+    // console.log(e.target.value);
+    // showCityList(e.target.value);
     setInputValue(e.target.value);
   };
+
+
+  const showCityList = async (e) => {
+    const data = await fetch(
+      `https://geocoding-api.open-meteo.com/v1/search?name=${e}`
+    );
+
+    const jsonData = await data.json();
+    // console.log('jsonData ', jsonData);
+
+    let list = []
+      for (let index = 0; index < jsonData.result?.length; index++) {
+        list.push(jsonData.result[index]);
+      } 
+    console.log('Names ', list);
+  }
 
 
   return (
     <div>
       {showSpinner ? <CircularProgress /> : (
+      
       <div>
         {showWeather ? (
           <div className="currentNavDiv">
             <CityNavbar data={cityData} />
           </div>
-          ) : (
+          ) 
+          : (
           <div className="welcomeSearchBox">
             {firstOpen && <h1 className="welcomeH1">Welcome to weather tracking App</h1>}
 
             <div className="searchBox">
               <h1>Search Your City</h1>
               <div className="inputFieldBox">
-                <TextField label="City" variant="outlined" value={inputValue} onChange={handleChangeInput} color="secondary" placeholder="Enter city name" autoComplete="off"/>
+                <TextField sx={sxStyle.field} label="City" 
+                  focused value={inputValue} onChange={handleChangeInput} placeholder="Enter city name" autoComplete="off"/>
+                
                 <div className="searchBtns">
                   {showBackBtn && <Button variant="contained" color="secondary" onClick={() =>  navigate('/track')}>back</Button>}
                   <Button variant="contained" color="secondary" onClick={handleSearchCity} disabled={!inputValue}>search</Button>
-                </div>
-                
+                </div> 
               </div>
             </div>
           </div>
@@ -120,9 +150,9 @@ const CitySearch = () => {
       )}
 
 
-      <Snackbar open={open} autoHideDuration={6000} anchorOrigin={{ vertical: 'top', horizontal: 'center' }} onClose={handleClose}>
+      <Snackbar open={openSnackbar} autoHideDuration={6000} anchorOrigin={{ vertical: 'top', horizontal: 'center' }} onClose={handleClose}>
         <Alert onClose={handleClose} severity="warning" sx={{ width: '100%' }}>
-        Error, city not found!
+          Error, city not found!
         </Alert>
       </Snackbar>
     </div>

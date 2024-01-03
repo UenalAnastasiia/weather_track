@@ -1,6 +1,6 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
-import "./styles/index.css";
+import "./index.css";
 import './fonts/baloo-2-v16-latin-600.ttf';
 import App from "./App";
 import reportWebVitals from "./reportWebVitals";

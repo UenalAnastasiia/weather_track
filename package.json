@@ -3,7 +3,9 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@emotion/cache": "^11.11.0",
     "@emotion/react": "^11.11.3",
+    "@emotion/server": "^11.11.0",
     "@emotion/styled": "^11.11.0",
     "@mui/icons-material": "^5.14.14",
     "@mui/joy": "^5.0.0-beta.11",
@@ -21,6 +23,7 @@
     "@types/react-dom": "^18.2.14",
     "circle-flags": "github:HatScripts/circle-flags",
     "dayjs": "^1.11.10",
+    "next": "^14.0.4",
     "react": "^18.2.0",
     "react-bootstrap": "^2.9.1",
     "react-dom": "^18.2.0",

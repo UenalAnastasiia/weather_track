@@ -61,7 +61,7 @@ const WeatherImg = (data: any) => {
 
   return (
     <div>
-      {data.hourlyCheck === true ? (
+      {data.hourlyCheck ? (
         <div>
           <img className="weatherIcon" src={showIcon} />
         </div>

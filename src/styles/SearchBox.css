@@ -50,26 +50,25 @@
     display: flex;
     justify-content: space-around;
 }
-
-.css-hjtp1-MuiInputBase-root-MuiOutlinedInput-root {
-    /* background-color: #ea89fbc4; */
-    background: #7e63c5db;
-    color: white;
-    box-shadow: 0px 0px 18px 3px #fdfdfdad;
+/* 
+.css-hjtp1-MuiInputBase-root-MuiOutlinedInput-root, .css-1x5jdmq {
+    background: #7e63c5db !important;
+    color: white !important;
+    box-shadow: 0px 0px 18px 3px #fdfdfdad !important;
 }
 
 .css-15jws13-MuiFormLabel-root-MuiInputLabel-root.Mui-focused {
-    color: white;
+    color: white !important;
 }
 
 .css-rw1vm2-MuiInputBase-root-MuiOutlinedInput-root.Mui-focused .MuiOutlinedInput-notchedOutline {
-    color: white;
+    color: white !important;
 }
 
 .css-1v4qvbo-MuiFormLabel-root-MuiInputLabel-root {
-    color: white;
+    color: white !important;
 }
 
 .css-1u3bzj6-MuiFormControl-root-MuiTextField-root {
-    width: 320px;
-}
+    width: 320px !important;
+} */

@@ -90,11 +90,13 @@ const CurrentWeather = (props) => {
             <div>
             <LightTooltip title="Weather History">
               <Button className="calendarBtn" onClick={() => navigate('/history')}>
-                      <CalendarIcon style={{ color: "#F02222", fontSize: 32 }} />
+                      <CalendarIcon style={{ color: "rgb(156, 39, 176)", fontSize: 32 }} />
               </Button>
             </LightTooltip>
 
-            <img className="countryFlagImg" src={StorageService.imgURL || ''} />
+            <LightTooltip title={props.cityData.country}>
+              <img className="countryFlagImg" src={StorageService.imgURL || ''} />
+            </LightTooltip>
 
               {weatherData && (
                 <div>
@@ -107,7 +109,7 @@ const CurrentWeather = (props) => {
                     </div>
 
                     <div className="tempDescrBox">
-                      <Typography aria-owns={open ? 'mouse-over-popover' : undefined} aria-haspopup="true"
+                      <Typography aria-owns={open ? 'mouse-over-popover' : undefined} aria-haspopup="true" sx={{zIndex: 1}}
                           onMouseEnter={handlePopoverOpen} onMouseLeave={handlePopoverClose}>
                          <span className="cityNameSpan">{props.name}</span>
                       </Typography>

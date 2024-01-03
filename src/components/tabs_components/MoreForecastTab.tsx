@@ -15,17 +15,28 @@ const MoreForecastTab = (props: DialogModal) => {
   const { onCloseDialog, openDialog } = props;
   const [chartData, setChartData] = useState(Object);
 
+  const sxStyle = {
+    paper: {
+      style: { maxWidth: 'none', maxHeight: 'none', width: 'min-content', height: 'min-content',
+      backgroundColor: 'rgb(53 2 56 / 55%)', boxShadow: '4px 4px 4px #fff, -4px -4px 20px #fff, inset -4px -4px 20px #fff, inset 4px 4px 20px #fff',
+      backdropFilter: 'blur(10px)', borderRadius: '32px', border: 'none', padding: '16px' }
+    },
+    drop: {
+      backdrop: { style: { backgroundColor: 'rgb(174 174 174 / 50%)' } }
+    }
+  }
+
   const [fetchAPIData, postError] = useFetching(async () => {
     const response = await weatherService.fetchWeeklyWeather();
     setWeatherData(response);
     setLoading(false);
-    pushChartData(response.daily)
+    pushChartData(response.daily);
   });
-  console.log = console.warn = console.error = () => {};
 
 
   useEffect(() => {
     fetchAPIData();
+    console.log = console.warn = console.error = () => {};
   }, []);
 
 
@@ -68,7 +79,9 @@ const MoreForecastTab = (props: DialogModal) => {
 
   return (
     <div className="moreForecastDialog">
-      <Dialog onClose={handleCloseDialog} open={openDialog}>
+      <Dialog onClose={handleCloseDialog} open={openDialog}
+        PaperProps={sxStyle.paper} slotProps={sxStyle.drop}>
+          
         {loading && <p>Loading...</p>}
         {!loading && (
           <div>

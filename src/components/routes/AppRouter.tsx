@@ -1,7 +1,7 @@
 import { Fragment } from 'react';
 import { Navigate, Route, Routes } from "react-router-dom";
 import CitySearch from '../city_components/CitySearch';
-import Home from './Home';
+import Home from '../home_components/Home';
 import HistoryWeather from '../HistoryWeather';
 
 

@@ -6,12 +6,19 @@ import DailyForecastTab from "../tabs_components/DailyForecastTab";
 import HourlyForecastTab from "../tabs_components/HourlyForecastTab";
 import WeeklyForecastTab from "../tabs_components/WeeklyForecastTab";
 import MoreForecastTab from "../tabs_components/MoreForecastTab";
-import LightTooltip from "../../UI/LightTooltip";
 
 
 const CurrentTabs = (data: any) => {
   const [tabValue, setTabValue] = React.useState("daily");
   const [openDialog, setOpenDialog] = React.useState(false);
+
+  const sxStyle = {
+    box: { width: '100%', typography: 'body1', color: 'white' },
+    contentBox: { borderBottom: 1, borderColor: 'divider' },
+    tab: { color: '#a076b4' },
+    tabIndicator: { style: { backgroundColor: "rgb(156, 39, 176)" } },
+    tabList: { '&.css-heg063-MuiTabs-flexContainer': { justifyContent: 'center' } }
+  }
 
 
   const handleTabChange = (event: React.SyntheticEvent, newValue: string) => {
@@ -31,22 +38,18 @@ const CurrentTabs = (data: any) => {
   
 
   return (
-    <Box sx={{ width: "100%", typography: "body1", color: "white" }}>
+    <Box sx={sxStyle.box}>
       <TabContext value={tabValue}>
-        <Box sx={{ borderBottom: 1, borderColor: "divider" }}>
-          <TabList onChange={handleTabChange}>
-            <Tab label="Hourly Forecast" value="hourly" />
-            <Tab label="Daily Forecast" value="daily" />
-            <Tab label="Weekly Forecast" value="weekly" />
-            <LightTooltip title="Forecast for 10 days">
-              <Tab label="..." value="more_forecast" onClick={handleClickOpenDialog} />
-            </LightTooltip>
+        <Box sx={sxStyle.contentBox}>
+          <TabList onChange={handleTabChange} sx={sxStyle.tabList} textColor="secondary" indicatorColor="secondary">
+            <Tab sx={sxStyle.tab} label="Hourly Forecast" value="hourly" />
+            <Tab sx={sxStyle.tab} label="Daily Forecast" value="daily" />
+            <Tab sx={sxStyle.tab} label="Weekly Forecast" value="weekly" />
+            <Tab sx={sxStyle.tab} label="..." value="more" onClick={handleClickOpenDialog} title="Forecast for 10 days"/>
           </TabList>
         </Box>
         <TabPanel value="hourly">
-            <HourlyForecastTab
-                quarterData={data.sharedData.minutely_15}
-            />
+            <HourlyForecastTab quarterData={data.sharedData.minutely_15} />
         </TabPanel>
 
         <TabPanel value="daily">
@@ -57,9 +60,8 @@ const CurrentTabs = (data: any) => {
           <WeeklyForecastTab />
         </TabPanel>
 
-        <TabPanel value="more_forecast">
-          <MoreForecastTab openDialog={openDialog}
-            onCloseDialog={handleCloseDialog}/>
+        <TabPanel value="more">
+          <MoreForecastTab openDialog={openDialog} onCloseDialog={handleCloseDialog}/>
         </TabPanel>
       </TabContext>
     </Box>

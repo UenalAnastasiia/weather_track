@@ -20,7 +20,19 @@ const CityNavbar = (props) => {
   const [cityData, setCityData] = useState(Object);
   const [choosenCityName, setchoosenCityName] = useState(Object);
   const [showSpinner, setShowSpinner] = useState(true);
-  const navigate = useNavigate()
+  const navigate = useNavigate();
+
+  const sxStyle = {
+    buttonGroup: { '&.css-1og05nr-MuiButtonGroup-root': { boxShadow: 'none' },
+      '&.css-1gws2xf-MuiButtonBase-root-MuiIconButton-root': {
+        boxShadow: '0px 3px 1px -2px rgba(0,0,0,0.2), 0px 2px 2px 0px rgba(0,0,0,0.14), 0px 1px 5px 0px rgba(0,0,0,0.12)',
+        borderRadius: '8px' },
+        '&.css-1og05nr-MuiButtonGroup-root, &.MuiButtonGroup-firstButton, &.css-1og05nr-MuiButtonGroup-root, &.MuiButtonGroup-middleButton': {
+        marginBottom: '8px',
+        borderRadius: '8px' } },
+    button: { marginBottom: '6px', borderRadius: '8px !important' }
+  }
+
 
   useEffect(() => {
     openCityWeather(props.data); 
@@ -57,8 +69,9 @@ const CityNavbar = (props) => {
         <div>
           {localLength.length === 1 ? (
             <div className="cityNavDiv">
-                <ButtonGroup orientation="vertical" variant="contained" color="secondary">
-                    <Button onClick={() => openCityWeather(localItems[0])}>
+                <ButtonGroup orientation="vertical" variant="contained" color="secondary"
+                  sx={ sxStyle.buttonGroup }>
+                    <Button onClick={() => openCityWeather(localItems[0])} sx={ sxStyle.button } >
                       {localItems[0].name}
                     </Button>
 
@@ -71,9 +84,10 @@ const CityNavbar = (props) => {
             </div>
           ) : (
             <div className="cityNavDiv">
-                <ButtonGroup key={1} orientation="vertical" variant="contained" color="secondary">
+                <ButtonGroup key={1} orientation="vertical" variant="contained" color="secondary"
+                  sx={ sxStyle.buttonGroup }>
                   {localLength.map((index) => (
-                    <Button key={index} onClick={() => openCityWeather(localItems[index])}>
+                    <Button key={index} onClick={() => openCityWeather(localItems[index])} sx={ sxStyle.button }>
                       {localItems[index].name}
                     </Button>
                   ))}
