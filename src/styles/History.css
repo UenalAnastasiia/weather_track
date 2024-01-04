@@ -4,8 +4,9 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
-    width: 90%;
+    width: 55%;
     left: 5%;
+    z-index: 1;
 }
 
 .historyChart {
@@ -59,4 +60,16 @@
     color: white;
     font-weight: 800;
     position: relative;
+}
+
+.historyNavDiv {
+    position: absolute;
+    right: 3vw;
+    top: 5vh;
+    height: 90vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    color: white;
+    width: 140px;
 }

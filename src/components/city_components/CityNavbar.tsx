@@ -30,7 +30,7 @@ const CityNavbar = (props: { data: any; }) => {
 
   const sxStyle = {
     buttonGroup: { boxShadow: 'none !important', alignItems: 'center' },
-    button: { marginBottom: '6px', borderRadius: '8px !important', minWidth: '140px !important' },
+    button: { marginBottom: '6px', borderRadius: '8px !important', width: '140px !important' },
     settingsIcon: { width: 'fit-content', position: 'absolute', top: 0, left: '-5vw', transform: 'scale(1.5)' },
     menuList: { backgroundColor: 'rgb(235 10 195 / 9%)', color: '#9c27b0', li: { fontWeight: '700 !important' } }
   }
@@ -176,8 +176,8 @@ const CityNavbar = (props: { data: any; }) => {
                 <ButtonGroup key={"group"+1} orientation="vertical" variant="contained" color="secondary"
                   sx={ sxStyle.buttonGroup }>
                   {localLength.map((index, el) => (
-                    <div>
-                      <div>
+                    <div key={"div1"+index}>
+                      <div key={"div2"+index}>
                         <Button key={"btn"+el} onClick={() => openCityWeather(localItems[index])} sx={ sxStyle.button }>
                           {localItems[index].name}
                         </Button>

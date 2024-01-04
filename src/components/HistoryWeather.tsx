@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { useState, useEffect } from "react";
 import WeatherService from "../API/weatherService";
 import { LineChart } from '@mui/x-charts/LineChart';
-import { CircularProgress, IconButton, Button, Dialog } from "@mui/material";
+import { CircularProgress, IconButton, Button, Dialog, ButtonGroup } from "@mui/material";
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { DatePicker } from '@mui/x-date-pickers/DatePicker';
@@ -19,10 +19,11 @@ const HistoryWeather = () => {
     const [startDate, setStartDate] = useState('');
     const [endDate, setEndDate] = useState('');
     const [showDatepicker, setShowDatepicker] = useState(false);
-    const [clearedFields, setClearedFields] = useState<boolean>(false);
     const navigate = useNavigate();
     const minDateData = dayjs('01/01/2000');
     const maxDateData = dayjs().add(-2, 'day');
+    const dateNavBtns = [{name: '7 Days', length: '7'}, {name: '14 Days', length: '14'}, {name: '30 Days', length: '30'}, {name: '6 Months', length: '180'}, 
+        {name: 'Year', length: '365'}, {name: '3 Years', length: '1095'}]
 
 
     const sxStyle = {
@@ -44,21 +45,23 @@ const HistoryWeather = () => {
                 '&.Mui-focused fieldset': { borderColor: 'white' } },
             svg: { color: 'white !important' }
         },
-        lineChart: { line: { stroke: 'white !important' }, text: { fill: 'white !important' } }
+        lineChart: { line: { stroke: 'white !important' }, text: { fill: 'white !important' } },
+        buttonGroup: { boxShadow: 'none !important', alignItems: 'center' },
+        button: { marginBottom: '10px', borderRadius: '8px !important', width: '110px !important' }
     }
 
 
     useEffect(() => {
-        fetchDate();
+        fetchDate(14);
         setCityName(WeatherService.cityName);        
     }, []);  
 
     // console.log = console.warn = console.error = () => {};
 
 
-    const fetchDate = () => {
+    const fetchDate = (length) => {
         let start = new Date();
-        start.setDate(start.getDate() - 14);
+        start.setDate(start.getDate() - length);
 
         let end = new Date();
         end.setDate(end.getDate() - 2);
@@ -120,11 +123,6 @@ const HistoryWeather = () => {
     };
 
 
-    const resetDate = () => {
-        setClearedFields(true)
-    };
-
-
     return (
         <div>
             <div className="historyHeader">
@@ -137,11 +135,11 @@ const HistoryWeather = () => {
                     <LightTooltip title="Since 01/01/2000"><Info sx={sxStyle.infoIcon} /></LightTooltip>
                 </div>
 
-                <LightTooltip title="Choose date">
+                {/* <LightTooltip title="Choose date">
                     <Button variant="contained" color="secondary" onClick={() => setShowDatepicker(true)}>
                         <CalendarMonth sx={sxStyle.icon} />
                     </Button>
-                </LightTooltip>
+                </LightTooltip> */}
             </div>
 
             {isLoading ? (
@@ -179,8 +177,6 @@ const HistoryWeather = () => {
                                         disabled={startDate === '' || endDate === ''}>
                                         Search
                                     </Button>
-                                
-
                                 </div>
                             </Dialog>
                         </div>
@@ -197,6 +193,22 @@ const HistoryWeather = () => {
                                 legend: { labelStyle: { fill: 'white' } },
                             }}
                         />
+                    </div>
+
+                    <div className="historyNavDiv">
+                        <ButtonGroup orientation="vertical" variant="contained" color="secondary" sx={ sxStyle.buttonGroup }>
+                            {Array.from(Array(6).keys()).map((index) => (
+                                <Button key={"btn"+index} sx={ sxStyle.button } onClick={() => {fetchDate(dateNavBtns[index].length)}}>
+                                    {dateNavBtns[index].name}
+                                </Button>
+                            ))}
+
+                            <LightTooltip title="Choose date">
+                                <Button sx={ sxStyle.button } variant="contained" color="secondary" onClick={() => setShowDatepicker(true)}>
+                                    <CalendarMonth sx={sxStyle.icon} />
+                                </Button>
+                            </LightTooltip>
+                        </ButtonGroup>
                     </div>
                 </div>
             ) : <CircularProgress />}
