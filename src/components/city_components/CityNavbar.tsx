@@ -31,7 +31,8 @@ const CityNavbar = (props: { data: any; }) => {
   const sxStyle = {
     buttonGroup: { boxShadow: 'none !important', alignItems: 'center' },
     button: { marginBottom: '6px', borderRadius: '8px !important', minWidth: '140px !important' },
-    settingsIcon: { width: 'fit-content', position: 'absolute', top: 0, left: '-5vw' }
+    settingsIcon: { width: 'fit-content', position: 'absolute', top: 0, left: '-5vw', transform: 'scale(1.5)' },
+    menuList: { backgroundColor: 'rgb(235 10 195 / 9%)', color: '#9c27b0', li: { fontWeight: '700 !important' } }
   }
 
 
@@ -206,10 +207,10 @@ const CityNavbar = (props: { data: any; }) => {
                 style={{ transformOrigin: placement === 'bottom-start' ? 'left top' : 'left bottom' }}>
                 <Paper>
                   <ClickAwayListener onClickAway={handleCloseMenu}>
-                    <MenuList autoFocusItem={openSettings} id="composition-menu" aria-labelledby="composition-button" onKeyDown={handleListKeyDown}>
-                      <MenuItem onClick={() => navigate('/search')}>Add city</MenuItem>
-                      <MenuItem onClick={() => setShowDeleteBtns((showDeleteBtns) => !showDeleteBtns)}>Delete city</MenuItem>
-                      <MenuItem onClick={resetApp}>Reset App</MenuItem>
+                    <MenuList sx={sxStyle.menuList} autoFocusItem={openSettings} id="composition-menu" aria-labelledby="composition-button" onKeyDown={handleListKeyDown}>
+                      <MenuItem onClick={() => navigate('/search')}>add city</MenuItem>
+                      <MenuItem onClick={() => setShowDeleteBtns((showDeleteBtns) => !showDeleteBtns)}>delete city</MenuItem>
+                      <MenuItem onClick={resetApp}>reset App</MenuItem>
                     </MenuList>
                   </ClickAwayListener>
                 </Paper>

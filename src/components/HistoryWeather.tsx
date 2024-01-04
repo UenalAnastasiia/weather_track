@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { useState, useEffect } from "react";
 import WeatherService from "../API/weatherService";
 import { LineChart } from '@mui/x-charts/LineChart';
-import { CircularProgress, IconButton, Button, Dialog } from "@mui/material";
+import { CircularProgress, IconButton, Button, Dialog, TextField } from "@mui/material";
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { DatePicker } from '@mui/x-date-pickers/DatePicker';
@@ -15,17 +15,22 @@ const HistoryWeather = () => {
     const [weatherData, setWeatherData] = useState(Object);
     const [isLoading, setIsLoading] = useState(false);
     const [cityName, setCityName] = useState(String);
-    const [startDate, setStartDate] = useState(Date);
-    const [endDate, setEndDate] = useState(Date);
+    const [startDate, setStartDate] = useState('');
+    const [endDate, setEndDate] = useState('');
     const [dateError, setDateError] = useState(false);
     const [showDatepicker, setShowDatepicker] = useState(false);
     const navigate = useNavigate();
+    let yestDate;
+    let befYestDate;
+
+
 
     const sxStyle = {
         paper: {
             style: { width: 'min-content', height: 'min-content', display: 'flex', alignItems: 'center', justifyContent: 'space-around',
-            backgroundColor: 'rgb(53 2 56 / 55%)', boxShadow: '0 4px 30px rgba(0, 0, 0, 0.1)',
-            backdropFilter: 'blur(6px)', borderRadius: '32px', border: 'none', padding: '24px' }
+            backgroundColor: 'rgb(53 2 56 / 55%)',
+            backdropFilter: 'blur(6px)', borderRadius: '32px', border: 'none', padding: '24px',
+            boxShadow: 'rgb(255, 255, 255) 4px 4px 4px, rgb(255, 255, 255) -4px -4px 20px, rgb(255, 255, 255) -4px -4px 20px inset, rgb(255, 255, 255) 4px 4px 20px inset' }
         },
         drop: {
             backdrop: { style: { backgroundColor: 'rgb(174 174 174 / 50%)' } }
@@ -33,10 +38,11 @@ const HistoryWeather = () => {
         icon: { color: 'white', fontSize: 24 },
         infoIcon: { color: 'white', fontSize: 18, position: 'absolute', top: '24px', right: '-24px' },
         picker: {
-            '&.css-z3c6am-MuiFormControl-root-MuiTextField-root': { width: '20vw' }, 
-            '&.css-1d3z3hw-MuiOutlinedInput-notchedOutline': { borderColor: 'white' },
-            '&.css-nxo287-MuiInputBase-input-MuiOutlinedInput-input, &.css-1yq5fb3-MuiButtonBase-root-MuiIconButton-root': { color: 'white' }, 
-            '&.css-1wc848c-MuiFormHelperText-root': { color: 'rgb(186 186 186 / 60%)', cursor: 'context-menu' }
+            label: { color: 'white !important' },
+            input: { color: 'white !important' },
+            '& .MuiOutlinedInput-root': { '& fieldset': { borderColor: 'white' }, '&:hover fieldset': { borderColor: 'white' },
+                '&.Mui-focused fieldset': { borderColor: 'white' } },
+            svg: { color: 'white !important' }
         },
         lineChart: { line: { stroke: 'white !important' }, text: { fill: 'white !important' } }
     }
@@ -45,9 +51,9 @@ const HistoryWeather = () => {
     useEffect(() => {
         fetchDate();
         setCityName(WeatherService.cityName);
-    }, []);    
+    }, []);  
 
-    console.log = console.warn = console.error = () => {};
+    // console.log = console.warn = console.error = () => {};
 
 
     const fetchDate = () => {
@@ -76,8 +82,17 @@ const HistoryWeather = () => {
 
 
     const dateValue = (date, period) => {
+        let yesterday = new Date();
+        yestDate = dateFormat(yesterday.setDate(yesterday.getDate() - 1));
+        let beforeYesterday = new Date();
+        befYestDate = dateFormat(beforeYesterday.setDate(beforeYesterday.getDate() - 2));
+
         let result = dateFormat(date);
-        period === 'start' ? setStartDate(result) : setEndDate(result);
+        if (result === yestDate || result === befYestDate) {
+            console.log('Anderes Datum');
+        } else {
+            period === 'start' ? setStartDate(result) : setEndDate(result);
+        }
     }
 
 
@@ -160,7 +175,7 @@ const HistoryWeather = () => {
 
                                     {dateError && <span className="dateErrorSpan">Error in date</span>}
                                 
-                                    <Button variant="contained" color="secondary" onClick={fetchNewChart}>
+                                    <Button variant="contained" color="secondary" onClick={fetchNewChart} disabled={startDate === '' || endDate === ''}>
                                         Search
                                     </Button>
                                 </div>

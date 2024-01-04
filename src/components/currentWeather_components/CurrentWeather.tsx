@@ -90,7 +90,7 @@ const CurrentWeather = (props) => {
             <div>
             <LightTooltip title="Weather History">
               <Button className="calendarBtn" onClick={() => navigate('/history')}>
-                      <CalendarIcon style={{ color: "rgb(156, 39, 176)", fontSize: 32 }} />
+                    <CalendarIcon style={{ color: "rgb(156, 39, 176)", fontSize: 32 }} />
               </Button>
             </LightTooltip>
 
