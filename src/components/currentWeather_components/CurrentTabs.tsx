@@ -15,7 +15,7 @@ const CurrentTabs = (data: any) => {
   const sxStyle = {
     box: { width: '100%', typography: 'body1', color: 'white' },
     contentBox: { borderBottom: 1, borderColor: 'divider' },
-    tab: { color: '#a076b4' },
+    tab: { color: '#a076b4', fontFamily: 'Baloo !important', fontSize: '16px !important' },
     tabIndicator: { style: { backgroundColor: "rgb(156, 39, 176)" } },
     tabList: { '&.css-heg063-MuiTabs-flexContainer': { justifyContent: 'center' } }
   }
@@ -45,7 +45,7 @@ const CurrentTabs = (data: any) => {
             <Tab sx={sxStyle.tab} label="Hourly Forecast" value="hourly" />
             <Tab sx={sxStyle.tab} label="Daily Forecast" value="daily" />
             <Tab sx={sxStyle.tab} label="Weekly Forecast" value="weekly" />
-            <Tab sx={sxStyle.tab} label="..." value="more" onClick={handleClickOpenDialog} title="Forecast for 10 days"/>
+            <Tab sx={sxStyle.tab} label="10 days..." value="more" onClick={handleClickOpenDialog} title="Forecast for 10 days"/>
           </TabList>
         </Box>
         <TabPanel value="hourly">

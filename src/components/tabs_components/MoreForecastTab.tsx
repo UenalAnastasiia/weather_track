@@ -65,7 +65,7 @@ const MoreForecastTab = (props: DialogModal) => {
     const currDate = today.toLocaleDateString("en-us", {
       weekday: "short",
       month: "short",
-      day: "numeric",
+      day: "numeric"
     });
 
     return `${currDate}`;

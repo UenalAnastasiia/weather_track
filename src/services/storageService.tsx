@@ -4,6 +4,13 @@ export default class StorageService {
   static imgURL = '';
   
   static checkStorageData(data: { name?: any; latitude?: any; longitude?: any; timezone: any; code: any; }) {
+    const storedData = localStorage.getItem("WeatherCity");
+    let JSONData = JSON.parse(storedData);
+
+    if (storedData === null || JSONData.length === 0) {
+      localStorage.setItem("WeatherCity", JSON.stringify([]));
+    }
+
     this.formatTimezone(data.timezone);
     this.getCountryCode(data.code);
     this.proveCityName(data);

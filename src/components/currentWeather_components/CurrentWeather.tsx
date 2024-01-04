@@ -109,7 +109,7 @@ const CurrentWeather = (props) => {
                     </div>
 
                     <div className="tempDescrBox">
-                      <Typography aria-owns={open ? 'mouse-over-popover' : undefined} aria-haspopup="true" sx={{zIndex: 1}}
+                      <Typography aria-owns={open ? 'mouse-over-popover' : undefined} aria-haspopup="true" sx={{zIndex: 1, fontFamily: 'Baloo !important'}}
                           onMouseEnter={handlePopoverOpen} onMouseLeave={handlePopoverClose}>
                          <span className="cityNameSpan">{props.name}</span>
                       </Typography>
