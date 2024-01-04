@@ -122,14 +122,6 @@
   
 /****** Current Tabs ******/
   
-/* .css-heg063-MuiTabs-flexContainer {
-    justify-content: center;
-}
-  
-.css-1h9z7r5-MuiButtonBase-root-MuiTab-root {
-    color: #827d7d !important;
-} */
-  
 .tabsBox {
     height: 35vh;
     margin-top: 0;
@@ -196,21 +188,5 @@
     text-align: center;
     margin-top: 16px;
 }
-  
-/* .css-1t1j96h-MuiPaper-root-MuiDialog-paper, .moreForecastDialog {
-    max-width: none !important;
-    max-height: none !important;
-    width: min-content;
-    height: min-content;
-    background: rgb(53 2 56 / 55%);
-    backdrop-filter: blur(10px);
-    border-radius: 32px;
-    box-shadow: 4px 4px 4px #fff, -4px -4px 20px #fff, inset -4px -4px 20px #fff, inset 4px 4px 20px #fff !important;
-    border: none !important;
-}
 
-.css-10vg0a6-MuiResponsiveChart-container {
-    width: unset;
-} */
-  
 /****** Close MoreForecastTab ******/

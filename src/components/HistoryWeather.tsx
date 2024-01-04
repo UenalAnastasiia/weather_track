@@ -3,12 +3,13 @@ import { useNavigate } from "react-router-dom";
 import { useState, useEffect } from "react";
 import WeatherService from "../API/weatherService";
 import { LineChart } from '@mui/x-charts/LineChart';
-import { CircularProgress, IconButton, Button, Dialog, TextField } from "@mui/material";
+import { CircularProgress, IconButton, Button, Dialog } from "@mui/material";
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { DatePicker } from '@mui/x-date-pickers/DatePicker';
 import { Close, Info, CalendarMonth, ArrowBack } from "@mui/icons-material";
 import LightTooltip from "../UI/LightTooltip";
+import dayjs from "dayjs";
 
 
 const HistoryWeather = () => {
@@ -20,8 +21,8 @@ const HistoryWeather = () => {
     const [dateError, setDateError] = useState(false);
     const [showDatepicker, setShowDatepicker] = useState(false);
     const navigate = useNavigate();
-    let yestDate;
-    let befYestDate;
+    const minDateData = dayjs('01/01/2000');
+    const maxDateData = dayjs().add(-2, 'day');
 
 
 
@@ -82,17 +83,8 @@ const HistoryWeather = () => {
 
 
     const dateValue = (date, period) => {
-        let yesterday = new Date();
-        yestDate = dateFormat(yesterday.setDate(yesterday.getDate() - 1));
-        let beforeYesterday = new Date();
-        befYestDate = dateFormat(beforeYesterday.setDate(beforeYesterday.getDate() - 2));
-
         let result = dateFormat(date);
-        if (result === yestDate || result === befYestDate) {
-            console.log('Anderes Datum');
-        } else {
-            period === 'start' ? setStartDate(result) : setEndDate(result);
-        }
+        period === 'start' ? setStartDate(result) : setEndDate(result);
     }
 
 
@@ -162,12 +154,12 @@ const HistoryWeather = () => {
                                     <h1 className="datepickerBoxH1">Choose date</h1>
 
                                     <LocalizationProvider dateAdapter={AdapterDayjs}>
-                                        <DatePicker disableFuture shouldDisableDate={disablePrevDates('01/01/2000')}
+                                        <DatePicker disableFuture minDate={minDateData} maxDate={maxDateData}
                                             onChange={(date) => { dateValue(date, 'start') }} 
                                             slotProps={{textField: {helperText: 'MM/DD/YYYY', placeholder: 'Enter start date'}}}
                                             sx={sxStyle.picker}/>
 
-                                        <DatePicker disableFuture shouldDisableDate={disablePrevDates(startDate)}
+                                        <DatePicker disableFuture shouldDisableDate={disablePrevDates(startDate)} maxDate={maxDateData}
                                             onChange={(date) => { dateValue(date, 'end') }}                                            
                                             slotProps={{textField: {helperText: 'MM/DD/YYYY', placeholder: 'Enter end date'}}}
                                             sx={sxStyle.picker}/>

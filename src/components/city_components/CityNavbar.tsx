@@ -145,9 +145,10 @@ const CityNavbar = (props: { data: any; }) => {
                         {localItems[0].name}
                       </Button>
 
-                      {showDeleteBtns && (<IconButton sx={{position: 'absolute'}} color="secondary" onClick={() => deleteCityFromStorage(0) }>
-                          <Remove />
-                      </IconButton>)}
+                      {showDeleteBtns && (
+                        <IconButton sx={{position: 'absolute'}} color="secondary" onClick={() => deleteCityFromStorage(0) } className="removeAnimation">
+                            <Remove />
+                        </IconButton>)}
                     </div>
 
                     <div className="addIconDiv">
@@ -177,9 +178,10 @@ const CityNavbar = (props: { data: any; }) => {
                           {localItems[index].name}
                         </Button>
 
-                        {showDeleteBtns && (<IconButton sx={{position: 'absolute'}} key={index} color="secondary" onClick={() => deleteCityFromStorage(index) }>
-                          <Remove />
-                        </IconButton>)}
+                        {showDeleteBtns && (
+                          <IconButton sx={{position: 'absolute'}} key={index} color="secondary" onClick={() => deleteCityFromStorage(index) } className="removeAnimation">
+                            <Remove />
+                          </IconButton>)}
                       </div>
                     </div>
                   ))}

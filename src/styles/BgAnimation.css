@@ -2,9 +2,7 @@ body {
     margin: 0;
     height: 100vh;
     font-weight: 100;
-    /* background: radial-gradient(#a23982,#1f1013); */
     background: radial-gradient(#6316be,#1f1013);
-    /* background: radial-gradient(circle, #9d1bd4, #8118c9, #6316be, #4114b2, #0712a6); */
     overflow-y: hidden;
     -webkit-animation: fadeIn 1 1s ease-out;
     -moz-animation: fadeIn 1 1s ease-out;
