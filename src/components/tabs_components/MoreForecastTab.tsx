@@ -17,7 +17,7 @@ const MoreForecastTab = (props: DialogModal) => {
 
   const sxStyle = {
     paper: {
-      style: { maxWidth: 'none', maxHeight: 'none', width: 'min-content', height: 'min-content',
+      style: { maxWidth: '720px', maxHeight: 'none', width: 'min-content', height: 'min-content',
       backgroundColor: 'rgb(53 2 56 / 55%)', boxShadow: '4px 4px 4px #fff, -4px -4px 20px #fff, inset -4px -4px 20px #fff, inset 4px 4px 20px #fff',
       backdropFilter: 'blur(10px)', borderRadius: '32px', border: 'none', padding: '16px' }
     },

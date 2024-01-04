@@ -81,12 +81,16 @@ const CityNavbar = (props: { data: any; }) => {
 
   const loadAfterDeleteCity = (result: Object[]) => {
     if ( result.length === 0) {
-      navigate('/search');
-    } else if (result.length === 1) {
+      setShowSpinner(true);
+      setReloadData(true);
+  
+      setTimeout(() => {
+        setShowSpinner(false);
+        navigate('/search');
+      }, 2000);
+    } else if (result.length >= 1) {
       openCityWeather(localItems[0]);
-    } else {
-      openCityWeather(localItems[result.length - 1]);
-    }
+    } 
   }
 
 
@@ -137,8 +141,8 @@ const CityNavbar = (props: { data: any; }) => {
       {showNav && 
         <div>
           {localLength.length === 1 ? (
-            <div className="cityNavDiv">
-                <ButtonGroup orientation="vertical" variant="contained" color="secondary"
+            <div className="cityNavDiv" key={"div"+0}>
+                <ButtonGroup key={"group"+0} orientation="vertical" variant="contained" color="secondary"
                   sx={ sxStyle.buttonGroup }>
                     <div>
                       <Button onClick={() => openCityWeather(localItems[0])} sx={ sxStyle.button } >
@@ -151,7 +155,7 @@ const CityNavbar = (props: { data: any; }) => {
                         </IconButton>)}
                     </div>
 
-                    <div className="addIconDiv">
+                    <div className="addIconDiv" key={"add"+0}>
                       <LightTooltip title="add city">
                         <IconButton sx={{ width: 'fit-content' }} color="secondary" onClick={() => navigate('/search') }>
                           <Add />
@@ -159,7 +163,7 @@ const CityNavbar = (props: { data: any; }) => {
                       </LightTooltip>
                     </div>
 
-                      <IconButton sx={sxStyle.settingsIcon} color="secondary" ref={anchorRef} id="composition-button"
+                      <IconButton key={"sett"+0} sx={sxStyle.settingsIcon} color="secondary" ref={anchorRef} id="composition-button"
                           aria-controls={openSettings ? 'composition-menu' : undefined} aria-expanded={openSettings ? 'true' : undefined}
                           aria-haspopup="true" onClick={() => { setOpenSettings((prevOpen) => !prevOpen) }}>
                         <Settings />
@@ -168,25 +172,26 @@ const CityNavbar = (props: { data: any; }) => {
             </div>
           ) 
           : (
-            <div className="cityNavDiv">
-                <ButtonGroup key={1} orientation="vertical" variant="contained" color="secondary"
+            <div className="cityNavDiv" key={"divNav"}>
+                <ButtonGroup key={"group"+1} orientation="vertical" variant="contained" color="secondary"
                   sx={ sxStyle.buttonGroup }>
-                  {localLength.map((index) => (
+                  {localLength.map((index, el) => (
                     <div>
                       <div>
-                        <Button key={localItems[index].name} onClick={() => openCityWeather(localItems[index])} sx={ sxStyle.button }>
+                        <Button key={"btn"+el} onClick={() => openCityWeather(localItems[index])} sx={ sxStyle.button }>
                           {localItems[index].name}
                         </Button>
 
                         {showDeleteBtns && (
-                          <IconButton sx={{position: 'absolute'}} key={index} color="secondary" onClick={() => deleteCityFromStorage(index) } className="removeAnimation">
-                            <Remove />
+                          <IconButton sx={{position: 'absolute'}} key={"remove"+el} color="secondary" 
+                            onClick={() => deleteCityFromStorage(index) } className="removeAnimation">
+                              <Remove />
                           </IconButton>)}
                       </div>
                     </div>
                   ))}
 
-                      <div className="addIconDiv">
+                      <div className="addIconDiv" key={"add"+1}>
                         <LightTooltip title="add city">
                           <IconButton sx={{ width: 'fit-content' }} color="secondary" onClick={() => navigate('/search') }>
                             <Add />
@@ -194,7 +199,7 @@ const CityNavbar = (props: { data: any; }) => {
                         </LightTooltip>
                       </div>
 
-                      <IconButton sx={sxStyle.settingsIcon} color="secondary" ref={anchorRef} id="composition-button"
+                      <IconButton key={"sett"+1} sx={sxStyle.settingsIcon} color="secondary" ref={anchorRef} id="composition-button"
                           aria-controls={openSettings ? 'composition-menu' : undefined} aria-expanded={openSettings ? 'true' : undefined}
                           aria-haspopup="true" onClick={() => { setOpenSettings((prevOpen) => !prevOpen) }}>
                         <Settings />

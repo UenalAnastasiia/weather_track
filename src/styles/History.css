@@ -34,19 +34,25 @@
 }
 
 .datepickerDiv {
-    height: 40vh;
-    width: 25vw;
+    height: 35vh;
+    width: 32vw;
+    max-width: 500px;
     display: flex;
     flex-direction: column;
     justify-content: space-around;
     align-items: center;
 }
 
-.dateErrorSpan {
-    color: red;
-    font-weight: 800;
-    margin-top: -12px;
+.datepickerFields {
+    display: flex;
+    justify-content: space-between;
+    width: 30vw;
+    max-width: 470px;
+}
 
+.datepickerFields >span {
+    color: white;
+    font-size: 36px;
 }
 
 .historyHeaderH2 {

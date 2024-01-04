@@ -3,7 +3,7 @@ import { LineChart } from '@mui/x-charts/LineChart';
 
 const LineChartUI = (chartData) => {
     const sxStyle = {
-      div: { width: '45vw', display: 'flex', alignItems: 'center', justifyContent: 'center' },
+      div: { width: '45vw', maxWidth: '700px', display: 'flex', alignItems: 'center', justifyContent: 'center' },
       lineChart: { line: { stroke: 'white !important' }, text: { fill: 'white !important' } }
     }
 

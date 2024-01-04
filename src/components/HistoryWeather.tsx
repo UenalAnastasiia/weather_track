@@ -18,12 +18,11 @@ const HistoryWeather = () => {
     const [cityName, setCityName] = useState(String);
     const [startDate, setStartDate] = useState('');
     const [endDate, setEndDate] = useState('');
-    const [dateError, setDateError] = useState(false);
     const [showDatepicker, setShowDatepicker] = useState(false);
+    const [clearedFields, setClearedFields] = useState<boolean>(false);
     const navigate = useNavigate();
     const minDateData = dayjs('01/01/2000');
     const maxDateData = dayjs().add(-2, 'day');
-
 
 
     const sxStyle = {
@@ -40,7 +39,7 @@ const HistoryWeather = () => {
         infoIcon: { color: 'white', fontSize: 18, position: 'absolute', top: '24px', right: '-24px' },
         picker: {
             label: { color: 'white !important' },
-            input: { color: 'white !important' },
+            input: { color: 'white !important', width: '150px !important' },
             '& .MuiOutlinedInput-root': { '& fieldset': { borderColor: 'white' }, '&:hover fieldset': { borderColor: 'white' },
                 '&.Mui-focused fieldset': { borderColor: 'white' } },
             svg: { color: 'white !important' }
@@ -51,7 +50,7 @@ const HistoryWeather = () => {
 
     useEffect(() => {
         fetchDate();
-        setCityName(WeatherService.cityName);
+        setCityName(WeatherService.cityName);        
     }, []);  
 
     // console.log = console.warn = console.error = () => {};
@@ -96,15 +95,18 @@ const HistoryWeather = () => {
 
 
     const fetchNewChart = () => {
-        if (startDate > endDate) {
-            setDateError(true) 
-        } else {
-            setDateError(false);
-            setIsLoading(false);
-            setShowDatepicker(false);
-            setShowDatepicker(false);
-            fetchAPIData(startDate, endDate);
-        }
+        setIsLoading(false);
+        setShowDatepicker(false);
+        setShowDatepicker(false);
+        fetchAPIData(startDate, endDate);
+    }
+
+
+    const disablePrevDates = (startDate) => {
+        const startSeconds = Date.parse(startDate);
+        return (date) => {
+          return Date.parse(date) > startSeconds;
+        } 
     }
 
 
@@ -113,12 +115,14 @@ const HistoryWeather = () => {
     };
 
 
-    const disablePrevDates = (startDate) => {
-        const startSeconds = Date.parse(startDate);
-        return (date) => {
-          return Date.parse(date) < startSeconds;
-        } 
-    }
+    const onKeyDown = (e) => {
+        e.preventDefault();
+    };
+
+
+    const resetDate = () => {
+        setClearedFields(true)
+    };
 
 
     return (
@@ -153,23 +157,30 @@ const HistoryWeather = () => {
                                     </IconButton>
                                     <h1 className="datepickerBoxH1">Choose date</h1>
 
-                                    <LocalizationProvider dateAdapter={AdapterDayjs}>
-                                        <DatePicker disableFuture minDate={minDateData} maxDate={maxDateData}
-                                            onChange={(date) => { dateValue(date, 'start') }} 
-                                            slotProps={{textField: {helperText: 'MM/DD/YYYY', placeholder: 'Enter start date'}}}
-                                            sx={sxStyle.picker}/>
+                                    <div className="datepickerFields">
+                                        <LocalizationProvider dateAdapter={AdapterDayjs}>
+                                            <DatePicker label="Start Date" disableFuture shouldDisableDate={disablePrevDates(endDate)}
+                                                onChange={(date) => { dateValue(date, 'start')}} 
+                                                slotProps={{textField: {helperText: 'MM/DD/YYYY', placeholder: 'Enter start date', onKeyDown: onKeyDown}}}
+                                                sx={sxStyle.picker} 
+                                                minDate={minDateData} maxDate={maxDateData}/>
 
-                                        <DatePicker disableFuture shouldDisableDate={disablePrevDates(startDate)} maxDate={maxDateData}
-                                            onChange={(date) => { dateValue(date, 'end') }}                                            
-                                            slotProps={{textField: {helperText: 'MM/DD/YYYY', placeholder: 'Enter end date'}}}
-                                            sx={sxStyle.picker}/>
-                                    </LocalizationProvider>
+                                            <span>-</span>
 
-                                    {dateError && <span className="dateErrorSpan">Error in date</span>}
-                                
-                                    <Button variant="contained" color="secondary" onClick={fetchNewChart} disabled={startDate === '' || endDate === ''}>
+                                            <DatePicker label="End Date" disableFuture
+                                                onChange={(date) => { dateValue(date, 'end')}}                                        
+                                                slotProps={{textField: {helperText: 'MM/DD/YYYY', placeholder: 'Enter end date', onKeyDown: onKeyDown}}}
+                                                sx={sxStyle.picker} 
+                                                minDate={dayjs(startDate)} maxDate={maxDateData}/>
+                                        </LocalizationProvider>
+                                    </div>
+
+                                    <Button variant="contained" color="secondary" onClick={fetchNewChart} 
+                                        disabled={startDate === '' || endDate === ''}>
                                         Search
                                     </Button>
+                                
+
                                 </div>
                             </Dialog>
                         </div>
