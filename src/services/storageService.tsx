@@ -54,4 +54,9 @@ export default class StorageService {
   static getCountryCode(data: string) { 
     this.imgURL = `https://hatscripts.github.io/circle-flags/flags/${data.toLowerCase()}.svg`;
   };
+
+  static getCityIndex(name: string) { 
+    let JSONdata = JSON.parse(localStorage.getItem("WeatherCity"));
+    return JSONdata.findIndex(obj => obj.name === name);
+  };
 }

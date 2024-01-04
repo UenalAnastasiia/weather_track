@@ -26,6 +26,7 @@ const CityNavbar = (props: { data: any; }) => {
   const [openSettings, setOpenSettings] = useState(false);
   const anchorRef = useRef<HTMLButtonElement>(null);
   const navigate = useNavigate();
+  const [selectedIndex, setSelectedIndex] = useState(0);
 
 
   const sxStyle = {
@@ -38,7 +39,8 @@ const CityNavbar = (props: { data: any; }) => {
 
   useEffect(() => {
     openCityWeather(props.data); 
-  }, []);
+    setSelectedIndex(StorageService.getCityIndex(props.data.name));
+  }, [props]);
 
 
   const openCityWeather = async (city) => {
@@ -178,7 +180,9 @@ const CityNavbar = (props: { data: any; }) => {
                   {localLength.map((index, el) => (
                     <div key={"div1"+index}>
                       <div key={"div2"+index}>
-                        <Button key={"btn"+el} onClick={() => openCityWeather(localItems[index])} sx={ sxStyle.button }>
+                        <Button key={"btn"+el} onClick={() => {{openCityWeather(localItems[index]); setSelectedIndex(index)}}} 
+                        sx={ sxStyle.button }
+                          style={{ backgroundColor: index === selectedIndex ? '#00adb5' : '#9c27b0'}}>
                           {localItems[index].name}
                         </Button>
 

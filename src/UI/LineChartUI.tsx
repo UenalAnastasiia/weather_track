@@ -4,7 +4,7 @@ import { LineChart } from '@mui/x-charts/LineChart';
 const LineChartUI = (chartData) => {
     const sxStyle = {
       div: { width: '45vw', maxWidth: '700px', display: 'flex', alignItems: 'center', justifyContent: 'center' },
-      lineChart: { line: { stroke: 'white !important' }, text: { fill: 'white !important' } }
+      lineChart: { line: { stroke: 'white !important' }, text: { fill: 'white !important', fontFamily: 'Baloo !important' } }
     }
 
     return (
@@ -17,7 +17,7 @@ const LineChartUI = (chartData) => {
               ]}
               xAxis={[{ scaleType: 'point', data: chartData.xLabels }]}
               slotProps={{
-                legend: { labelStyle: { fill: 'white' }}}}
+                legend: { labelStyle: { fill: 'white', fontFamily: 'Baloo !important' }}}}
             />
           </div>
     );

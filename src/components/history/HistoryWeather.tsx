@@ -2,12 +2,12 @@ import "../../styles/History.css";
 import { useNavigate } from "react-router-dom";
 import { useState, useEffect } from "react";
 import WeatherService from "../../API/weatherService";
-import { LineChart } from '@mui/x-charts/LineChart';
 import { CircularProgress, IconButton, Button, Dialog } from "@mui/material";
 import { Close, Info, ArrowBack } from "@mui/icons-material";
 import LightTooltip from "../../UI/LightTooltip";
 import HistoryNavbar from "./HistoryNavbar";
 import HistoryDatepicker from "./HistoryDatepicker";
+import HistoryLineChart from "./HistoryLineChart";
 
 
 const HistoryWeather = () => {
@@ -18,6 +18,7 @@ const HistoryWeather = () => {
     const [endDate, setEndDate] = useState('');
     const [showDatepicker, setShowDatepicker] = useState(false);
     const [dateLength, setDateLength] = useState(14);
+    const [labelLengthName, setLabelLengthName] = useState('14 Days');
     const navigate = useNavigate();
 
 
@@ -33,14 +34,14 @@ const HistoryWeather = () => {
         },
         icon: { color: 'white', fontSize: 24 },
         infoIcon: { color: 'white', fontSize: 18, position: 'absolute', top: '24px', right: '-24px' },
-        lineChart: { line: { stroke: 'white !important' }, text: { fill: 'white !important' } }
     }
 
 
     useEffect(() => {
         fetchDate(dateLength);
         setCityName(WeatherService.cityName);        
-    }, [dateLength]);  
+    }, [dateLength, labelLengthName]);  
+    
 
     // console.log = console.warn = console.error = () => {};
     
@@ -82,12 +83,18 @@ const HistoryWeather = () => {
         setShowDatepicker(false);
         setShowDatepicker(false);
         fetchAPIData(startDate, endDate);
+        setLabelLengthName('choosen period');
     }
 
 
     const handleCloseDialog = () => {
         setShowDatepicker(false);
     };
+
+
+    const getLabelName = () => {
+      return labelLengthName;
+    }
 
 
     return (
@@ -128,20 +135,10 @@ const HistoryWeather = () => {
                         </div>
                     }
 
-                    <div className="historyChart">
-                        <LineChart sx={sxStyle.lineChart} width={1000} height={500}
-                            series={[
-                                { data: weatherData.daily.temperature_2m_mean, 
-                                  label: 'temperature in ' + weatherData.daily_units.temperature_2m_mean, 
-                                  color: '#a41313' }]}
-                            xAxis={[{ scaleType: 'point', data: weatherData.daily.time }]}
-                            slotProps={{
-                                legend: { labelStyle: { fill: 'white' } },
-                            }}
-                        />
-                    </div>
+                    <HistoryLineChart weatherData={weatherData} labelLengthName={labelLengthName} />
 
-                    <HistoryNavbar setDateLength={setDateLength} setShowDatepicker={setShowDatepicker} />
+                    <HistoryNavbar setDateLength={setDateLength} setShowDatepicker={setShowDatepicker} 
+                        setLabelLengthName={setLabelLengthName} getLabelName={getLabelName} />
                 </div>
             ) : <CircularProgress />}
         </div>
