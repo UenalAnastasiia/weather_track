@@ -1,15 +1,16 @@
-import "./../styles/History.css";
+import "../../styles/History.css";
 import { useNavigate } from "react-router-dom";
 import { useState, useEffect } from "react";
-import WeatherService from "../API/weatherService";
+import WeatherService from "../../API/weatherService";
 import { LineChart } from '@mui/x-charts/LineChart';
-import { CircularProgress, IconButton, Button, Dialog, ButtonGroup } from "@mui/material";
+import { CircularProgress, IconButton, Button, Dialog } from "@mui/material";
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { DatePicker } from '@mui/x-date-pickers/DatePicker';
-import { Close, Info, CalendarMonth, ArrowBack } from "@mui/icons-material";
-import LightTooltip from "../UI/LightTooltip";
+import { Close, Info, ArrowBack } from "@mui/icons-material";
+import LightTooltip from "../../UI/LightTooltip";
 import dayjs from "dayjs";
+import HistoryNavbar from "./HistoryNavbar";
 
 
 const HistoryWeather = () => {
@@ -19,11 +20,10 @@ const HistoryWeather = () => {
     const [startDate, setStartDate] = useState('');
     const [endDate, setEndDate] = useState('');
     const [showDatepicker, setShowDatepicker] = useState(false);
+    const [dateLength, setDateLength] = useState(14);
     const navigate = useNavigate();
     const minDateData = dayjs('01/01/2000');
     const maxDateData = dayjs().add(-2, 'day');
-    const dateNavBtns = [{name: '7 Days', length: '7'}, {name: '14 Days', length: '14'}, {name: '30 Days', length: '30'}, {name: '6 Months', length: '180'}, 
-        {name: 'Year', length: '365'}, {name: '3 Years', length: '1095'}]
 
 
     const sxStyle = {
@@ -45,19 +45,17 @@ const HistoryWeather = () => {
                 '&.Mui-focused fieldset': { borderColor: 'white' } },
             svg: { color: 'white !important' }
         },
-        lineChart: { line: { stroke: 'white !important' }, text: { fill: 'white !important' } },
-        buttonGroup: { boxShadow: 'none !important', alignItems: 'center' },
-        button: { marginBottom: '10px', borderRadius: '8px !important', width: '110px !important' }
+        lineChart: { line: { stroke: 'white !important' }, text: { fill: 'white !important' } }
     }
 
 
     useEffect(() => {
-        fetchDate(14);
+        fetchDate(dateLength);
         setCityName(WeatherService.cityName);        
-    }, []);  
+    }, [dateLength]);  
 
     // console.log = console.warn = console.error = () => {};
-
+    
 
     const fetchDate = (length) => {
         let start = new Date();
@@ -134,12 +132,6 @@ const HistoryWeather = () => {
                     <h2>Weather History from {cityName}</h2>
                     <LightTooltip title="Since 01/01/2000"><Info sx={sxStyle.infoIcon} /></LightTooltip>
                 </div>
-
-                {/* <LightTooltip title="Choose date">
-                    <Button variant="contained" color="secondary" onClick={() => setShowDatepicker(true)}>
-                        <CalendarMonth sx={sxStyle.icon} />
-                    </Button>
-                </LightTooltip> */}
             </div>
 
             {isLoading ? (
@@ -195,21 +187,7 @@ const HistoryWeather = () => {
                         />
                     </div>
 
-                    <div className="historyNavDiv">
-                        <ButtonGroup orientation="vertical" variant="contained" color="secondary" sx={ sxStyle.buttonGroup }>
-                            {Array.from(Array(6).keys()).map((index) => (
-                                <Button key={"btn"+index} sx={ sxStyle.button } onClick={() => {fetchDate(dateNavBtns[index].length)}}>
-                                    {dateNavBtns[index].name}
-                                </Button>
-                            ))}
-
-                            <LightTooltip title="Choose date">
-                                <Button sx={ sxStyle.button } variant="contained" color="secondary" onClick={() => setShowDatepicker(true)}>
-                                    <CalendarMonth sx={sxStyle.icon} />
-                                </Button>
-                            </LightTooltip>
-                        </ButtonGroup>
-                    </div>
+                    <HistoryNavbar setDateLength={setDateLength} setShowDatepicker={setShowDatepicker} />
                 </div>
             ) : <CircularProgress />}
         </div>

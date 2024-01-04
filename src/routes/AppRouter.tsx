@@ -2,7 +2,7 @@ import { Fragment } from 'react';
 import { Navigate, Route, Routes } from "react-router-dom";
 import CitySearch from '../components/city_components/CitySearch';
 import Home from '../components/home_components/Home';
-import HistoryWeather from '../components/HistoryWeather';
+import HistoryWeather from '../components/history/HistoryWeather';
 
 
 const AppRouter = () => {
