@@ -10,7 +10,7 @@ const HistoryNavbar = ( { setDateLength, setShowDatepicker } ) => {
         icon: { color: 'white', fontSize: 24 },
         infoIcon: { color: 'white', fontSize: 18, position: 'absolute', top: '24px', right: '-24px' },
         buttonGroup: { boxShadow: 'none !important', alignItems: 'center' },
-        button: { marginBottom: '10px', borderRadius: '8px !important', width: '110px !important' }
+        button: { marginBottom: '10px', borderRadius: '8px !important', width: '110px !important', fontFamily: 'Baloo !important', fontSize: '16px' }
     }
 
 

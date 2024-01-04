@@ -30,9 +30,9 @@ const CityNavbar = (props: { data: any; }) => {
 
   const sxStyle = {
     buttonGroup: { boxShadow: 'none !important', alignItems: 'center' },
-    button: { marginBottom: '6px', borderRadius: '8px !important', width: '140px !important' },
+    button: { marginBottom: '6px', borderRadius: '8px !important', width: '140px !important', fontFamily: 'Baloo !important', fontSize: '14px' },
     settingsIcon: { width: 'fit-content', position: 'absolute', top: 0, left: '-5vw', transform: 'scale(1.5)' },
-    menuList: { backgroundColor: 'rgb(235 10 195 / 9%)', color: '#9c27b0', li: { fontWeight: '700 !important' } }
+    menuList: { backgroundColor: 'rgb(235 10 195 / 9%)', color: '#9c27b0', li: { fontWeight: '700 !important', fontFamily: 'Baloo !important' } }
   }
 
 
