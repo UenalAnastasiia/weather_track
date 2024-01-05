@@ -47,8 +47,11 @@ const MenuPopper = ( { setOpenSettings, openSettings, setShowDeleteBtns, resetAp
                   <ClickAwayListener onClickAway={handleCloseMenu}>
                     <MenuList sx={sxStyle.menuList} autoFocusItem={openSettings} id="composition-menu" aria-labelledby="composition-button" onKeyDown={handleListKeyDown}>
                       <MenuItem onClick={() => navigate('/search')}>add city</MenuItem>
-                      <MenuItem onClick={() => setShowDeleteBtns((showDeleteBtns) => !showDeleteBtns)}>delete city</MenuItem>
+                      <MenuItem onClick={() => {setShowDeleteBtns((showDeleteBtns) => !showDeleteBtns); setOpenSettings(false)}}>
+                        delete city
+                      </MenuItem>
                       <MenuItem onClick={resetApp}>reset App</MenuItem>
+                      <MenuItem onClick={() => navigate('/imprint')}>imprint</MenuItem>
                     </MenuList>
                   </ClickAwayListener>
                 </Paper>
