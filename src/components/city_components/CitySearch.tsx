@@ -3,7 +3,7 @@ import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import CoordinatesService from "../../API/coordinatesService";
 import WeatherService from "../../API/weatherService";
-import CityNavbar from "./CityNavbar";
+import CityNavbarMain from "./CityNavbarMain";
 import StorageService from "../../services/storageService";
 import MuiAlert, { AlertProps } from '@mui/material/Alert';
 import {CircularProgress, Snackbar, TextField, Button} from '@mui/material';
@@ -125,7 +125,7 @@ const CitySearch = () => {
       <div>
         {showWeather ? (
           <div className="currentNavDiv">
-            <CityNavbar data={cityData} />
+            <CityNavbarMain data={cityData} />
           </div>
           ) 
           : (
