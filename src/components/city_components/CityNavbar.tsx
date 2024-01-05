@@ -76,23 +76,42 @@ const CityNavbar = (props: { data: any; }) => {
     localStorage.setItem("WeatherCity", JSON.stringify(currentCities));
     let result = JSON.parse(localStorage.getItem("WeatherCity"));
     setLocalItems(result);
-
-    loadAfterDeleteCity(result);
+    checkAfterDeleteCity(result, index);
   }
 
 
-  const loadAfterDeleteCity = (result: Object[]) => {
-    if ( result.length === 0) {
-      setShowSpinner(true);
-      setReloadData(true);
-  
-      setTimeout(() => {
-        setShowSpinner(false);
-        navigate('/search');
-      }, 2000);
-    } else if (result.length >= 1) {
-      openCityWeather(localItems[0]);
-    } 
+  const checkAfterDeleteCity = (result: Object[], deletedIndex: number) => {
+    if ( result.length === 0) { 
+      renderAfterDeleteLastCity();
+    } else {
+      renderAfterDelete(result, deletedIndex);
+    }
+  }
+
+
+  const renderAfterDeleteLastCity = () => {
+    setShowSpinner(true);
+    setReloadData(true);
+
+    setTimeout(() => {
+      setShowSpinner(false);
+      localStorage.removeItem("WeatherCity");
+      navigate('/');
+    }, 2000);
+  }
+
+
+  const renderAfterDelete = (result: Object[], deletedIndex: number) => {
+    if (result.length === 1 && deletedIndex !== 0) {
+      openCityWeather(result[0]);
+      setSelectedIndex(0);
+    } else if (result.length > 1 && deletedIndex !== 0) {
+      openCityWeather(result[(deletedIndex - 1)]);
+      setSelectedIndex((deletedIndex - 1));
+    } else if (deletedIndex === 0) {
+      openCityWeather(result[0]);
+      setSelectedIndex(0);
+    }
   }
 
 
@@ -147,8 +166,9 @@ const CityNavbar = (props: { data: any; }) => {
                 <ButtonGroup key={"group"+0} orientation="vertical" variant="contained" color="secondary"
                   sx={ sxStyle.buttonGroup }>
                     <div>
-                      <Button onClick={() => openCityWeather(localItems[0])} sx={ sxStyle.button } >
-                        {localItems[0].name}
+                      <Button onClick={() => {openCityWeather(localItems[0]); setSelectedIndex(0)}} 
+                      sx={ sxStyle.button } style={{ backgroundColor: 0 === selectedIndex ? '#00adb5' : '#9c27b0'}} >
+                          {localItems[0].name}
                       </Button>
 
                       {showDeleteBtns && (

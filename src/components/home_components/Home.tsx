@@ -2,6 +2,8 @@ import { useEffect, useState } from "react";
 import CitySearch from "../city_components/CitySearch";
 import CityNavbar from "../city_components/CityNavbar";
 import { CircularProgress } from "@mui/material";
+import StorageService from "../../services/storageService";
+
 
 const Home = () => {
   const [localEmpty, setLocalEmpty] = useState(true);
@@ -20,12 +22,16 @@ const Home = () => {
   const checkStorage = () => {
     const storedData = localStorage.getItem("WeatherCity");
     let JSONData = JSON.parse(storedData);
+    let index = StorageService.returnIndex();
 
     if (storedData === null || JSONData.length === 0) {
       setLocalEmpty(true);
-      // localStorage.setItem("WeatherCity", JSON.stringify([]));
-    } else {
-      JSONData.length === 1 ? setLocalFirstElement(JSONData[0]) : setLocalFirstElement(JSONData[JSONData.length - 1]);
+    } else {     
+      if (JSONData.length === 1) {
+        setLocalFirstElement(JSONData[0])
+      } else if (JSONData.length > 1 && index !== '') {
+        setLocalFirstElement(JSONData[index])
+      } else setLocalFirstElement(JSONData[0]); 
       setLocalEmpty(false);
     }
   }

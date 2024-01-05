@@ -2,6 +2,7 @@ import WeatherService from "../API/weatherService";
 
 export default class StorageService {
   static imgURL = '';
+  static cityIndex = '';
   
   static checkStorageData(data: { name?: any; latitude?: any; longitude?: any; timezone: any; code: any; }) {
     const storedData = localStorage.getItem("WeatherCity");
@@ -15,6 +16,7 @@ export default class StorageService {
     this.getCountryCode(data.code);
     this.proveCityName(data);
   }
+  
 
   static proveCityName(data) {
     let storedCities = JSON.parse(localStorage.getItem("WeatherCity"));
@@ -24,6 +26,7 @@ export default class StorageService {
       for (let i = 0; i < storedCities.length; i++) {
         if (storedCities[i].name === data.name) {
           found = true;
+          this.cityIndex = `${i}`;
           break;
         } else found = false;
       }
@@ -31,6 +34,7 @@ export default class StorageService {
 
     found === true ? console.log() : this.pushToLocalStorage(data);
   }
+
 
   static pushToLocalStorage(data: { name: any; latitude: any; longitude: any; timezone: any; code: any; }) {
     let JSONdata = JSON.parse(localStorage.getItem("WeatherCity"));
@@ -42,6 +46,9 @@ export default class StorageService {
       code: data.code
     });
     localStorage.setItem("WeatherCity", JSON.stringify(JSONdata));
+
+    let updateLocal = JSON.parse(localStorage.getItem("WeatherCity"));
+    this.cityIndex = updateLocal.findIndex(obj => obj.name === data.name);
   }
 
 
@@ -55,8 +62,14 @@ export default class StorageService {
     this.imgURL = `https://hatscripts.github.io/circle-flags/flags/${data.toLowerCase()}.svg`;
   };
 
+
   static getCityIndex(name: string) { 
     let JSONdata = JSON.parse(localStorage.getItem("WeatherCity"));
     return JSONdata.findIndex(obj => obj.name === name);
+  };
+
+
+  static returnIndex() { 
+    return this.cityIndex;
   };
 }
