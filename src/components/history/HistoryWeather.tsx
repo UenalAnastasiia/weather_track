@@ -33,7 +33,7 @@ const HistoryWeather = () => {
             backdrop: { style: { backgroundColor: 'rgb(174 174 174 / 50%)' } }
         },
         icon: { color: 'white', fontSize: 24 },
-        infoIcon: { color: 'white', fontSize: 18, position: 'absolute', top: '24px', right: '-24px' },
+        infoIcon: { color: 'white', fontSize: 18, position: 'absolute', top: '24px', right: '-24px' }
     }
 
 

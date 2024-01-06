@@ -1,7 +1,7 @@
 .imprintBox {
-    width: 40vw;
+    width: 30vw;
     max-width: 620px;
-    height: 70vh;
+    height: 50vh;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -11,4 +11,9 @@
     border-radius: 32px;
     box-shadow: 0px 0px 18px 6px #fdfdfdad;
     color: white;
+}
+
+h1, p {
+    margin: 0;
+    margin-bottom: 8px;
 }

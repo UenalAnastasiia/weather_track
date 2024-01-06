@@ -14,7 +14,7 @@ const HistoryDatepicker = ({ setStartDate, setEndDate, dateFormat, startDate, en
             '& .MuiOutlinedInput-root': { '& fieldset': { borderColor: 'white' }, '&:hover fieldset': { borderColor: 'white' },
                 '&.Mui-focused fieldset': { borderColor: 'white' } },
             svg: { color: 'white !important' }
-        }
+        } 
     }
 
 
