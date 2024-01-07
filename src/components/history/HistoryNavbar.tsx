@@ -39,7 +39,6 @@ const HistoryNavbar = ( { setDateLength, setShowDatepicker, setLabelLengthName, 
                             {dateNavBtns[index].name}
                     </Button>
                 ))} 
-                
                 <LightTooltip title="Choose date">
                     <Button sx={ sxStyle.button } variant="contained" color="secondary" style={{ backgroundColor: 7 === selectedIndex ? '#00adb5' : '#9c27b0'}}
                         onClick={() => {setShowDatepicker(true); setSelectedIndex(7)}}>

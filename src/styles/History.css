@@ -73,3 +73,12 @@
     color: white;
     width: 140px;
 }
+
+.chartParameterNav {
+    display: flex;
+    flex-direction: column;
+    width: fit-content;
+    position: absolute;
+    left: 3vw;
+    top: 30vh;
+}

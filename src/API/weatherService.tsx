@@ -47,12 +47,12 @@ export default class WeatherService {
   }
 
 
-  static async fetchHistoryWeather(start, end) {
+  static async fetchHistoryWeather(start, end, parameter) {
     if (this.cityCoordinates.length === 0) {
       return 'No coordinates';
     } else {
       const data = await fetch(
-        `https://archive-api.open-meteo.com/v1/archive?latitude=${this.cityCoordinates[0].latitude}&longitude=${this.cityCoordinates[0].longitude}&start_date=${start}&end_date=${end}&daily=temperature_2m_mean`
+        `https://archive-api.open-meteo.com/v1/archive?latitude=${this.cityCoordinates[0].latitude}&longitude=${this.cityCoordinates[0].longitude}&start_date=${start}&end_date=${end}&daily=${parameter}&timezone=${this.timezoneURL[0].country}%2F${this.timezoneURL[0].city}`
       );
   
       const jsonData = await data.json();

@@ -1,6 +1,6 @@
 import "../../styles/History.css";
 import { useNavigate } from "react-router-dom";
-import { useState, useEffect } from "react";
+import { useState, useEffect, SetStateAction } from "react";
 import WeatherService from "../../API/weatherService";
 import { CircularProgress, IconButton, Button, Dialog } from "@mui/material";
 import { Close, Info, ArrowBack } from "@mui/icons-material";
@@ -19,7 +19,17 @@ const HistoryWeather = () => {
     const [showDatepicker, setShowDatepicker] = useState(false);
     const [dateLength, setDateLength] = useState(14);
     const [labelLengthName, setLabelLengthName] = useState('14 Days');
+    const [chartLabelName, setChartLabelName] = useState('Temperature in °C');
     const navigate = useNavigate();
+    const [chartParameter, setChartParameter] = useState('temperature_2m_mean');
+    const [selectedIndex, setSelectedIndex] = useState(0);
+
+    const chartParameterBtns = [
+        {name: 'Temperature', param: 'temperature_2m_mean', label: 'Temperature in °C'},
+        {name: 'Daylight Duration', param: 'daylight_duration', label: 'Daylight Duration in sec'},
+        {name: 'Sunshine Duration', param: 'sunshine_duration', label: 'Sunshine Duration in sec'},
+        {name: 'Precipitation', param: 'precipitation_sum', label: 'Precipitation in mm'} 
+    ];
 
 
     const sxStyle = {
@@ -33,14 +43,15 @@ const HistoryWeather = () => {
             backdrop: { style: { backgroundColor: 'rgb(174 174 174 / 50%)' } }
         },
         icon: { color: 'white', fontSize: 24 },
-        infoIcon: { color: 'white', fontSize: 18, position: 'absolute', top: '24px', right: '-24px' }
+        infoIcon: { color: 'white', fontSize: 18, position: 'absolute', top: '24px', right: '-24px' },
+        button: { marginBottom: '10px', borderRadius: '8px !important', width: '140px !important', fontFamily: 'Baloo !important', fontSize: '16px' }
     }
 
 
     useEffect(() => {
         fetchDate(dateLength);
         setCityName(WeatherService.cityName);        
-    }, [dateLength, labelLengthName]);  
+    }, [labelLengthName, chartParameter]);  
     
 
     // console.log = console.warn = console.error = () => {};
@@ -53,20 +64,23 @@ const HistoryWeather = () => {
         let end = new Date();
         end.setDate(end.getDate() - 2);
         
-        fetchAPIData(dateFormat(start), dateFormat(end));
+        fetchAPIData(dateFormat(start), dateFormat(end), chartParameter);
     }
 
     
-    const fetchAPIData = async (start, end) => {
-        const todayWeather = await WeatherService.fetchHistoryWeather(start, end);
+    const fetchAPIData = async (start, end, parameter) => {        
+        const todayWeather = await WeatherService.fetchHistoryWeather(start, end, parameter);
+        
         if (todayWeather === 'No coordinates') {
             navigate('/track');
-        } else {
+        } else {    
             setWeatherData(todayWeather);
-
-            setTimeout(() => {
-                setIsLoading(true);
-            }, 1000);
+            setIsLoading(true);
+            // setTimeout(() => {
+            //     setIsLoadingChart(true);
+            //     setIsLoading(true);
+            //     setWeatherData(todayWeather);
+            // }, 1000);
         }
     }
 
@@ -82,7 +96,7 @@ const HistoryWeather = () => {
         setIsLoading(false);
         setShowDatepicker(false);
         setShowDatepicker(false);
-        fetchAPIData(startDate, endDate);
+        fetchAPIData(startDate, endDate, chartParameter);
         setLabelLengthName('choosen period');
     }
 
@@ -94,6 +108,13 @@ const HistoryWeather = () => {
 
     const getLabelName = () => {
       return labelLengthName;
+    }
+
+
+    const getChartParameterData = (index: SetStateAction<number>, param, label) => {
+        setSelectedIndex(index);
+        setChartParameter(param); 
+        setChartLabelName(label);
     }
 
 
@@ -109,6 +130,17 @@ const HistoryWeather = () => {
                     <LightTooltip title="Since 01/01/2000"><Info sx={sxStyle.infoIcon} /></LightTooltip>
                 </div>
             </div>
+
+            <div className="chartParameterNav">
+                {Array.from(Array(4).keys()).map((index) => (
+                        <Button key={"chartbtn"+index} style={{ backgroundColor: index === selectedIndex ? '#00adb5' : '#9c27b0'}}
+                            variant="contained" color="secondary" sx={sxStyle.button}
+                                onClick={() => {getChartParameterData(index, chartParameterBtns[index].param, chartParameterBtns[index].label)}}>
+                                    {chartParameterBtns[index].name}
+                        </Button>
+                ))} 
+            </div>
+
 
             {isLoading ? (
                 <div>
@@ -135,7 +167,8 @@ const HistoryWeather = () => {
                         </div>
                     }
 
-                    <HistoryLineChart weatherData={weatherData} labelLengthName={labelLengthName} />
+
+                    <HistoryLineChart weatherData={weatherData} labelLengthName={labelLengthName} chartParameter={chartParameter} chartLabelName={chartLabelName} />
 
                     <HistoryNavbar setDateLength={setDateLength} setShowDatepicker={setShowDatepicker} 
                         setLabelLengthName={setLabelLengthName} getLabelName={getLabelName} />
