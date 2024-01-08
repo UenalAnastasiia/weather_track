@@ -76,11 +76,6 @@ const HistoryWeather = () => {
         } else {    
             setWeatherData(todayWeather);
             setIsLoading(true);
-            // setTimeout(() => {
-            //     setIsLoadingChart(true);
-            //     setIsLoading(true);
-            //     setWeatherData(todayWeather);
-            // }, 1000);
         }
     }
 

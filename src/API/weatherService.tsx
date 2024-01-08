@@ -59,4 +59,18 @@ export default class WeatherService {
       return jsonData;
     }
   }
+
+
+  static async fetchDayHistoryWeather(date) {
+    if (this.cityCoordinates.length === 0) {
+      return 'No coordinates';
+    } else {
+      const data = await fetch(
+        `https://archive-api.open-meteo.com/v1/archive?latitude=${this.cityCoordinates[0].latitude}&longitude=${this.cityCoordinates[0].longitude}&start_date=${date}&end_date=${date}&daily=weather_code,temperature_2m_max,temperature_2m_min,temperature_2m_mean,precipitation_sum&timezone=${this.timezoneURL[0].country}%2F${this.timezoneURL[0].city}`
+      );
+  
+      const jsonData = await data.json();
+      return jsonData;
+    }
+  }
 }

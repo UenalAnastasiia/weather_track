@@ -13,6 +13,7 @@ import { Button, Popover, Typography } from "@mui/material";
 import CalendarIcon from "@mui/icons-material/CalendarMonth";
 import CityInfo from "./CityInfo";
 import LightTooltip from "../../UI/LightTooltip";
+import { History } from "@mui/icons-material";
 
 
 const CurrentWeather = (props) => {
@@ -123,8 +124,14 @@ const CurrentWeather = (props) => {
                           <CityInfo cityData={props.cityData} />
                       </Popover>
 
+                      <LightTooltip title="day tempertaure in past">
+                        <Button onClick={() => navigate('/day')} sx={{ position: 'absolute', top: '20vh', right: '5vw' }}>
+                          <History style={{ color: 'rgb(156 39 176 / 53%)', fontSize: 32 }} />
+                        </Button>
+                      </LightTooltip>
+
                       <h1 className="currentTempH1">{getCurrentData(weatherData, weatherData.minutely_15.temperature_2m, "temperature")}&deg; </h1>
-                      <WeatherDescription sharedData={weatherData.daily} />
+                      <WeatherDescription sharedData={getCurrentData(weatherData, weatherData.minutely_15.weather_code, "weatherCode")} />
                       <h2>
                         Max: {getRoundTemp(weatherData.daily.temperature_2m_max[0])}&deg; 
                         Min: {getRoundTemp(weatherData.daily.temperature_2m_min[0])}&deg;
