@@ -86,12 +86,12 @@
 /****** Day History ******/
 
 .dayHistoryDiv {
-    width: 40vw;
-    max-width: 620px;
-    height: 60vh;
+    width: 65vw;
+    /* max-width: 620px; */
+    height: 90vh;
     display: flex;
     align-items: center;
-    flex-direction: column;
+    justify-content: center;
     position: relative;
     background-color: #160e2a6b;
     border-radius: 32px;
@@ -102,6 +102,30 @@
     position: absolute;
     top: 5vh;
     left: 5vw;
+}
+
+.highcharts-credits {
+    display: none !important;
+}
+
+.highcharts-container {
+    height: 600px !important;
+    width: 900px !important;
+}
+
+.highcharts-background {
+    fill: #ffffff00;
+}
+
+.highcharts-xaxis-labels text {
+    fill: white !important;
+    color: white !important;
+}
+
+.highcharts-title {
+    fill: #9c27b0 !important;
+    color: #9c27b0 !important;
+    font-size: 24px !important;
 }
 
 /****** Close Day History ******/

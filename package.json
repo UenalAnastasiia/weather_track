@@ -23,6 +23,8 @@
     "@types/react-dom": "^18.2.14",
     "circle-flags": "github:HatScripts/circle-flags",
     "dayjs": "^1.11.10",
+    "highcharts": "^11.2.0",
+    "highcharts-react-official": "^3.2.1",
     "material-ui-popup-state": "^5.0.10",
     "next": "^14.0.4",
     "react": "^18.2.0",

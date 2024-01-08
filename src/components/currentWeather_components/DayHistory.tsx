@@ -1,24 +1,24 @@
 import "../../styles/History.css";
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import { Button } from "@mui/material";
+import { Button, CircularProgress } from "@mui/material";
 import { ArrowBack } from "@mui/icons-material";
 import WeatherService from "../../API/weatherService";
+import Highcharts from "highcharts/highstock";
+import HighchartsReact from "highcharts-react-official";
 
 const DayHistory = () => {
-    const [weatherData, setWeatherData] = useState(Object);
     const [isLoading, setIsLoading] = useState(false);
     const navigate = useNavigate();
-    const pastYears = 6;
 
     useEffect(() => {
         fetchAPIData(new Date());      
     }, []); 
-
     
-    const fetchAPIData = async (date) => {  
+    
+    const fetchAPIData = async (date: Date) => {  
         let pastData = [];   
-        for (let index = 1; index < 6; index++) {
+        for (let index = 1; index < 11; index++) {
             let result = (date.getFullYear() - index) + '-' + ('0' + (date.getMonth() + 1)).slice(-2) + '-' + ('0' + date.getDate()).slice(-2);
             const fetchedData = await WeatherService.fetchDayHistoryWeather(result);
             if (fetchedData === 'No coordinates') {
@@ -27,12 +27,124 @@ const DayHistory = () => {
                 pastData.push(fetchedData);           
             }  
         }
-        setWeatherData(pastData);
+
+        pushDataToChart(pastData);
+    }
+
+
+    const pushDataToChart = (pastData: string | any[]) => {
+        for (let i = 0; i < pastData.length; i++) {
+            options.xAxis[0].categories.push(pastData[i].daily.time[0]);
+            options.series[0].data.push(pastData[i].daily.temperature_2m_mean);
+            options.series[1].data.push(pastData[i].daily.precipitation_hours);
+            options.series[2].data.push(pastData[i].daily.rain_sum);
+        }
+        options.title.text = `History for 10 years from ${WeatherService.cityName}`;
         setIsLoading(true);
     }
 
-    console.log(weatherData);
 
+    const [options] = useState({
+        title: {
+            text: ''
+        },
+        xAxis: [{
+            categories: [],
+            crosshair: true
+        }],
+        yAxis: [{ // Primary yAxis
+            labels: {
+                format: '{value} mm',
+                style: {
+                    color: 'rgb(37 186 105)'
+                }
+            },
+            title: {
+                text: 'Rainfall',
+                style: {
+                    color: 'rgb(37 186 105)'
+                }
+            },
+            opposite: true
+        }, { // Secondary yAxis
+            gridLineWidth: 0,
+            title: {
+                text: 'Temperature',
+                style: {
+                    color: Highcharts.getOptions().colors[0]
+                }
+            },
+            labels: {
+                format: '{value} °C',
+                style: {
+                    color: Highcharts.getOptions().colors[0]
+                }
+            }
+        }, { // Tertiary yAxis
+            gridLineWidth: 0,
+            title: {
+                text: 'Precipitation',
+                style: {
+                    color: '#c9201a'
+                }
+            },
+            labels: {
+                format: '{value} h',
+                style: {
+                    color: '#c9201a'
+                }
+            },
+            opposite: true
+        }],
+        tooltip: {
+            shared: true
+        },
+        legend: {
+            layout: 'vertical',
+            align: 'right',
+            x: 10,
+            verticalAlign: 'bottom',
+            y: 20,
+            floating: true,
+            backgroundColor:
+                Highcharts.defaultOptions.legend.backgroundColor || // theme
+                'rgba(255,255,255)'
+        },
+        series: [{
+            name: 'Temperature',
+            type: 'column',
+            yAxis: 1,
+            data: [],
+            tooltip: {
+                valueSuffix: ' °C'
+            }
+        }, {
+            name: 'Precipitation',
+            type: 'spline',
+            yAxis: 2,
+            data: [],
+            marker: {
+                enabled: false
+            },
+            dashStyle: 'shortdot',
+            tooltip: {
+                valueSuffix: ' h'
+            },
+            color: '#c9201a'
+        }, {
+            name: 'Rainfall',
+            type: 'spline',
+            data: [],
+            tooltip: {
+                valueSuffix: ' mm'
+            },
+            color: 'rgb(37 186 105)'
+        }],
+        accessibility: {
+            enabled: false
+        }
+    });
+    
 
     return (
         <div>
@@ -41,24 +153,9 @@ const DayHistory = () => {
             </Button>
 
             <div className='dayHistoryDiv'>
-                <h1>Day History</h1>
-
                 {isLoading ? (
-                    <div>
-                        {Array.from(Array(5).keys()).map((index) => (
-                            <div key={index}>
-                                {weatherData ? (
-                                    <div>
-                                        <span>{weatherData[index].daily.time},</span>
-                                        <span>{weatherData[index].daily.temperature_2m_mean},</span>
-                                        <span>{weatherData[index].daily.weather_code}</span>
-                                    </div>
-                                ) : <h1>Loading...</h1>}  
-                            </div>
-                        ))}
-                    </div>
-                ) : <h1>Loading...</h1>}
-                
+                    <HighchartsReact highcharts={Highcharts} options={options} />
+                ) : <CircularProgress />} 
             </div>
         </div>
     );

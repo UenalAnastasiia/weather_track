@@ -13,8 +13,6 @@ const HistoryLineChart = (props) => {
     }
 
     useEffect(() => {
-        console.log(props);
-        
         // setIsLoading(false);
         setTimeData(props.weatherData.daily.time);
         setChartData(props.weatherData.daily[props.chartParameter]);
@@ -31,7 +29,7 @@ const HistoryLineChart = (props) => {
         // }, 2000);
 
     }, [props]);  
-
+    
 
     return (
         <div className="historyChart">

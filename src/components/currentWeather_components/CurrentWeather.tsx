@@ -124,7 +124,7 @@ const CurrentWeather = (props) => {
                           <CityInfo cityData={props.cityData} />
                       </Popover>
 
-                      <LightTooltip title="day tempertaure in past">
+                      <LightTooltip title="day temperature in past">
                         <Button onClick={() => navigate('/day')} sx={{ position: 'absolute', top: '20vh', right: '5vw' }}>
                           <History style={{ color: 'rgb(156 39 176 / 53%)', fontSize: 32 }} />
                         </Button>
