@@ -1,6 +1,6 @@
-import { CircularProgress } from '@mui/material';
 import { LineChart } from '@mui/x-charts';
 import { useState, useEffect } from "react";
+import Loader from '../../UI/Loader';
 
 
 const HistoryLineChart = (props) => {
@@ -49,7 +49,7 @@ const HistoryLineChart = (props) => {
                     )}
                 </div>
                 
-            ) : <CircularProgress />} 
+            ) : <Loader />} 
             
         </div>
     );

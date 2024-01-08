@@ -1,11 +1,12 @@
 import "../../styles/History.css";
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import { Button, CircularProgress } from "@mui/material";
+import { Button } from "@mui/material";
 import { ArrowBack } from "@mui/icons-material";
 import WeatherService from "../../API/weatherService";
 import Highcharts from "highcharts/highstock";
 import HighchartsReact from "highcharts-react-official";
+import Loader from "../../UI/Loader";
 
 const DayHistory = () => {
     const [isLoading, setIsLoading] = useState(false);
@@ -18,7 +19,7 @@ const DayHistory = () => {
     
     const fetchAPIData = async (date: Date) => {  
         let pastData = [];   
-        for (let index = 1; index < 11; index++) {
+        for (let index = 1; index < 21; index++) {
             let result = (date.getFullYear() - index) + '-' + ('0' + (date.getMonth() + 1)).slice(-2) + '-' + ('0' + date.getDate()).slice(-2);
             const fetchedData = await WeatherService.fetchDayHistoryWeather(result);
             if (fetchedData === 'No coordinates') {
@@ -39,7 +40,7 @@ const DayHistory = () => {
             options.series[1].data.push(pastData[i].daily.precipitation_hours);
             options.series[2].data.push(pastData[i].daily.rain_sum);
         }
-        options.title.text = `History for 10 years from ${WeatherService.cityName}`;
+        options.title.text = `History for 20 years from ${WeatherService.cityName}`;
         setIsLoading(true);
     }
 
@@ -155,7 +156,7 @@ const DayHistory = () => {
             <div className='dayHistoryDiv'>
                 {isLoading ? (
                     <HighchartsReact highcharts={Highcharts} options={options} />
-                ) : <CircularProgress />} 
+                ) : <Loader />} 
             </div>
         </div>
     );

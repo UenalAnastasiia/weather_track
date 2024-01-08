@@ -6,7 +6,8 @@ import WeatherService from "../../API/weatherService";
 import CityNavbarMain from "./CityNavbarMain";
 import StorageService from "../../services/storageService";
 import MuiAlert, { AlertProps } from '@mui/material/Alert';
-import {CircularProgress, Snackbar, TextField, Button} from '@mui/material';
+import { Snackbar, TextField, Button } from '@mui/material';
+import Loader from "../../UI/Loader";
 
 
 const Alert = React.forwardRef<HTMLDivElement, AlertProps>(function Alert(props, ref) {
@@ -120,7 +121,7 @@ const CitySearch = () => {
 
   return (
     <div>
-      {showSpinner ? <CircularProgress /> : (
+      {showSpinner ? <Loader /> : (
       
       <div>
         {showWeather ? (

@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react";
 import CitySearch from "../city_components/CitySearch";
 import CityNavbarMain from "../city_components/CityNavbarMain";
-import { CircularProgress } from "@mui/material";
 import StorageService from "../../services/storageService";
+import Loader from "../../UI/Loader";
 
 
 const Home = () => {
@@ -43,7 +43,7 @@ const Home = () => {
         <CitySearch />
       ) : (
         <div>
-          {showSpinner && <CircularProgress />}
+          {showSpinner && <Loader />}
           <CityNavbarMain data={localFirstElement} />
         </div>
       )}

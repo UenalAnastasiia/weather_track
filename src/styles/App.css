@@ -45,12 +45,47 @@
   border-radius: 24px;
 }
 
-.MuiCircularProgress-indeterminate {
-  width: 100px !important;
-  height: 100px !important;
-  color: #be25da !important;
-}
-
 .css-ahj2mt-MuiTypography-root, .css-1h9z7r5-MuiButtonBase-root-MuiTab-root, .css-x4ypk3, .css-zcbmsk-MuiButtonBase-root-MuiButton-root {
   font-family: "Baloo";
+}
+
+.loader {
+  width: 10px;
+  aspect-ratio: 1;
+  background: #fff;
+  border-radius: 50%;
+  position: absolute;
+  transform:
+    rotate(0deg)
+    translateY(calc((100px * -0.5) + (10px * 0.5)));
+  animation: spin 1s infinite linear;
+}
+
+.loader::before {
+  content: "";
+  position: absolute;
+  inset: calc(10px * -0.5);
+  border-radius: 50%;
+  background: #fff;
+  filter: blur(10px);
+  z-index: -1;
+}
+
+.loader::after {
+  content: "";
+  width: 100px;
+  aspect-ratio: 1;
+  position: absolute;
+  top: 0%;
+  left: 50%;
+  translate: -50% 0;
+  background: conic-gradient(white, hsl(0deg 0% 96.28%), hsl(7.79deg 11.24% 95.8%), transparent 65%);
+  border-radius: 50%;
+  mask: radial-gradient(
+    transparent calc(((100px * 0.5) - 10px) - 1px),
+    white calc((100px * 0.5) - 10px));
+}
+
+@keyframes spin {
+  to { transform: rotate(-360deg) translateY(calc((100px * -0.5) + (10px * 0.5))); }
 }

@@ -86,7 +86,7 @@
 /****** Day History ******/
 
 .dayHistoryDiv {
-    width: 65vw;
+    width: 80vw;
     /* max-width: 620px; */
     height: 90vh;
     display: flex;
@@ -96,6 +96,7 @@
     background-color: #160e2a6b;
     border-radius: 32px;
     box-shadow: 0px 0px 18px 6px #fdfdfdad;
+    margin-left: 3vw;
 }
 
 .dayBackBtn {
@@ -110,7 +111,7 @@
 
 .highcharts-container {
     height: 600px !important;
-    width: 900px !important;
+    width: 1100px !important;
 }
 
 .highcharts-background {

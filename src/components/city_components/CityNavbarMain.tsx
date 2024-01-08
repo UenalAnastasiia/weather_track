@@ -5,9 +5,9 @@ import CurrentWeather from "../currentWeather_components/CurrentWeather";
 import WeatherService from "../../API/weatherService";
 import CoordinatesService from "../../API/coordinatesService";
 import StorageService from "../../services/storageService";
-import { CircularProgress } from "@mui/material";
 import CityNavWithOne from "./CityNavWithOne";
 import CityNavWithMulti from "./CityNavWithMulti";
+import Loader from "../../UI/Loader";
 
 
 const CityNavbarMain = (props: { data: any; }) => {
@@ -128,7 +128,7 @@ const CityNavbarMain = (props: { data: any; }) => {
           }
 
 
-          {showSpinner && <CircularProgress />}
+          {showSpinner && <Loader />}
 
           {!reloadData && 
             <div className="currentNavDiv">

@@ -2,12 +2,13 @@ import "../../styles/History.css";
 import { useNavigate } from "react-router-dom";
 import { useState, useEffect, SetStateAction } from "react";
 import WeatherService from "../../API/weatherService";
-import { CircularProgress, IconButton, Button, Dialog } from "@mui/material";
+import { IconButton, Button, Dialog } from "@mui/material";
 import { Close, Info, ArrowBack } from "@mui/icons-material";
 import LightTooltip from "../../UI/LightTooltip";
 import HistoryNavbar from "./HistoryNavbar";
 import HistoryDatepicker from "./HistoryDatepicker";
 import HistoryLineChart from "./HistoryLineChart";
+import Loader from "../../UI/Loader";
 
 
 const HistoryWeather = () => {
@@ -168,7 +169,7 @@ const HistoryWeather = () => {
                     <HistoryNavbar setDateLength={setDateLength} setShowDatepicker={setShowDatepicker} 
                         setLabelLengthName={setLabelLengthName} getLabelName={getLabelName} />
                 </div>
-            ) : <CircularProgress />}
+            ) : <Loader />}
         </div>
     );
 };
