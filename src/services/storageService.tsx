@@ -55,7 +55,7 @@ export default class StorageService {
     const storedData = localStorage.getItem("WeatherCity");
     let JSONData = JSON.parse(storedData);
 
-    if (JSONData.length === 10) {
+    if (JSONData?.length === 10) {
       return true
     } else return false
   };
