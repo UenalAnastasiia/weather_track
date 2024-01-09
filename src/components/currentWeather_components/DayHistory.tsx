@@ -57,13 +57,15 @@ const DayHistory = () => {
             labels: {
                 format: '{value} mm',
                 style: {
-                    color: 'rgb(37 186 105)'
+                    color: 'rgb(37 186 105)',
+                    fontFamily: 'Baloo'
                 }
             },
             title: {
                 text: 'Rainfall',
                 style: {
-                    color: 'rgb(37 186 105)'
+                    color: 'rgb(37 186 105)',
+                    fontFamily: 'Baloo'
                 }
             },
             opposite: true
@@ -72,13 +74,15 @@ const DayHistory = () => {
             title: {
                 text: 'Temperature',
                 style: {
-                    color: Highcharts.getOptions().colors[0]
+                    color: Highcharts.getOptions().colors[0],
+                    fontFamily: 'Baloo'
                 }
             },
             labels: {
                 format: '{value} °C',
                 style: {
-                    color: Highcharts.getOptions().colors[0]
+                    color: Highcharts.getOptions().colors[0],
+                    fontFamily: 'Baloo'
                 }
             }
         }, { // Tertiary yAxis
@@ -86,19 +90,22 @@ const DayHistory = () => {
             title: {
                 text: 'Precipitation',
                 style: {
-                    color: '#c9201a'
+                    color: '#c9201a',
+                    fontFamily: 'Baloo'
                 }
             },
             labels: {
                 format: '{value} h',
                 style: {
-                    color: '#c9201a'
+                    color: '#c9201a',
+                    fontFamily: 'Baloo'
                 }
             },
             opposite: true
         }],
         tooltip: {
-            shared: true
+            shared: true,
+            fontFamily: 'Baloo'
         },
         legend: {
             layout: 'vertical',
@@ -107,6 +114,7 @@ const DayHistory = () => {
             verticalAlign: 'bottom',
             y: 20,
             floating: true,
+            fontFamily: 'Baloo',
             backgroundColor:
                 Highcharts.defaultOptions.legend.backgroundColor || // theme
                 'rgba(255,255,255)'
@@ -118,7 +126,8 @@ const DayHistory = () => {
             data: [],
             tooltip: {
                 valueSuffix: ' °C'
-            }
+            },
+            fontFamily: 'Baloo'
         }, {
             name: 'Precipitation',
             type: 'spline',
@@ -131,7 +140,8 @@ const DayHistory = () => {
             tooltip: {
                 valueSuffix: ' h'
             },
-            color: '#c9201a'
+            color: '#c9201a',
+            fontFamily: 'Baloo'
         }, {
             name: 'Rainfall',
             type: 'spline',
@@ -139,7 +149,8 @@ const DayHistory = () => {
             tooltip: {
                 valueSuffix: ' mm'
             },
-            color: 'rgb(37 186 105)'
+            color: 'rgb(37 186 105)',
+            fontFamily: 'Baloo'
         }],
         accessibility: {
             enabled: false

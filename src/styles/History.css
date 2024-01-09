@@ -7,12 +7,14 @@
     width: 55%;
     left: 5%;
     z-index: 1;
+    font-family: 'Baloo';
 }
 
 .historyChart {
     background-color: #ffffff38;
     border-radius: 32px;
     box-shadow: 0px 0px 18px 6px #fdfdfdad;
+    font-family: 'Baloo';
 }
 
 .backBtn {
@@ -26,6 +28,7 @@
     font-weight: 800;
     font-size: 38px;
     cursor: context-menu;
+    font-family: "Baloo";
 }
 
 .closeBtn {
@@ -60,6 +63,7 @@
     color: white;
     font-weight: 800;
     position: relative;
+    font-family: 'Baloo';
 }
 
 .historyNavDiv {
@@ -112,6 +116,7 @@
 .highcharts-container {
     height: 600px !important;
     width: 1100px !important;
+    font-family: 'Baloo' !important;
 }
 
 .highcharts-background {
@@ -121,12 +126,18 @@
 .highcharts-xaxis-labels text {
     fill: white !important;
     color: white !important;
+    font-family: 'Baloo' !important;
 }
 
 .highcharts-title {
     fill: #9c27b0 !important;
     color: #9c27b0 !important;
     font-size: 24px !important;
+    font-family: 'Baloo' !important;
+}
+
+.highcharts-legend-item {
+    font-family: 'Baloo' !important;
 }
 
 /****** Close Day History ******/

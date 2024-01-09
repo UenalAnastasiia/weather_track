@@ -9,9 +9,9 @@ const HistoryDatepicker = ({ setStartDate, setEndDate, dateFormat, startDate, en
 
     const sxStyle = {
         picker: {
-            label: { color: 'white !important' },
-            input: { color: 'white !important', width: '150px !important' },
-            '& .MuiOutlinedInput-root': { '& fieldset': { borderColor: 'white' }, '&:hover fieldset': { borderColor: 'white' },
+            label: { color: 'white !important', fontFamily: 'Baloo !important' },
+            input: { color: 'white !important', width: '150px !important', fontFamily: 'Baloo !important' },
+            '& .MuiOutlinedInput-root': { '& fieldset': { borderColor: 'white', fontFamily: 'Baloo !important' }, '&:hover fieldset': { borderColor: 'white' },
                 '&.Mui-focused fieldset': { borderColor: 'white' } },
             svg: { color: 'white !important' }
         } 
