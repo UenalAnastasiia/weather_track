@@ -49,7 +49,7 @@ const CurrentTabs = (data: any) => {
           </TabList>
         </Box>
         <TabPanel value="hourly">
-            <HourlyForecastTab quarterData={data.sharedData.minutely_15} />
+            <HourlyForecastTab quarterData={data.sharedData.minutely_15} cityData={data.cityData}/>
         </TabPanel>
 
         <TabPanel value="daily">

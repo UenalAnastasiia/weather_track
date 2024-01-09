@@ -12,7 +12,6 @@ export default class StorageService {
       localStorage.setItem("WeatherCity", JSON.stringify([]));
     }
 
-    this.formatTimezone(data.timezone);
     this.getCountryCode(data.code);
     this.proveCityName(data);
   }
@@ -50,12 +49,6 @@ export default class StorageService {
     let updateLocal = JSON.parse(localStorage.getItem("WeatherCity"));
     this.cityIndex = updateLocal.findIndex(obj => obj.name === data.name);
   }
-
-
-  static formatTimezone(data: string) {
-    let splitResult = data.split('/');
-    WeatherService.getTimezone(splitResult[0], splitResult[1]); 
-  };
 
 
   static getCountryCode(data: string) { 

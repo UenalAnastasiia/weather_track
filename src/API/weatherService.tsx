@@ -1,7 +1,6 @@
 export default class WeatherService {
   static coordinatesURL = [];
   static archivURL = [];
-  static timezoneURL = [];
   static cityCoordinates = [];
   static cityName: string;
 
@@ -13,14 +12,10 @@ export default class WeatherService {
     this.cityName = name;
   }
 
-  static getTimezone(country: string, city: string) {
-    this.timezoneURL = [{country: country, city: city}];
-  }
-
 
   static async fetchTodayWeather() {
     const data = await fetch(
-      `${this.coordinatesURL}&minutely_15=temperature_2m,relative_humidity_2m,apparent_temperature,weather_code&hourly=temperature_2m,weather_code&daily=weather_code,temperature_2m_max,temperature_2m_min,sunrise,sunset&timezone=${this.timezoneURL[0].country}%2F${this.timezoneURL[0].city}&forecast_days=2`
+      `${this.coordinatesURL}&minutely_15=temperature_2m,relative_humidity_2m,apparent_temperature,weather_code&hourly=temperature_2m,weather_code&daily=weather_code,temperature_2m_max,temperature_2m_min,sunrise,sunset&timezone=auto&forecast_days=3`
     );
 
     const jsonData = await data.json();
@@ -30,7 +25,7 @@ export default class WeatherService {
 
   static async fetchCurrentWeather() {
     const data = await fetch(
-      `${this.coordinatesURL}&current=temperature_2m,relative_humidity_2m,apparent_temperature,precipitation,rain,weather_code,wind_speed_10m,wind_direction_10m&daily=sunrise,sunset,daylight_duration,sunshine_duration,uv_index_max,precipitation_sum&timezone=${this.timezoneURL[0].country}%2F${this.timezoneURL[0].city}&forecast_days=1&forecast_minutely_15=4`
+      `${this.coordinatesURL}&current=temperature_2m,relative_humidity_2m,apparent_temperature,precipitation,rain,weather_code,wind_speed_10m,wind_direction_10m&daily=sunrise,sunset,daylight_duration,sunshine_duration,uv_index_max,precipitation_sum&timezone=auto&forecast_days=1&forecast_minutely_15=4`
     );
 
     const jsonData = await data.json();
@@ -52,7 +47,7 @@ export default class WeatherService {
       return 'No coordinates';
     } else {
       const data = await fetch(
-        `https://archive-api.open-meteo.com/v1/archive?latitude=${this.cityCoordinates[0].latitude}&longitude=${this.cityCoordinates[0].longitude}&start_date=${start}&end_date=${end}&daily=${parameter}&timezone=${this.timezoneURL[0].country}%2F${this.timezoneURL[0].city}`
+        `https://archive-api.open-meteo.com/v1/archive?latitude=${this.cityCoordinates[0].latitude}&longitude=${this.cityCoordinates[0].longitude}&start_date=${start}&end_date=${end}&daily=${parameter}&timezone=auto}`
       );
   
       const jsonData = await data.json();
@@ -66,7 +61,7 @@ export default class WeatherService {
       return 'No coordinates';
     } else {
       const data = await fetch(
-        `https://archive-api.open-meteo.com/v1/archive?latitude=${this.cityCoordinates[0].latitude}&longitude=${this.cityCoordinates[0].longitude}&start_date=${date}&end_date=${date}&daily=temperature_2m_mean,rain_sum,precipitation_hours&timezone=${this.timezoneURL[0].country}%2F${this.timezoneURL[0].city}`
+        `https://archive-api.open-meteo.com/v1/archive?latitude=${this.cityCoordinates[0].latitude}&longitude=${this.cityCoordinates[0].longitude}&start_date=${date}&end_date=${date}&daily=temperature_2m_mean,rain_sum,precipitation_hours&timezone=auto`
       );
   
       const jsonData = await data.json();

@@ -75,7 +75,7 @@ const CurrentWeather = (props) => {
 
 
   const roundTimeQuarterHour = () => {
-    let timezoneURL = WeatherService.timezoneURL[0].country + '/' + WeatherService.timezoneURL[0].city;
+    let timezoneURL = props.cityData.timezone;
     
     let round = 1000 * 60 * 15;
     let cityData = new Date().toLocaleString("en-US", {timeZone: timezoneURL});
@@ -163,7 +163,7 @@ const CurrentWeather = (props) => {
                   </div>
 
                   <div className="tabsBox">
-                    <CurrentTabs sharedData={weatherData} />
+                    <CurrentTabs sharedData={weatherData} cityData={props.cityData} />
                   </div>
                 </div>
               )}

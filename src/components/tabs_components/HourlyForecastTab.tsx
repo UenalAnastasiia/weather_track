@@ -9,7 +9,7 @@ const HourlyForecastTab = (data: any) => {
 
 
   const roundTimeToHour = () => {
-    let timezoneURL = WeatherService.timezoneURL[0].country + '/' + WeatherService.timezoneURL[0].city;
+    let timezoneURL = data.cityData.timezone;
 
     let round = 1000 * 60 * 60;
     let cityData = new Date().toLocaleString("en-US", {timeZone: timezoneURL});

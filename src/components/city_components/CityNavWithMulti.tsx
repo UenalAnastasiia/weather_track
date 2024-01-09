@@ -17,7 +17,7 @@ const CityNavWithMulti = ( {openCityWeather, localItems, setSelectedIndex, selec
         button: { marginBottom: '6px', borderRadius: '8px !important', width: '140px !important', fontFamily: 'Baloo !important', fontSize: '14px' },
         settingsIcon: { width: 'fit-content', position: 'absolute', top: '4vh', left: '4vw', transform: 'scale(1.5)' },
         menuList: { backgroundColor: 'rgb(235 10 195 / 9%)', color: '#9c27b0', li: { fontWeight: '700 !important', fontFamily: 'Baloo !important' } },
-        removeDeleteIcon: { width: 'fit-content', position: 'absolute', top: '-12px', left: '4px' }
+        removeDeleteIcon: { width: 'fit-content', position: 'absolute', bottom: '2px', left: '4px' }
     }
 
 
