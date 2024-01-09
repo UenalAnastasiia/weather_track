@@ -6,7 +6,7 @@ import WeatherService from "../../API/weatherService";
 import CityNavbarMain from "./CityNavbarMain";
 import StorageService from "../../services/storageService";
 import MuiAlert, { AlertProps } from '@mui/material/Alert';
-import { Snackbar, TextField, Button } from '@mui/material';
+import { Snackbar, TextField, Button, Box } from '@mui/material';
 import Loader from "../../UI/Loader";
 import Autocomplete from '@mui/material/Autocomplete';
 
@@ -53,7 +53,7 @@ const CitySearch = () => {
 
 
   const fetchAPIData = async (data) => {
-    const cData = await CoordinatesService.fetchCoordinateAPI(data);
+    const cData = await CoordinatesService.fetchCoordinateAPI(data.name);
 
     try {
       tryFetch(cData.results[0]);
@@ -110,7 +110,7 @@ const CitySearch = () => {
     let list = [];
     if (jsonData.results) {
       for (let index = 0; index < jsonData.results.length; index++) {
-        list.push(jsonData.results[index].name);
+        list.push({name: jsonData.results[index].name, country: jsonData.results[index].country_code});
       }
       setCityList(list);
     }    
@@ -134,14 +134,21 @@ const CitySearch = () => {
                 <h1>Search Your City</h1>
                 <div className="inputFieldBox">
                   <Autocomplete sx={{ width: 300 }} options={cityList} 
+                    getOptionLabel={(option) => option.name}
                     onChange={(event, value) => setInputValue(value)}
-                    renderOption={(props, option) => {
-                      return (
-                        <li {...props} key={option.id}>
-                          {option}
-                        </li>
-                      );
-                    }}
+                    renderOption={(props, option) => (
+                      <Box component="li" sx={{ '& > img': { mr: 2, flexShrink: 0 } }} {...props} key={option.id}>
+                        <img
+                          loading="lazy"
+                          width="20"
+                          src={`https://hatscripts.github.io/circle-flags/flags/${option.country.toLowerCase()}.svg`}
+                          // srcSet={`https://flagcdn.com/w40/${option.country.toLowerCase()}.png 2x`}
+                          // src={`https://flagcdn.com/w20/${option.country.toLowerCase()}.png`}
+                          alt=""
+                        />
+                        {option.name}
+                      </Box>
+                    )}
                     
                     renderInput={(params) => 
                       <TextField {...params} sx={sxStyle.field} label="City" 

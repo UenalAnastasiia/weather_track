@@ -1,6 +1,5 @@
 import Moment from "react-moment";
 import WeatherImg from "../weather_infos/WeatherImg";
-import WeatherService from "../../API/weatherService";
 
 const HourlyForecastTab = (data: any) => {
   const getRoundTemp = (temp: any) => {

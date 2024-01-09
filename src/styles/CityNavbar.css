@@ -15,9 +15,9 @@
 .multiNav {
     position: absolute;
     left: 10vw;
-    top: 15vh;
-    height: 60vh;
-    max-height: 60vh;
+    top: 5vh;
+    height: 80vh;
+    max-height: 80vh;
     overflow-y: auto;
     display: flex;
     flex-direction: column;
@@ -34,7 +34,7 @@
     color: white;
     width: 180px;
     padding-left: 20px;
-    padding-top: 90px;
+    margin-top: 5vh;
 }
   
 .currentNavDiv {

@@ -7,7 +7,6 @@ import Card from "react-bootstrap/Card";
 import WeatherImg from "../weather_infos/WeatherImg";
 import WeatherDescription from "../weather_infos/WeatherDescription";
 import CurrentTabs from "./CurrentTabs";
-import WeatherService from "../../API/weatherService";
 import StorageService from "../../services/storageService";
 import { Button, Popover, Typography } from "@mui/material";
 import CalendarIcon from "@mui/icons-material/CalendarMonth";
