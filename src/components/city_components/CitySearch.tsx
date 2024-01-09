@@ -53,14 +53,20 @@ const CitySearch = () => {
 
 
   const fetchAPIData = async (data) => {
-    const cData = await CoordinatesService.fetchCoordinateAPI(data.name);
-
-    try {
-      tryFetch(cData.results[0]);
-    } catch (e) {
+    if (StorageService.storageLimitReached()) {
       setOpenSnackbar(true);
-      console.error(e);
-      return <CitySearch /> 
+      setTimeout(() => {
+        navigate('/track');
+      }, 2000);
+    } else {
+      const cData = await CoordinatesService.fetchCoordinateAPI(data.name);
+      try { tryFetch(cData.results[0]); } 
+      catch (e) {
+        // setSnackbarMessage('Error, city not found!');
+        // setOpenSnackbar(true);
+        console.error(e);
+        return <CitySearch /> 
+      }
     }
   }
 
@@ -172,7 +178,7 @@ const CitySearch = () => {
 
       <Snackbar open={openSnackbar} autoHideDuration={6000} anchorOrigin={{ vertical: 'top', horizontal: 'center' }} onClose={handleClose}>
         <Alert onClose={handleClose} severity="warning" sx={{ width: '100%' }}>
-          Error, city not found!
+          City Limit has been reached
         </Alert>
       </Snackbar>
     </div>

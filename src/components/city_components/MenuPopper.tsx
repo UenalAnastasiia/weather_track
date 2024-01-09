@@ -1,11 +1,13 @@
-import React from "react";
+import React, { useState } from "react";
 import { Grow, Paper, Popper, MenuItem, MenuList } from "@mui/material";
 import ClickAwayListener from '@mui/material/ClickAwayListener';
 import { useNavigate } from "react-router-dom";
+import StorageService from "../../services/storageService";
 
 
 const MenuPopper = ( { setOpenSettings, openSettings, setShowDeleteBtns, resetApp, anchorRef, sxStyle } ) => {
     const navigate = useNavigate();
+    const [disableAddBtn, setDisableAddBtn] = useState(false);
 
 
     const handleCloseMenu = (event: Event | React.SyntheticEvent) => {
@@ -35,6 +37,8 @@ const MenuPopper = ( { setOpenSettings, openSettings, setShowDeleteBtns, resetAp
           }
       
           prevOpen.current = openSettings;
+
+          StorageService.storageLimitReached() ? setDisableAddBtn(true) : setDisableAddBtn(false);
     }, [openSettings]);
 
 
@@ -46,7 +50,7 @@ const MenuPopper = ( { setOpenSettings, openSettings, setShowDeleteBtns, resetAp
                 <Paper>
                   <ClickAwayListener onClickAway={handleCloseMenu}>
                     <MenuList sx={sxStyle.menuList} autoFocusItem={openSettings} id="composition-menu" aria-labelledby="composition-button" onKeyDown={handleListKeyDown}>
-                      <MenuItem onClick={() => navigate('/search')}>add city</MenuItem>
+                      <MenuItem disabled={disableAddBtn} onClick={() => navigate('/search')}>add city</MenuItem>
                       <MenuItem onClick={() => {setShowDeleteBtns((showDeleteBtns) => !showDeleteBtns); setOpenSettings(false)}}>
                         delete city
                       </MenuItem>

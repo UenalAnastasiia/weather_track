@@ -51,6 +51,16 @@ export default class StorageService {
   }
 
 
+  static storageLimitReached(): boolean { 
+    const storedData = localStorage.getItem("WeatherCity");
+    let JSONData = JSON.parse(storedData);
+
+    if (JSONData.length === 10) {
+      return true
+    } else return false
+  };
+
+
   static getCountryCode(data: string) { 
     this.imgURL = `https://hatscripts.github.io/circle-flags/flags/${data.toLowerCase()}.svg`;
   };

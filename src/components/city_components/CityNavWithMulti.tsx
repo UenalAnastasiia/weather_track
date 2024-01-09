@@ -4,11 +4,13 @@ import {Add, PlaylistRemove, Remove, Settings} from '@mui/icons-material';
 import LightTooltip from "../../UI/LightTooltip";
 import { useNavigate } from 'react-router-dom';
 import MenuPopper from "./MenuPopper";
+import StorageService from "../../services/storageService";
 
 
 const CityNavWithMulti = ( {openCityWeather, localItems, setSelectedIndex, selectedIndex, deleteCityFromStorage, resetApp, localLength } ) => {
     const [openSettings, setOpenSettings] = useState(false);
     const [showDeleteBtns, setShowDeleteBtns] = useState(false);
+    const [disableAddBtn, setDisableAddBtn] = useState(false);
     const anchorRef = useRef<HTMLButtonElement>(null);
     const navigate = useNavigate();
 
@@ -28,6 +30,8 @@ const CityNavWithMulti = ( {openCityWeather, localItems, setSelectedIndex, selec
         anchorRef.current!.focus();
       }
       prevOpen.current = openSettings;
+
+      StorageService.storageLimitReached() ? setDisableAddBtn(true) : setDisableAddBtn(false);
     },   [openSettings]);
 
 
@@ -65,7 +69,7 @@ const CityNavWithMulti = ( {openCityWeather, localItems, setSelectedIndex, selec
 
                         <div className="addIconDiv" key={"add"+1}>
                             <LightTooltip title="add city">
-                            <IconButton sx={{ width: 'fit-content' }} color="secondary" onClick={() => navigate('/search') }>
+                            <IconButton disabled={disableAddBtn} sx={{ width: 'fit-content' }} color="secondary" onClick={() => navigate('/search') }>
                                 <Add />
                             </IconButton>
                             </LightTooltip>
