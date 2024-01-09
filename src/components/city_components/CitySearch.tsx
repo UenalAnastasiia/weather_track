@@ -23,6 +23,7 @@ const CitySearch = () => {
   const [firstOpen, setFirstOpen] = useState(true);
   const [showBackBtn, setShowBackBtn] = useState(false);
   const [openSnackbar, setOpenSnackbar] = React.useState(false);
+  const [cityList, setCityList] = useState([]);
   const navigate = useNavigate();
 
 
@@ -97,28 +98,26 @@ const CitySearch = () => {
 
 
   const handleChangeInput = (e) => {
-    // console.log(e.target.value);
-    // showCityList(e.target.value);
+    console.log(e.target.value);
+    showCityList(e.target.value);
     setInputValue(e.target.value);
   };
 
 
   const showCityList = async (e) => {
-    const data = await fetch(
-      `https://geocoding-api.open-meteo.com/v1/search?name=${e}`
-    );
-
+    const data = await fetch(`https://geocoding-api.open-meteo.com/v1/search?name=${e}`);
     const jsonData = await data.json();
-    // console.log('jsonData ', jsonData);
 
-    let list = []
-      for (let index = 0; index < jsonData.result?.length; index++) {
-        list.push(jsonData.result[index]);
-      } 
-    console.log('Names ', list);
+    let list = [];
+    if (jsonData.results) {
+      for (let index = 0; index < jsonData.results.length; index++) {
+        list.push(jsonData.results[index].name);
+      }
+      setCityList(list);
+    }
   }
 
-
+  
   return (
     <div>
       {showSpinner ? <Loader /> : (
@@ -138,11 +137,17 @@ const CitySearch = () => {
               <div className="inputFieldBox">
                 <TextField sx={sxStyle.field} label="City" 
                   focused value={inputValue} onChange={handleChangeInput} placeholder="Enter city name" autoComplete="off"/>
-                
+                  
                 <div className="searchBtns">
                   {showBackBtn && <Button variant="contained" color="secondary" onClick={() =>  navigate('/track')}>back</Button>}
                   <Button variant="contained" color="secondary" onClick={handleSearchCity} disabled={!inputValue}>search</Button>
                 </div> 
+
+                {cityList.map((arr, index) => {
+                  return (
+                      <span key={index}>{arr}</span>
+                  );
+                })}
               </div>
             </div>
           </div>
