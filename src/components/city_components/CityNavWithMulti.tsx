@@ -33,43 +33,45 @@ const CityNavWithMulti = ( {openCityWeather, localItems, setSelectedIndex, selec
 
     return (
         <div>
-            <div className="cityNavDivMulti" key={"divNav"}>
-                <ButtonGroup key={"group"+1} orientation="vertical" variant="contained" color="secondary"
-                  sx={ sxStyle.buttonGroup }>
+            <div className="multiNav">
+                <div className="cityNavDivMulti" key={"divNav"}>
+                    <ButtonGroup key={"group"+1} orientation="vertical" variant="contained" color="secondary"
+                    sx={ sxStyle.buttonGroup }>
 
-                    {showDeleteBtns && (
-                        <LightTooltip title="hide delete buttons">
-                            <IconButton sx={sxStyle.removeDeleteIcon} color="secondary" onClick={() => setShowDeleteBtns(false) }>
-                                <PlaylistRemove />
-                            </IconButton>
-                        </LightTooltip>
-                    )}
+                        {showDeleteBtns && (
+                            <LightTooltip title="hide delete buttons">
+                                <IconButton sx={sxStyle.removeDeleteIcon} color="secondary" onClick={() => setShowDeleteBtns(false) }>
+                                    <PlaylistRemove />
+                                </IconButton>
+                            </LightTooltip>
+                        )}
 
-                    {localLength.map((index, el) => (
-                        <div key={"div1"+index}>
-                            <div key={"div2"+index}>
-                                {showDeleteBtns && (
-                                    <IconButton sx={{position: 'absolute', left: 0}} key={"remove"+el} color="secondary" 
-                                        onClick={() => deleteCityFromStorage(index) } className="removeAnimation">
-                                        <Remove />
-                                    </IconButton>)}
+                        {localLength.map((index, el) => (
+                            <div key={"div1"+index}>
+                                <div key={"div2"+index}>
+                                    {showDeleteBtns && (
+                                        <IconButton sx={{position: 'absolute', left: 0}} key={"remove"+el} color="secondary" 
+                                            onClick={() => deleteCityFromStorage(index) } className="removeAnimation">
+                                            <Remove />
+                                        </IconButton>)}
 
-                                <Button key={"btn"+el} onClick={() => {{openCityWeather(localItems[index]); setSelectedIndex(index)}}} 
-                                    sx={ sxStyle.button } style={{ backgroundColor: index === selectedIndex ? '#00adb5' : '#9c27b0'}}>
-                                        {localItems[index].name}
-                                </Button>
+                                    <Button key={"btn"+el} onClick={() => {{openCityWeather(localItems[index]); setSelectedIndex(index)}}} 
+                                        sx={ sxStyle.button } style={{ backgroundColor: index === selectedIndex ? '#00adb5' : '#9c27b0'}}>
+                                            {localItems[index].name}
+                                    </Button>
+                                </div>
                             </div>
-                        </div>
-                    ))}
+                        ))}
 
-                    <div className="addIconDiv" key={"add"+1}>
-                        <LightTooltip title="add city">
-                          <IconButton sx={{ width: 'fit-content' }} color="secondary" onClick={() => navigate('/search') }>
-                            <Add />
-                          </IconButton>
-                        </LightTooltip>
-                    </div>
-                </ButtonGroup>
+                        <div className="addIconDiv" key={"add"+1}>
+                            <LightTooltip title="add city">
+                            <IconButton sx={{ width: 'fit-content' }} color="secondary" onClick={() => navigate('/search') }>
+                                <Add />
+                            </IconButton>
+                            </LightTooltip>
+                        </div>
+                    </ButtonGroup>
+                </div>
             </div>
 
             <IconButton key={"sett"+1} sx={sxStyle.settingsIcon} color="secondary" ref={anchorRef} id="composition-button"

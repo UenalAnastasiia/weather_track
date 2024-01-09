@@ -99,9 +99,7 @@ const CitySearch = () => {
 
 
   const handleChangeInput = (e) => {
-    console.log(e.target.value);
-    showCityList(e.target.value);
-    setInputValue(e.target.value);
+    showCityList(e.target.value);  
   };
 
 
@@ -115,44 +113,53 @@ const CitySearch = () => {
         list.push(jsonData.results[index].name);
       }
       setCityList(list);
-    }
+    }    
   }
 
 
   return (
     <div>
       {showSpinner ? <Loader /> : (
-      
-      <div>
-        {showWeather ? (
-          <div className="currentNavDiv">
-            <CityNavbarMain data={cityData} />
-          </div>
-          ) 
-          : (
-          <div className="welcomeSearchBox">
-            {firstOpen && <h1 className="welcomeH1">Welcome to weather tracking App</h1>}
+        <div>
+          {showWeather ? (
+            <div className="currentNavDiv">
+              <CityNavbarMain data={cityData} />
+            </div>
+            ) 
+            : (
+            <div className="welcomeSearchBox">
+              {firstOpen && <h1 className="welcomeH1">Welcome to weather tracking App</h1>}
 
-            <div className="searchBox">
-              <h1>Search Your City</h1>
-              <div className="inputFieldBox">
-                <Autocomplete
-                  options={cityList}
-                  sx={{ width: 300 }}
-                  renderInput={(params) => 
-                    <TextField {...params} sx={sxStyle.field} label="City" 
-                      value={inputValue} onChange={handleChangeInput} placeholder="Enter city name" />}
-                />
-                  
-                <div className="searchBtns">
-                  {showBackBtn && <Button variant="contained" color="secondary" onClick={() =>  navigate('/track')}>back</Button>}
-                  <Button variant="contained" color="secondary" onClick={handleSearchCity} disabled={!inputValue}>search</Button>
-                </div> 
+              <div className="searchBox">
+                <h1>Search Your City</h1>
+                <div className="inputFieldBox">
+                  <Autocomplete sx={{ width: 300 }} options={cityList} 
+                    onChange={(event, value) => setInputValue(value)}
+                    renderOption={(props, option) => {
+                      return (
+                        <li {...props} key={option.id}>
+                          {option}
+                        </li>
+                      );
+                    }}
+                    
+                    renderInput={(params) => 
+                      <TextField {...params} sx={sxStyle.field} label="City" 
+                        value={inputValue} 
+                        onChange={handleChangeInput}
+                         placeholder="Enter city name" 
+                      />}
+                  />
+                    
+                  <div className="searchBtns">
+                    {showBackBtn && <Button variant="contained" color="secondary" onClick={() =>  navigate('/track')}>back</Button>}
+                    <Button variant="contained" color="secondary" onClick={handleSearchCity} disabled={!inputValue}>search</Button>
+                  </div> 
+                </div>
               </div>
             </div>
-          </div>
-        )}
-      </div>
+          )}
+        </div>
       )}
 
 
