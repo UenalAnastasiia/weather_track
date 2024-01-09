@@ -8,6 +8,7 @@ import StorageService from "../../services/storageService";
 import MuiAlert, { AlertProps } from '@mui/material/Alert';
 import { Snackbar, TextField, Button } from '@mui/material';
 import Loader from "../../UI/Loader";
+import Autocomplete from '@mui/material/Autocomplete';
 
 
 const Alert = React.forwardRef<HTMLDivElement, AlertProps>(function Alert(props, ref) {
@@ -16,7 +17,7 @@ const Alert = React.forwardRef<HTMLDivElement, AlertProps>(function Alert(props,
 
  
 const CitySearch = () => {
-  const [inputValue, setInputValue] = useState("");
+  const [inputValue, setInputValue] = React.useState('');
   const [cityData, setCityData] = useState(Object);
   const [showWeather, setShowWeather] = useState(false);
   const [showSpinner, setShowSpinner] = useState(false);
@@ -117,7 +118,7 @@ const CitySearch = () => {
     }
   }
 
-  
+
   return (
     <div>
       {showSpinner ? <Loader /> : (
@@ -135,19 +136,18 @@ const CitySearch = () => {
             <div className="searchBox">
               <h1>Search Your City</h1>
               <div className="inputFieldBox">
-                <TextField sx={sxStyle.field} label="City" 
-                  focused value={inputValue} onChange={handleChangeInput} placeholder="Enter city name" autoComplete="off"/>
+                <Autocomplete
+                  options={cityList}
+                  sx={{ width: 300 }}
+                  renderInput={(params) => 
+                    <TextField {...params} sx={sxStyle.field} label="City" 
+                      value={inputValue} onChange={handleChangeInput} placeholder="Enter city name" />}
+                />
                   
                 <div className="searchBtns">
                   {showBackBtn && <Button variant="contained" color="secondary" onClick={() =>  navigate('/track')}>back</Button>}
                   <Button variant="contained" color="secondary" onClick={handleSearchCity} disabled={!inputValue}>search</Button>
                 </div> 
-
-                {cityList.map((arr, index) => {
-                  return (
-                      <span key={index}>{arr}</span>
-                  );
-                })}
               </div>
             </div>
           </div>
