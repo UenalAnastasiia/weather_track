@@ -9,7 +9,7 @@
   font-family: "Baloo";
 }
 
-.logoH1 {
+/* .logoH1 {
   position: absolute;
   bottom: 12px;
   left: 24px;
@@ -20,7 +20,28 @@
   font-weight: 800;
   margin: 0;
   font-family: "Baloo";
+
+  animation: shrink 5s;
+  animation-timing-function: ease-in-out;
+  animation-delay: 0.5s;
+  animation-fill-mode: forwards;
+  height: fit-content;
+  width: fit-content;
+  z-index: 120;
 }
+
+@keyframes shrink {
+  0% {
+      left: 45vw;
+      bottom: 45vh;
+  }
+
+  100% {
+      left: 24px;
+      bottom: 12px;
+  }
+} */
+
 
 *::-webkit-scrollbar {
   display: block;

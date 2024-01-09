@@ -3,7 +3,7 @@ import { useState, useEffect } from "react";
 import weatherService from "../../API/weatherService";
 import { useFetching } from "../../hooks/useFetching";
 import WeatherImg from "../weather_infos/WeatherImg";
-import { DialogModal } from "../../interfaces/DialogModal";
+import { DialogModal } from "../../API/interfaces/DialogModal";
 import { Dialog, IconButton } from "@mui/material";
 import LineChartUI from "../../UI/LineChartUI";
 import CloseIcon from "@mui/icons-material/Close";

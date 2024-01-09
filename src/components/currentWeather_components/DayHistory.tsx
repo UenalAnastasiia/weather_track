@@ -17,7 +17,7 @@ const DayHistory = () => {
     }, []); 
     
     
-    const fetchAPIData = async (date: Date) => {  
+    const fetchAPIData = async (date) => {  
         let pastData = [];   
         for (let index = 1; index < 21; index++) {
             let result = (date.getFullYear() - index) + '-' + ('0' + (date.getMonth() + 1)).slice(-2) + '-' + ('0' + date.getDate()).slice(-2);

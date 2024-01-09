@@ -1,0 +1,39 @@
+.welcomeAnimationBox {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: "Baloo";
+}
+
+.logoH1 {
+    position: absolute;
+    bottom: 12px;
+    left: 24px;
+    text-shadow: 0px 0px 0px #b393d3, 0px 0px 0px #b393d3, 0px 0px 10px #b393d3, 0px 0px 6px #b393d3;
+    color: transparent;
+    background-clip: text;
+    font-size: 46px;
+    font-weight: 800;
+    margin: 0;
+    font-family: "Baloo";
+    animation: pushLogo 1s;
+    animation-timing-function: ease-in-out;
+    animation-delay: 0.5s;
+    animation-fill-mode: forwards;
+    height: fit-content;
+    width: fit-content;
+    z-index: 120;
+  }
+  
+  @keyframes pushLogo {
+    0% {
+        left: 45vw;
+        bottom: 45vh;
+        transform: scale(5);
+    }
+  
+    100% {
+        left: 24px;
+        bottom: 12px;
+    }
+  }

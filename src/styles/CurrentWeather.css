@@ -47,6 +47,7 @@
   
   .circleBox {
     margin-left: 3vw;
+    margin-top: 5vh;
   }
   
   .tempDescrBox {
@@ -131,7 +132,7 @@
     font-weight: 800;
     cursor: pointer;
   }
-  
+
   /****** Close Current Weather ******/
   
   

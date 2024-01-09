@@ -25,6 +25,14 @@ const CurrentWeather = (props) => {
   const handlePopoverClose = () => { setAnchorEl(null) };
   const open = Boolean(anchorEl);
 
+  const sxStyle = {
+    cityDiv: { width: '25vw', marginLeft: '-25vh', display: 'flex', justifyContent: 'center', 
+    marginTop: '-30px', marginBottom: '20px' },
+    citySpan: { zIndex: 1, fontFamily: 'Baloo !important', position: 'relative',
+      ":hover": { transform: 'scale(1.1)' } },
+    historyIcon: { position: 'absolute', top: '20vh', right: '4vw' }
+  };
+
 
   const fetchAPIData = async () => {
     setWeatherData(props.weatherData);
@@ -110,25 +118,28 @@ const CurrentWeather = (props) => {
                     </div>
 
                     <div className="tempDescrBox">
-                      <Typography aria-owns={open ? 'mouse-over-popover' : undefined} aria-haspopup="true" sx={{zIndex: 1, fontFamily: 'Baloo !important'}}
-                          onMouseEnter={handlePopoverOpen} onMouseLeave={handlePopoverClose}>
-                         <span className="cityNameSpan">{props.name}</span>
-                      </Typography>
+                      <div style={sxStyle.cityDiv}>
+                        <Typography aria-owns={open ? 'mouse-over-popover' : undefined} aria-haspopup="true" 
+                            sx={sxStyle.citySpan}
+                            onMouseEnter={handlePopoverOpen} onMouseLeave={handlePopoverClose}>
+                          <span className="cityNameSpan">{props.name}</span>
+                        </Typography>
 
-                      <Popover id="mouse-over-popover"
-                          sx={{ pointerEvents: 'none' }} open={open} anchorEl={anchorEl}
-                          anchorOrigin={{ vertical: 'bottom', horizontal: 'left' }}
-                          transformOrigin={{ vertical: 'top', horizontal: 'left' }}
-                          onClose={handlePopoverClose}
-                          disableRestoreFocus>
-                          <CityInfo cityData={props.cityData} />
-                      </Popover>
+                        <Popover id="mouse-over-popover"
+                            sx={{ pointerEvents: 'none' }} open={open} anchorEl={anchorEl}
+                            anchorOrigin={{ vertical: 'bottom', horizontal: 'left' }}
+                            transformOrigin={{ vertical: 'top', horizontal: 'left' }}
+                            onClose={handlePopoverClose}
+                            disableRestoreFocus>
+                            <CityInfo cityData={props.cityData} />
+                        </Popover>
 
-                      <LightTooltip title="day temperature in past">
-                        <Button onClick={() => navigate('/day')} sx={{ position: 'absolute', top: '20vh', right: '5vw' }}>
-                          <History style={{ color: 'rgb(156 39 176 / 53%)', fontSize: 32 }} />
-                        </Button>
-                      </LightTooltip>
+                        <LightTooltip title="day temperature in past">
+                          <Button onClick={() => navigate('/day')} sx={sxStyle.historyIcon}>
+                            <History style={{ color: 'rgb(156 39 176 / 53%)', fontSize: 32 }} />
+                          </Button>
+                        </LightTooltip>
+                      </div>
 
                       <h1 className="currentTempH1">{getCurrentData(weatherData, weatherData.minutely_15.temperature_2m, "temperature")}&deg; </h1>
                       <WeatherDescription sharedData={getCurrentData(weatherData, weatherData.minutely_15.weather_code, "weatherCode")} />
