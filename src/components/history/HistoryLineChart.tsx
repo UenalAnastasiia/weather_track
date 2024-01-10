@@ -13,24 +13,20 @@ const HistoryLineChart = (props) => {
     }
 
     useEffect(() => {
-        // setIsLoading(false);
         setTimeData(props.weatherData.daily.time);
-        setChartData(props.weatherData.daily[props.chartParameter]);
+        
+        if (props.chartParameter === 'daylight_duration' && props.weatherData.daily[props.chartParameter] || 
+            props.chartParameter === 'sunshine_duration' && props.weatherData.daily[props.chartParameter]) {
+            let newData = props.weatherData.daily[props.chartParameter].map((element) => Math.floor(element / 3600));
+            setChartData(newData);
+        } else { setChartData(props.weatherData.daily[props.chartParameter]); }
+
         if (chartData !== undefined) {
             setIsLoading(true);
         }
-
-
-        // setTimeout(() => {
-        //     setChartData(props.weatherData.daily[props.chartParameter]);
-        //     if (chartData !== undefined) {
-        //         setIsLoading(true);
-        //     }
-        // }, 2000);
-
     }, [props]);  
-    
 
+    
     return (
         <div className="historyChart">
             {isLoading ? (

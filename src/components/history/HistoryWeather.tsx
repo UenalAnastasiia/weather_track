@@ -27,8 +27,8 @@ const HistoryWeather = () => {
 
     const chartParameterBtns = [
         {name: 'Temperature', param: 'temperature_2m_mean', label: 'Temperature in °C'},
-        {name: 'Daylight Duration', param: 'daylight_duration', label: 'Daylight Duration in sec'},
-        {name: 'Sunshine Duration', param: 'sunshine_duration', label: 'Sunshine Duration in sec'},
+        {name: 'Daylight Duration', param: 'daylight_duration', label: 'Daylight Duration in hours'},
+        {name: 'Sunshine Duration', param: 'sunshine_duration', label: 'Sunshine Duration in hours'},
         {name: 'Precipitation', param: 'precipitation_sum', label: 'Precipitation in mm'} 
     ];
 
@@ -164,7 +164,7 @@ const HistoryWeather = () => {
                     }
 
 
-                    <HistoryLineChart weatherData={weatherData} labelLengthName={labelLengthName} chartParameter={chartParameter} chartLabelName={chartLabelName} />
+                    <HistoryLineChart weatherData={weatherData} dateLength={dateLength} chartParameter={chartParameter} chartLabelName={chartLabelName} />
 
                     <HistoryNavbar setDateLength={setDateLength} setShowDatepicker={setShowDatepicker} 
                         setLabelLengthName={setLabelLengthName} getLabelName={getLabelName} />
