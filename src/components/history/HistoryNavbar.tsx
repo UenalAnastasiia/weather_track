@@ -7,8 +7,8 @@ const HistoryNavbar = ( { setDateLength, setShowDatepicker, setLabelLengthName, 
     const [selectedIndex, setSelectedIndex] = useState(1);
 
 
-    const dateNavBtns = [{name: '7 Days', length: '7'}, {name: '14 Days', length: '14'}, {name: '30 Days', length: '30'}, {name: '6 Months', length: '180'}, 
-    {name: 'Year', length: '365'}, {name: '3 Years', length: '1095'}];
+    const dateNavBtns = [{name: '7 Days', length: '8'}, {name: '14 Days', length: '15'}, {name: '30 Days', length: '31'}, {name: '6 Months', length: '181'}, 
+    {name: 'Year', length: '366'}, {name: '3 Years', length: '1096'}];
 
     const sxStyle = {
         icon: { color: 'white', fontSize: 24 },
