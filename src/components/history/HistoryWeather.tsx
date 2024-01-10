@@ -59,13 +59,16 @@ const HistoryWeather = () => {
     
 
     const fetchDate = (length) => {
-        let start = new Date();
-        start.setDate(start.getDate() - length);
-
-        let end = new Date();
-        end.setDate(end.getDate() - 2);
-        
-        fetchAPIData(dateFormat(start), dateFormat(end), chartParameter);
+        if (labelLengthName !== 'choosen period') {
+            let start = new Date();
+            start.setDate(start.getDate() - length);
+    
+            let end = new Date();
+            end.setDate(end.getDate() - 2);
+            
+            fetchAPIData(dateFormat(start), dateFormat(end), chartParameter);
+        } else { fetchAPIData(startDate, endDate, chartParameter) }
+       
     }
 
     
@@ -89,8 +92,6 @@ const HistoryWeather = () => {
 
 
     const fetchNewChart = () => {
-        setIsLoading(false);
-        setShowDatepicker(false);
         setShowDatepicker(false);
         fetchAPIData(startDate, endDate, chartParameter);
         setLabelLengthName('choosen period');
@@ -113,7 +114,7 @@ const HistoryWeather = () => {
         setChartLabelName(label);
     }
 
-
+    
     return (
         <div>
             <div className="historyHeader">

@@ -13,20 +13,20 @@ const HistoryLineChart = (props) => {
     }
 
     useEffect(() => {
-        setTimeData(props.weatherData.daily.time);
-        
         if (props.chartParameter === 'daylight_duration' && props.weatherData.daily[props.chartParameter] || 
             props.chartParameter === 'sunshine_duration' && props.weatherData.daily[props.chartParameter]) {
             let newData = props.weatherData.daily[props.chartParameter].map((element) => Math.floor(element / 3600));
             setChartData(newData);
         } else { setChartData(props.weatherData.daily[props.chartParameter]); }
 
+        setTimeData(props.weatherData.daily.time);
+
         if (chartData !== undefined) {
             setIsLoading(true);
-        }
-    }, [props]);  
+        } 
+    }, [props]); 
 
-    
+
     return (
         <div className="historyChart">
             {isLoading ? (
@@ -44,7 +44,6 @@ const HistoryLineChart = (props) => {
                         />
                     )}
                 </div>
-                
             ) : <Loader />} 
             
         </div>

@@ -1,4 +1,5 @@
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
+import { useEffect, useState } from "react";
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { DatePicker } from '@mui/x-date-pickers/DatePicker';
 import dayjs from 'dayjs';
@@ -16,6 +17,13 @@ const HistoryDatepicker = ({ setStartDate, setEndDate, dateFormat, startDate, en
             svg: { color: 'white !important' }
         } 
     }
+
+
+    useEffect(() => {
+        setStartDate('');
+        setEndDate('');
+    }, []);  
+
 
 
     const dateValue = (date, period) => {
