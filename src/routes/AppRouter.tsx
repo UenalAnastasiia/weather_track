@@ -6,6 +6,7 @@ import HistoryWeather from '../components/history/HistoryWeather';
 import Imprint from '../components/home_components/Imprint';
 import DayHistory from '../components/currentWeather_components/DayHistory';
 import WelcomeAnimation from '../components/home_components/WelcomeAnimation';
+import AppInfo from '../components/home_components/AppInfo';
 
 
 const AppRouter = () => {
@@ -18,6 +19,7 @@ const AppRouter = () => {
         <Route path="/history" element={<HistoryWeather />}></Route>
         <Route path="/day" element={<DayHistory />}></Route>
         <Route path="/imprint" element={<Imprint />}></Route>
+        <Route path="/info" element={<AppInfo />}></Route>
       </Routes>
     </Fragment>
   );

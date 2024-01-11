@@ -1,4 +1,4 @@
-import WeatherService from "../API/weatherService";
+// import WeatherService from "../API/weatherService";
 
 export default class StorageService {
   static imgURL = '';

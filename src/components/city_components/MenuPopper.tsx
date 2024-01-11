@@ -39,7 +39,7 @@ const MenuPopper = ( { setOpenSettings, openSettings, setShowDeleteBtns, resetAp
           prevOpen.current = openSettings;
 
           StorageService.storageLimitReached() ? setDisableAddBtn(true) : setDisableAddBtn(false);
-    }, [openSettings]);
+    }, [openSettings, anchorRef]);
 
 
     return (
@@ -54,7 +54,8 @@ const MenuPopper = ( { setOpenSettings, openSettings, setShowDeleteBtns, resetAp
                       <MenuItem onClick={() => {setShowDeleteBtns((showDeleteBtns) => !showDeleteBtns); setOpenSettings(false)}}>
                         delete city
                       </MenuItem>
-                      <MenuItem onClick={resetApp}>reset App</MenuItem>
+                      <MenuItem onClick={resetApp}>reset app</MenuItem>
+                      <MenuItem onClick={() => navigate('/info')}>app info</MenuItem>
                       <MenuItem onClick={() => navigate('/imprint')}>imprint</MenuItem>
                     </MenuList>
                   </ClickAwayListener>

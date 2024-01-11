@@ -32,7 +32,7 @@ const CityNavWithMulti = ( {openCityWeather, localItems, setSelectedIndex, selec
       prevOpen.current = openSettings;
 
       StorageService.storageLimitReached() ? setDisableAddBtn(true) : setDisableAddBtn(false);
-    },   [openSettings]);
+    },   [openSettings, anchorRef]);
 
 
     return (
@@ -59,7 +59,7 @@ const CityNavWithMulti = ( {openCityWeather, localItems, setSelectedIndex, selec
                                             <Remove />
                                         </IconButton>)}
 
-                                    <Button key={"btn"+el} onClick={() => {{openCityWeather(localItems[index]); setSelectedIndex(index)}}} 
+                                    <Button key={"btn"+el} onClick={() => {openCityWeather(localItems[index]); setSelectedIndex(index)}} 
                                         sx={ sxStyle.button } style={{ backgroundColor: index === selectedIndex ? '#00adb5' : '#9c27b0'}}>
                                             {localItems[index].name}
                                     </Button>
