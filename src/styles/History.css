@@ -15,6 +15,7 @@
     border-radius: 32px;
     box-shadow: 0px 0px 18px 6px #fdfdfdad;
     font-family: 'Baloo';
+    margin-top: 5vh;
 }
 
 .backBtn {
@@ -123,7 +124,7 @@
     fill: #ffffff00;
 }
 
-.highcharts-xaxis-labels text {
+.highcharts-yaxis-labels text, .highcharts-xaxis-labels text, .highcharts-axis-title, .highcharts-legend-item text {
     fill: white !important;
     color: white !important;
     font-family: 'Baloo' !important;
@@ -138,6 +139,10 @@
 
 .highcharts-legend-item {
     font-family: 'Baloo' !important;
+}
+
+.highcharts-tick, .highcharts-axis-line {
+    stroke: white;
 }
 
 /****** Close Day History ******/

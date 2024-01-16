@@ -7,8 +7,11 @@ import { Close, Info, ArrowBack } from "@mui/icons-material";
 import LightTooltip from "../../UI/LightTooltip";
 import HistoryNavbar from "./HistoryNavbar";
 import HistoryDatepicker from "./HistoryDatepicker";
-import HistoryLineChart from "./HistoryLineChart";
 import Loader from "../../UI/Loader";
+import TemperatureChart from "../charts/TemperatureChart";
+import DurationChart from "../charts/DurationChart";
+import PrecipitationChart from "../charts/PrecipitationChart";
+import WindChart from "../charts/WindChart";
 
 
 const HistoryWeather = () => {
@@ -18,18 +21,18 @@ const HistoryWeather = () => {
     const [startDate, setStartDate] = useState('');
     const [endDate, setEndDate] = useState('');
     const [showDatepicker, setShowDatepicker] = useState(false);
-    const [dateLength, setDateLength] = useState(14);
-    const [labelLengthName, setLabelLengthName] = useState('14 Days');
+    const [dateLength, setDateLength] = useState(31);
+    const [labelLengthName, setLabelLengthName] = useState('30 Days');
     const [chartLabelName, setChartLabelName] = useState('Temperature in °C');
     const navigate = useNavigate();
-    const [chartParameter, setChartParameter] = useState('temperature_2m_mean');
+    const [chartParameter, setChartParameter] = useState('temperature_2m_max,temperature_2m_min');
     const [selectedIndex, setSelectedIndex] = useState(0);
 
     const chartParameterBtns = [
-        {name: 'Temperature', param: 'temperature_2m_mean', label: 'Temperature in °C'},
-        {name: 'Daylight Duration', param: 'daylight_duration', label: 'Daylight Duration in hours'},
-        {name: 'Sunshine Duration', param: 'sunshine_duration', label: 'Sunshine Duration in hours'},
-        {name: 'Precipitation', param: 'precipitation_sum', label: 'Precipitation in mm'} 
+        {name: 'Temperature', param: 'temperature_2m_max,temperature_2m_min', label: 'Temperature in °C'},
+        {name: 'Daylight Sunshine', param: 'daylight_duration,sunshine_duration', label: 'Duration in hours'},
+        {name: 'Wind Speed', param: 'wind_speed_10m_max', label: 'Wind Speed in km/h'},
+        {name: 'Precipitation', param: 'precipitation_sum,rain_sum', label: 'Precipitation in mm'} 
     ];
 
 
@@ -51,13 +54,11 @@ const HistoryWeather = () => {
 
     useEffect(() => {
         fetchDate(dateLength);
-        setCityName(WeatherService.cityName);        
-    }, [labelLengthName, chartParameter]);  
+        setCityName(WeatherService.cityName);  
+    }, [labelLengthName, chartParameter, dateLength]);  
     
-
     // console.log = console.warn = console.error = () => {};
     
-
     const fetchDate = (length) => {
         if (labelLengthName !== 'choosen period') {
             let start = new Date();
@@ -77,6 +78,10 @@ const HistoryWeather = () => {
         
         if (todayWeather === 'No coordinates') {
             navigate('/track');
+        } else if (labelLengthName === 'choosen period') {
+            setWeatherData(todayWeather);
+            setDateLength(todayWeather.daily.time.length)
+            setIsLoading(true);
         } else {    
             setWeatherData(todayWeather);
             setIsLoading(true);
@@ -109,9 +114,14 @@ const HistoryWeather = () => {
 
 
     const getChartParameterData = (index: SetStateAction<number>, param, label) => {
+        setIsLoading(false);
         setSelectedIndex(index);
         setChartParameter(param); 
         setChartLabelName(label);
+
+        setTimeout(() => {
+            setIsLoading(true);
+        }, 2000);
     }
 
     
@@ -164,11 +174,20 @@ const HistoryWeather = () => {
                         </div>
                     }
 
+                    {chartParameter === 'temperature_2m_max,temperature_2m_min' && 
+                        <TemperatureChart weatherData={weatherData.daily} dateLength={dateLength} chartLabelName={chartLabelName} />}
 
-                    <HistoryLineChart weatherData={weatherData} dateLength={dateLength} chartParameter={chartParameter} chartLabelName={chartLabelName} />
+                    {chartParameter === 'daylight_duration,sunshine_duration' && 
+                        <DurationChart weatherData={weatherData.daily} dateLength={dateLength} chartLabelName={chartLabelName} />}
+
+                    {chartParameter === 'wind_speed_10m_max' && 
+                        <WindChart weatherData={weatherData.daily} dateLength={dateLength} chartLabelName={chartLabelName} />}
+
+                    {chartParameter === 'precipitation_sum,rain_sum' && 
+                        <PrecipitationChart weatherData={weatherData.daily} dateLength={dateLength} chartLabelName={chartLabelName} />}
 
                     <HistoryNavbar setDateLength={setDateLength} setShowDatepicker={setShowDatepicker} 
-                        setLabelLengthName={setLabelLengthName} getLabelName={getLabelName} />
+                        setLabelLengthName={setLabelLengthName} getLabelName={getLabelName} setIsLoading={setIsLoading} />
                 </div>
             ) : <Loader />}
         </div>

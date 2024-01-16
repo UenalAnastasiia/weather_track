@@ -3,8 +3,8 @@ import { Button, ButtonGroup } from "@mui/material";
 import LightTooltip from "../../UI/LightTooltip";
 import { CalendarMonth } from "@mui/icons-material";
 
-const HistoryNavbar = ( { setDateLength, setShowDatepicker, setLabelLengthName, getLabelName } ) => {
-    const [selectedIndex, setSelectedIndex] = useState(1);
+const HistoryNavbar = ( { setDateLength, setShowDatepicker, setLabelLengthName, getLabelName, setIsLoading } ) => {
+    const [selectedIndex, setSelectedIndex] = useState(Number);
 
 
     const dateNavBtns = [{name: '7 Days', length: '8'}, {name: '14 Days', length: '15'}, {name: '30 Days', length: '31'}, {name: '6 Months', length: '181'}, 
@@ -19,8 +19,14 @@ const HistoryNavbar = ( { setDateLength, setShowDatepicker, setLabelLengthName, 
 
 
     useEffect(() => {
-        getLabelName() === '14 Days' ? setSelectedIndex(1) : setSelectedIndex(7);
+        checkDateBtnIndex(getLabelName());
     }, []);  
+
+
+    const checkDateBtnIndex = (name) => {
+        let index = dateNavBtns.map(e => e.name).indexOf(name);
+        index === -1 ? setSelectedIndex(6) : setSelectedIndex(index)
+    }
 
 
     const shareData = (length: string, name: string, index: SetStateAction<number>) => {
@@ -40,8 +46,8 @@ const HistoryNavbar = ( { setDateLength, setShowDatepicker, setLabelLengthName, 
                     </Button>
                 ))} 
                 <LightTooltip title="Choose date">
-                    <Button sx={ sxStyle.button } variant="contained" color="secondary" style={{ backgroundColor: 7 === selectedIndex ? '#00adb5' : '#9c27b0'}}
-                        onClick={() => {setShowDatepicker(true); setSelectedIndex(7)}}>
+                    <Button sx={ sxStyle.button } variant="contained" color="secondary" style={{ backgroundColor: 6 === selectedIndex ? '#00adb5' : '#9c27b0'}}
+                        onClick={() => {setShowDatepicker(true); setIsLoading(true); setSelectedIndex(6)}}>
                             <CalendarMonth sx={sxStyle.icon} />
                     </Button>
                 </LightTooltip>

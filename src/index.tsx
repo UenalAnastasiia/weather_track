@@ -13,13 +13,13 @@ const root = ReactDOM.createRoot(
 
 
 root.render(
-  <React.StrictMode>
+  // <React.StrictMode>
     <BrowserRouter>
     <StyledEngineProvider injectFirst>
       <App />
     </StyledEngineProvider>
     </BrowserRouter>
-  </React.StrictMode>
+  // </React.StrictMode>
 );
 
 reportWebVitals();
