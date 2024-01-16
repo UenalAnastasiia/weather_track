@@ -8,10 +8,7 @@ import LightTooltip from "../../UI/LightTooltip";
 import HistoryNavbar from "./HistoryNavbar";
 import HistoryDatepicker from "./HistoryDatepicker";
 import Loader from "../../UI/Loader";
-import TemperatureChart from "../charts/TemperatureChart";
-import DurationChart from "../charts/DurationChart";
-import PrecipitationChart from "../charts/PrecipitationChart";
-import WindChart from "../charts/WindChart";
+import ChartCheck from "./ChartCheck";
 
 
 const HistoryWeather = () => {
@@ -174,17 +171,7 @@ const HistoryWeather = () => {
                         </div>
                     }
 
-                    {chartParameter === 'temperature_2m_max,temperature_2m_min' && 
-                        <TemperatureChart weatherData={weatherData.daily} dateLength={dateLength} chartLabelName={chartLabelName} />}
-
-                    {chartParameter === 'daylight_duration,sunshine_duration' && 
-                        <DurationChart weatherData={weatherData.daily} dateLength={dateLength} chartLabelName={chartLabelName} />}
-
-                    {chartParameter === 'wind_speed_10m_max' && 
-                        <WindChart weatherData={weatherData.daily} dateLength={dateLength} chartLabelName={chartLabelName} />}
-
-                    {chartParameter === 'precipitation_sum,rain_sum' && 
-                        <PrecipitationChart weatherData={weatherData.daily} dateLength={dateLength} chartLabelName={chartLabelName} />}
+                    {chartParameter && <ChartCheck weatherData={weatherData.daily} dateLength={dateLength} chartLabelName={chartLabelName} />}
 
                     <HistoryNavbar setDateLength={setDateLength} setShowDatepicker={setShowDatepicker} 
                         setLabelLengthName={setLabelLengthName} getLabelName={getLabelName} setIsLoading={setIsLoading} />

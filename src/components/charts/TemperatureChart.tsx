@@ -36,6 +36,12 @@ const TemperatureChart = (props) => {
 
         title: '',
 
+        subtitle: {
+            text: document.ontouchstart === undefined ?
+                'Click and drag in the plot area to zoom in' : 'Pinch the chart to zoom in',
+            align: 'left'
+        },
+
         xAxis: {
             type: 'datetime',
             labels: {

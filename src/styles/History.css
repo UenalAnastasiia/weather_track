@@ -145,4 +145,9 @@
     stroke: white;
 }
 
+.highcharts-subtitle {
+    fill: rgb(219, 216, 216) !important;
+    font-family: 'Baloo' !important;
+}
+
 /****** Close Day History ******/
